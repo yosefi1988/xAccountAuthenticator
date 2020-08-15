@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fb_background_color"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:fitsSystemWindows="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:paddingBottom="50dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:background="@drawable/png_contact_us" />
+
+            <TextView
+                android:id="@+id/login_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/reg_new_yafte"
+                android:textColor="#4267b2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="شماره پشتیبانی 09227087288"
+                android:textColor="@color/day_contact_us_text"
+                android:textSize="20dp"  />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="نوع ارتباط را انتخاب کنید:"
+                android:textColor="#4267b2"/>
+            <RadioGroup
+                android:visibility="visible"
+                android:id="@+id/rgRadios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/contactUsSuggestion"
+                    android:checked="true" >
+                    <requestFocus />
+                </RadioButton>
+
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/contactUsAppOrder"
+                    android:layout_alignParentRight="true" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/contactUs"
+                    android:layout_alignParentRight="true" />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/editTextTitle"
+                style="@style/AppTheme.DayEditText"
+                android:drawableLeft="@android:drawable/ic_menu_edit"
+                android:hint="@string/subject" />
+
+
+            <EditText
+                android:id="@+id/editTextPhone"
+                style="@style/AppTheme.DayEditText"
+                android:inputType="phone"
+                android:drawableLeft="@android:drawable/ic_menu_edit"
+                android:hint="@string/phoneNumber" />
+
+
+            <EditText
+                android:id="@+id/editTextText"
+                style="@style/AppTheme.DayEditText"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:drawableLeft="@android:drawable/ic_menu_edit"
+                android:hint="@string/contact_us_hint" />
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+
+                <Button
+                    android:id="@+id/buttonReg"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_search"
+                    android:text="@string/reg"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/buttonBack"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_search"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

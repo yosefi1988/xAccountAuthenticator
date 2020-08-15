@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/fb_background_color"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:fitsSystemWindows="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp" >
+
+                <ImageView
+                    android:id="@+id/imageViewUserAvatar"
+                    android:clickable="true"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/png_user" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/login_title"
+                style="@style/AppTheme.DayTextViewBigTitle"
+                android:text="@string/profile" />
+
+            <EditText
+                android:id="@+id/ueditTextNameUserId"
+                style="@style/AppTheme.DayEditText"
+                android:drawableLeft="@android:drawable/ic_secure"
+                android:hint="@string/userid"
+
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:cursorVisible="false"
+                android:inputType="phone" />
+
+
+            <EditText
+                android:id="@+id/editTextName"
+                style="@style/AppTheme.DayEditText"
+                android:drawableLeft="@android:drawable/ic_secure"
+                android:hint="@string/mobile_number"
+
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:cursorVisible="false"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                style="@style/AppTheme.DayEditText"
+                android:drawableLeft="@android:drawable/ic_secure"
+                android:hint="@string/emailAddress"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:cursorVisible="false"
+                android:inputType="phone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingTop="5dp"
+                android:textColor="#4267b2"
+                android:visibility="invisible"
+                android:text="help" />
+
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonSignOut"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_search"
+            android:text="@string/sign_out"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_search"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+

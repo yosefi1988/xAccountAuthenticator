@@ -1,0 +1,259 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Theme-->
+    <style name="AppDayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/tubelessColor_blue_01</item>
+        <item name="colorPrimaryDark">@color/tubelessColor_blue_01</item>
+        <item name="colorAccent">@color/tubelessColor_blue_01</item>
+
+        <item name="buttonStyle">@style/AppTheme.DayButton</item>
+        <item name="android:buttonStyle">@style/AppTheme.DayButton</item>
+
+        <item name="android:editTextStyle">@style/AppTheme.DayEditText</item>
+        <item name="editTextStyle">@style/AppTheme.DayEditText</item>
+    </style>
+
+    <style name="AppNightTheme" parent="Theme.AppCompat.DayNight" >
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/tubelessColor_blue_01</item>
+        <item name="colorPrimaryDark">@color/tubelessColor_blue_01</item>
+        <item name="colorAccent">@color/tubelessColor_blue_01</item>
+
+        <item name="buttonStyle">@style/AppTheme.NightButton</item>
+        <item name="android:buttonStyle">@style/AppTheme.NightButton</item>
+
+        <item name="android:editTextStyle">@style/AppTheme.NightEditText</item>
+        <item name="editTextStyle">@style/AppTheme.NightEditText</item>
+
+
+    </style>
+
+
+    <style name="TubelessDayTheme" parent="AppDayTheme">
+        <item name="android:textViewStyle">@style/AppTheme.DayTextView</item>
+    </style>
+
+
+
+    <style name="AppTheme.AllActivities"  parent="AppDayTheme">
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+    </style>
+
+
+    <style name="AppTheme.MainActivityTheme"  parent="AppTheme.AllActivities">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="toolbar_text">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:shadowColor">@color/colorBlack</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+<!--        &lt;!&ndash; android:textColorPrimary is the color of the text text in the Toolbar  &ndash;&gt;-->
+<!--        <item name="android:textColorPrimary">@android:color/holo_blue_light</item>-->
+<!--        &lt;!&ndash; actionMenuTextColor is the color of the text of action (menux) items  &ndash;&gt;-->
+<!--        <item name="actionMenuTextColor">@android:color/holo_green_light</item>-->
+<!--        &lt;!&ndash; Tints the input fields like checkboxes and text fields &ndash;&gt;-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+
+
+<!--        &lt;!&ndash; Applies to views in their normal state. &ndash;&gt;-->
+<!--        <item name="colorControlNormal">@color/colorBlack</item>-->
+<!--        &lt;!&ndash; Applies to views in their activated state (i.e checked or switches) &ndash;&gt;-->
+<!--        <item name="colorControlActivated">@color/colorBlack</item>-->
+<!--        &lt;!&ndash; Applied to framework control highlights (i.e ripples or list selectors) &ndash;&gt;-->
+<!--        <item name="colorControlHighlight">@color/colorBlack</item>-->
+
+        <!-- Enable these below if you want clicking icons to trigger a ripple effect -->
+        <!--
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
+        -->
+
+    </style>
+
+    <!-- This configures the styles for the text within the Toolbar  -->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+
+
+
+    <!--EditText-->
+    <style name="AppTheme.DayEditText" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/bg_search</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+
+        <item name="android:imeOptions">flagNoExtractUi</item>
+        <item name="android:textColorHint">@color/day_white_hint_text</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+    <style name="AppTheme.NightEditText" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/rounded_edittext</item>
+        <item name="android:imeOptions">flagNoExtractUi</item>
+        <item name="android:textColorHint">@color/night_white_hint_text</item>
+        <item name="android:textColor">@color/night_white_text</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+
+
+
+    <!--TextView-->
+    <style name="AppTheme.DayTextView" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/tubelessColor_blue_02</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.DayTextViewBigTitle" parent="AppTheme.DayTextView">
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="AppTheme.NightTextView" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:textColor">@color/night_white_text</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">17dp</item>
+    </style>
+
+
+    <!--Button-->
+    <style name="AppTheme.NightButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@color/night_white_text</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="AppTheme.DayButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/day_white_text</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="TRANS_BACKListActivity" parent="NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="TranslucentSajjad" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/tubelessColor_blue_03</item>
+        <item name="colorPrimaryDark">@color/tubelessColor_blue_01</item>
+        <item name="colorAccent">@color/tubelessColor_blue_02</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+    </style>
+
+    <style name="TranslucentSajjad2" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!--<item name="android:windowTranslucentStatus" >true</item>-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+    </style>
+
+
+
+
+    <style name="TubelessDayTheme.NoActionBar"  parent="AppDayTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="TubelessDayTheme.NoActionBar.NoTranslucent2" />
+
+    <style name="TubelessDayTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="TubelessDayTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="ThemeFullSCreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
+    </style>
+
+
+    <style name="ThemeFullSCreenX" parent="TubelessDayTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
+        <item name="android:windowNoTitle">true</item>
+
+
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+    <string name="font_secondary_bold">fonts/byekan.ttf</string>
+</resources>

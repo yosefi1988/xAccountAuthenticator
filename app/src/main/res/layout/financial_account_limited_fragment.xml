@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="30dp"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:fitsSystemWindows="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtPriceComment"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="حساب کاربری شما محدود می باشد مشاهده این قسمت برای شما هزینه دارد." />
+
+
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="نسبت به سرمایه مد نظر خود یکی از گذینه ها را انتخاب کنید :" />
+
+            <RelativeLayout
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:layoutDirection="rtl"
+                android:foregroundGravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioGroup
+                    android:visibility="visible"
+                    android:id="@+id/rgRadios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <requestFocus/>
+                    <RadioButton
+                        android:id="@+id/radioButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:text="هزینه سیگنال برای سرمایه های کمتر از 20 میلیون تومان ؛"
+                        android:checked="true" >
+                        <requestFocus />
+
+                    </RadioButton>
+
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="هزینه سیگنال برای سرمایه های بین 20 تا 200 میلیون تومان ؛"
+                        android:layout_alignParentRight="true" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="هزینه سیگنال برای سرمایه های بیشتر از 200 میلیون تومان ؛"
+                        android:layout_alignParentRight="true" />
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="هزینه برای یک سال" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"  />
+
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/button_pay"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_search"
+                    android:text="@string/pardakht_rule"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/button_back"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_search"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:visibility="gone"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+<!--    </ScrollView>-->
+
+
+
+</LinearLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:orientation="vertical"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:background="@color/tubelessColor_blue_01"-->
+<!--    android:layout_height="match_parent">-->
+
+
+<!--</RelativeLayout>-->

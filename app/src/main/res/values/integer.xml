@@ -1,0 +1,23 @@
+<resources>
+    <integer name="cat1Yadak">10018</integer>
+    <integer name="cat2Yadak">10019</integer>
+    <integer name="cat3Yadak">10020</integer>
+
+    <integer name="cat1Yafte">16</integer>
+    <integer name="cat2Yafte">17</integer>
+    <integer name="cat3Yafte">18</integer>
+
+
+
+    <integer name="cat1BourseTrain">10024</integer>
+    <integer name="cat2BourseTrain">10025</integer>
+    <integer name="cat3BourseTrain">10026</integer>
+
+    <integer name="cat1BourseNews">20023</integer>
+    <integer name="cat2BourseNews">20024</integer>
+    <integer name="cat3BourseNews">20025</integer>
+
+    <integer name="cat1BourseAnalize">20026</integer>
+    <integer name="cat2BourseAnalize">20027</integer>
+    <integer name="cat3BourseAnalize">20028</integer>
+</resources>

@@ -1,0 +1,437 @@
+<resources>
+    <string name="app_id">17</string>
+
+        <string name="HOST" translatable="false">http://www.example.com</string>
+
+
+    <string name="app_price">1000</string>
+    <string name="app_pardakht_text" formatted="false">با پرداخت مبلغ %s تومان به صورت نامحدود از مطالب این نرم افزار استفاده کنید.\nقسمتی از این مبلغ صرف ایتام خواهد شد.\nدر صورت عدم تمایل به پرداخت مبلغ ، میتوانید تمام مطالب را به صورت رایگان در سایت ما مشاهده کنید :\n\n %s</string>
+    <string name="app_web_address">http://owl.sajjadyosefi.ir</string>
+    <string name="pardakht">پرداخت</string>
+    <string name="cancelAndExit">انصراف و خروج</string>
+    <string name="internetConnectionForPaymentErrorText">برای انجام عملیات پرداخت می بایست به اینترنت متصل باشید</string>
+    <string name="internetConnectionErrorTextFirstTime">در اولین اجرا باید اطلاعاتی از سرور دریافت کنیم، باید به اینترنت متصل شوید</string>
+    <string name="internetConnectTryAgain">متصل شدم؛ مجدد تلاش کن</string>
+    <string name="errorInInternetConnection">اتصال اینترنت شما به درستی برقرار نشده است</string>
+    <string name="errorInInternetConnectionforCountinue">برای ادامه باید به اینترنت متصل شوید</string>
+
+    <string name="phoneNumber">شماره موبایل </string>
+    <string name="Discription">توضیح (اختیاری)</string>
+    <string name="peymentOkResponseMessage">پرداخت شما با موفقیت انجام شد \n کد رهپیری شما : \n %s</string>
+    <string name="ErrorOnConfermPayment" formatted="false">ارتباط اینترنت شما مشکل داشت و ما متوجه پرداخت شما نشدیم، هرچه سریعتر کد پیگیری خود را برای ما sms کنید. \n شماره پشتیبانی: \n %s \n کد رهگیری: \n %s</string>
+    <string name="updateAvalable">نسخه جدید از نرم افزار آماده ست.</string>
+    <string name="SupportNumber">09123678522</string>
+    <string name="Model">مدل :</string>
+    <string name="PriceIn">قیمت در</string>
+    <string name="HomePageTitle">لیست اصلی</string>
+    <string name="ErrorOnGetPermision">خطا در دریافت مجوزهای کاربر</string>
+    <string name="WeNeedYourDeviceInfo">ادامه کار به اعطای مجوز از طرف شما بستگی دارد</string>
+    <string name="login">ورود</string>
+    <string name="register">ثبت نام</string>
+    <string name="forgetPassword">فراموشی رمز</string>
+    <string name="changePassword">تغییر رمز</string>
+    <string name="account">حساب کاربری</string>
+    <string name="socialNetwork">شبکه های اجتماعی</string>
+    <string name="logout">خروج از حساب کاربری</string>
+    <string name="closeApp">بستن برنامه</string>
+    <string name="loginText">از شماره موبایل خودتان برای ورود به سیستم استفاده کنید؛ ممکن است برای احراز هویت برایتان پیامک تائیدیه ارسال شود.</string>
+    <string name="password">رمز عبور</string>
+    <string name="REGISTER">ثبت نام</string>
+    <string name="registerText">ما برای تشخیص کاربرهایمان از شماره موبایل استفاده میکنیم. جهت استفاده از شبکه تیوبلس می بایست شماره موبایل خودتان را وارد کنید.</string>
+    <string name="rePassword">تکرار رمز عبور</string>
+    <string name="registerFooterText">قبل از ثبت نام حتماً قوانین را مطالعه کنید.قوانین از طریق منوی سمت راست در دسترس است.</string>
+    <string name="acceptRule">ثبت نام (قوانین را پذیرفتم)</string>
+    <string name="passwordRecovery">بازیابی رمز</string>
+    <string name="forgetPasswordText">رمز عبور را برایتان ایمیل خواهیم کرد ؛ درصورت عدم دسترسی به ایمیل , می توانید از موبایلتان دستور بازیابی رمز عبور بدهید.</string>
+    <string name="emailAddress">آدرس ایمیل</string>
+    <string name="mobilePasswordRecoveryHelpText">برای بازیابی رمز عبور با موبایل می بایست از طریق موبایل متن داخل کادر بالا را به شماره 1000010009 ارسال کنید.درصورتی که به هر دلیل به موبایل خود دسترسی ندارید با پشتیبانی تماس بگیرید.</string>
+    <string name="mobileCaptcaText">متن ارسالی با پیامک</string>
+    <string name="changePasswordText">رمز عبور جدید برایتان پیامک نیز خواهد شد</string>
+    <string name="currentPassword">رمزعبور جاری</string>
+    <string name="newPassword">رمز عبور جدید</string>
+    <string name="reNewPassword">تکرار رمز عبور جدید</string>
+    <string name="changePasswordFooterText">تغییر رمز عبور شامل کسر از اعتبار شما خواهد شد. قوانین را مطالعه کنید</string>
+    <string name="someText">چیزی بنویسید</string>
+    <string name="contactUsSuggestion">پیشنهاد تغییرات و ویژگی جدید</string>
+    <string name="contactUs">تماس با ما؛ انتقادات، پیشنهادات، شکایات</string>
+    <string name="contactUsMenu">ارتباط با ما</string>
+    <string name="contactUsAppOrder">سفارش نرم افزار های اندرویدی</string>
+    <string name="send">ارسال</string>
+    <string name="radio1Text">قسمتی از بودجه ی این نرم افزار به ویژگی های درخواستی کاربر ها احتصاص دارد.اگر حس میکنید این نرم افزار چیزی کم داره؛یا جایی از برنامه نیاز به اصلاح داره از قسمت زیر پیشنهاد خودتان را ارسال کنید.</string>
+    <string name="radio2Text">برای سفارش نرم افزار های اندرویدی برای سازمان یا کسب و کار خود از پنل زیر درخواست خود را اسال کنید.به سرعت با شما تماس خواهیم گرفت.</string>
+    <string name="radio3Text">انتقادات و پیشنهادات و شکایاتتان از نرم افزار یا سایر کاربر ها را در قسمت زیر وارد کنید ؛ به سرعت رسیدگی خواهیم کرد و نتیجه را به اطلاع شما خواهیم رساند.</string>
+    <string name="telegramChanel">کانال تلگرام</string>
+    <string name="instagramPage">اینستاگرام</string>
+    <string name="webSite">وبسایت</string>
+    <string name="ghavanin">قوانین</string>
+    <string name="instagramNotInstall">شما تلگرام را نصب نکرده اید</string>
+    <string name="commingSoon">درحال آماده سازی هستیم.</string>
+    <string name="telegramNotInstall">شما هنوز تلگرام را نصب نکرده اید</string>
+    <string name="downloadNotifText">نسخه جدید تیوبلس (فشرده-zip)</string>
+    <string name="startDownloadText">دانلود شروع شد.</string>
+    <string name="GhablanDownloadShode">اینو قبلاً دانلود کردید</string>
+    <string name="NotLoggedIn">برای دانلود تصاویر باید وارد حساب خود شوید</string>
+    <string name="NotLoggedIn3">ابتدا باید وارد حساب خود شوید</string>
+    <string name="EDIT_PROFILE">ویرایش پروفایل</string>
+    <string name="LOGOUT_SUCCSESS">با موفقیت خارج شدید</string>
+    <string name="notMatchPassword">رمز های عبور وارد شده یکسان نیست</string>
+    <string name="UnKnown">بدون نام</string>
+    <string name="notCorrectInput">مقادیر وارد شده صحبح نمی باشد</string>
+    <string name="cancel2">بیخیال</string>
+    <string name="download">دریافت کن</string>
+    <string name="NotMobileValid">شماره موبایل معتبر نیست</string>
+    <string name="VersionName">نسخه</string>
+    <string name="AbouteThisVersion">درباره این ورژن</string>
+    <string name="send_picture">ارسال تصویر خودرو</string>
+    <string name="conferm_picture_message">تصاویر پس از تائید شدن نمایش داده می شوند، زیاد طول نمیکشه تا تائید بشن.</string>
+    <string name="enter_many_tag">تگ ها :</string>
+    <string name="tag_examples"> مثال : نیسان_آبی نمای_خارج رینگ چرخ</string>
+    <string name="tag_role">برای جدا کردن تگ ها از فاصله استفاده کنید</string>
+    <string name="gallery">گالری</string>
+    <string name="camera">دوربین</string>
+    <string name="inputType">عکس رو از کجا میخواهید؟</string>
+    <string name="SelectPicture">انتخاب عکس</string>
+    <string name="SelectCategory">انتخاب دسته بندی</string>
+    <string name="CategoryTitle0">براساس شرکت</string>
+    <string name="categoryNotSelect">لطفاً یک دسته بندی انتخاب کنید</string>
+    <string name="pictureNotSelect">هنوز تصویری انتخاب نکرده اید</string>
+    <string name="tagNotImported">وارد کردن حداقل 3 تگ الزامیست</string>
+    <string name="fileSize4Mb">حجم فایل شما باید کمتر از 4 مگ باشد</string>
+    <string name="NotLoggedIn2">برای ارسال تصویر باید وارد حساب کاربری خود شوید</string>
+    <string name="CanNotSendPicture">ارسال تصویر برای شما مسدود شده است. \n لطفاً با واحد پشتیبانی تماس بگیرید. \n  \n شماره تماس : \n 09123678522</string>
+    <string name="RegisterErrorOnServer">به یک مشکل برخوردیم که هیچ کسی از اون اطلاع نداره ؛ لطفاً به ما اطلاع بدید \n شماره تماس پشتیبانی: \n 09123678522</string>
+    <string name="search">جستجو</string>
+    <string name="CategoryTitle1">براساس الفبا نام خودرو</string>
+    <string name="CategoryTitleRecent">اخیراً</string>
+    <string name="no_data_available">هنوز دیتایی برای نمایش موجود نیست</string>
+    <string name="radyab">ردیاب خودرو</string>
+    <string name="radyabComment">با استفاده از این ماژول می توانید محل توقف یا حرکت خودروی خود را با هزینه ای بسیار ناچیز از هر نقطه از کره زمین مشاهده کنید.</string>
+    <string name="firstTab">U+F03F</string>
+    <string name="loginIcon">\uF02C</string>
+    <string name="RegisterIon">\uE805</string>
+    <string name="changePasswordIcon">\uf13e</string>
+    <string name="ghavaninIcon">\uF15C</string>
+    <string name="contactUsMenuIcon">\uE806</string>
+    <string name="AbouteThisVersionIcon">\uF129</string>
+    <string name="logoutIcon">\uF02D</string>
+    <string name="closeAppIcon">\uE807</string>
+
+    <string name="InternetIcon">\uf26b</string>
+    <string name="InstagramIcon">\uf31f</string>
+    <string name="TelegramIcon">\uf2c6</string>
+    <string name="shareApp">ارسال برنامه</string>
+    <string name="shareAppIcon">\uF1E0</string>
+    <string name="ShareText">تیوبلس - شبکه اجتماعی ماشین بازها \n\n به ما بپیوندید \n  https://cafebazaar.ir/app/ir.sajjadyosefi.tubeless.tubeless/?l=fa</string>
+    <string name="ShareText2">ادامه مطلب را به همراه هزاران مطالب دیگر در اپ تیوبلس مشاهده کنید\n\nتیوبلس - شبکه اجتماعی ماشین بازها \n\n به ما بپیوندید \n  https://cafebazaar.ir/app/ir.sajjadyosefi.tubeless.tubeless/?l=fa</string>
+    <string name="ShareTitle">کجا میخواهید به اشتراک بگذارید؟</string>
+    <string name="timeline">Timeline</string>
+    <string name="News">اخبار و مقالات و اطلاعیه ها</string>
+    <string name="pleaseWait">لطفاً منتظر باشید</string>
+    <string name="peyda_shode">ثبت مدارک یا اشیا پیدا شده</string>
+    <string name="gom_shode">ثبت مدارک یا اشیا گم شده</string>
+    <string name="serghati">ثبت مدارک یا اشیا سرقتی</string>
+    <string name="title">عنوان</string>
+    <string name="radioYafte1Text">اگر مدارک یا اشیائی پیدا کردید می توانید از این قسمت برای ثبت آن استفاده کنید</string>
+    <string name="radioYafte2Text">اگر مدارک یا اشیائی را گم کرده اید از پنل زیر آن را ثبت کنید. در صورت تمایل مژدگانی نیز تعیین کنید تا سریعتر پیدا کنید.</string>
+    <string name="radioYafte3Text">اگر مدارک یا اشیائی از شما به سرقت رفته سریعاً آن را گزارش کنید</string>
+    <string name="requerment_fields_inYafteha">فیلد های عنوان؛محل؛زمان اجباری است \n در توضیحات نیز شماره موبایل خود را وارد کنید</string>
+    <string name="cannot_send_sms">امکان ارسال پیامک وجود ندارد</string>
+    <string name="sms_receive">پیامک توسط خودرو دریافت شد</string>
+    <string name="sms_not_receive">پیامک به ردیاب داخل خودرو نرسید</string>
+    <string name="sms_send">پیامک ارسال شد</string>
+    <string name="sms_not_send">پیامک ارسال نشد</string>
+    <string name="sms_not_send_no_service">سرویس ارسال پیامک یافت نشد</string>
+    <string name="sms_not_send_no_radio">وضعیت آنتن موبایلتان را بررسی کنید؛ امکان ارسال وجودندارد</string>
+    <string name="registerRadyab">ثبت ردیاب جدید</string>
+    <string name="NotRndValid">کد معرفی نا معتبر است</string>
+    <string name="sms_not_send2">پبامک ارسال نشد 2</string>
+    <string name="all">all</string>
+    <string name="create">create</string>
+    <string name="ok">ok</string>
+    <string name="car_under_control">ردیابی خودرو</string>
+    <string name="title_activity_main_radyab">MainRadyabActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="map">نقشه</string>
+    <string name="registerTitle">احتمالا پیامک تائیدیه برایتان ارسال خواهد شد.</string>
+    <string name="accept_and_register">ثبت (قوانین را می پذیرم)</string>
+    <string name="cancel">انصراف</string>
+    <string name="reg">ثبت</string>
+    <string name="changePasswordTitle">در وارد کردن رمزعبور دقت کنید.</string>
+    <string name="welcome">خوش آمدید</string>
+    <string name="mobile_number">شماره موبایل</string>
+    <string name="not_login">شما هنوز وارد نشده اید</string>
+    <string name="not_access">شما به این عمل دسترسی ندارید</string>
+    <string name="code">کد مربوطه</string>
+    <string name="code_2">دسته</string>
+    <string name="code_melli">کد ملی</string>
+    <string name="search_with_code_melli">جستجو با کد ملی</string>
+    <string name="search_with_code_name_family">جستجو با اطلاعات شناسنامه ای</string>
+    <string name="code_name">نام</string>
+    <string name="code_family">نام خانوادگی</string>
+    <string name="code_father_name">نام پدر</string>
+    <string name="search_category">دسته بندی</string>
+    <string name="searchText">ششش</string>
+    <string name="with_code_melli">با کد ملی</string>
+    <string name="name">نام و فامیلی</string>
+    <string name="with_name">با نام و فامیلی</string>
+    <string name="with_name2">با مشخصات</string>
+    <string name="inputError">مقادیر واردشده صحیح نیست</string>
+    <string name="search_result">نتایج</string>
+    <string name="son_of">فرزند</string>
+    <string name="find_date">تاریخ پیدا شدن :</string>
+    <string name="identity_number">شماره / کد :</string>
+    <string name="search_length_comment">عبارتی برای جستجو وارد نکردید.</string>
+    <string name="not_found_dialog">ما نتیجه ای برای جستجوی شما پیدا نکردیم ! آیا میخواهید آن را در سیستم ثبت کنید ؟</string>
+    <string name="regit">ثبت می کنم</string>
+    <string name="addCar">افزودن اتوموبیل</string>
+
+    <string name="app_name_tablet">Bottom Navigation (Tablet)</string>
+    <string name="app_name_custom_badges">Custom Badges</string>
+    <string name="app_name_no_coordinator">No Coordinator</string>
+    <string name="app_name_fixed_scroll">Fixed Scroll</string>
+    <string name="menu_enable_disable_items">Disable Items</string>
+
+    <string name="server_not_response">متاسفانه سرور پاسخی نداد</string>
+
+
+
+    <string name="profile">پروفایل</string>
+    <string name="register_and_login">ورود / ثبت نام</string>
+    <string name="Communicate">پل های ارتباطی</string>
+    <string name="tubeless_app_list">لیست اپلیکیشن ها</string>
+    <string name="telegram">کانال تلگرام</string>
+    <string name="instagram">اینستاگرام</string>
+    <string name="aboute_us">درباره ما</string>
+    <string name="simcart">سیم کارت</string>
+    <string name="sign_out">خروج از حساب کاربری</string>
+    <string name="back">بازگشت</string>
+    <string name="userid">کد کاربری</string>
+    <string name="close">بستن</string>
+    <string name="not_found_result">جستجوی شما نتیجه ای نداشت.از منو جستجو با نام و نام خانوادگی را انتخاب کنید.
+    </string>
+    <string name="register_new">ثبت(گم شده - سرقطی)</string>
+    <string name="reg_new_yafte">ثبت مورد جدید</string>
+    <string name="lost_documents">در جستجوی قطعه ماشین وارداتی هستم</string>
+    <string name="find_documents">در جستجوی قطعه کمیاب قدیمی هستم</string>
+    <string name="stolen_documents">قطعه ای کمیاب دارم</string>
+    <string name="text_pic">text pic</string>
+    <string name="location_of_miss">آدرس تغریبی شما (مثال : استان و شهر)</string>
+    <string name="what_date">شماره تماس شما و تا چه تاریخی این درخواست معتبر است (مثال تا زمستان 99)</string>
+    <string name="what_date2">چه زمانی گم کردید/پیدا کردید/به سرقت رفت؟</string>
+
+    <string name="where_miss">مدل خودروی (شامل تیپ - مدل و کلاس و...)</string>
+    <string name="text2">مشخصات شامل نام؛ مدل , کشور سازنده؛ وارد کننده ؛رنگ ؛شکل؛علامت و هرچیزی که مشخص کننده ی قطعه ی مورد نظر شماست
+    </string>
+
+    <string name="text22">مشخصات شامل نام؛ نام خانوادگی؛ تاریخ صدور؛رنگ؛شکل؛علامت و هرچیزی که مشخص کننده ی مالکیت شما بر
+        آن مدارک می باشد
+    </string>
+
+    <string name="new_yafte_new_yafte_inserted">مورد جدید با موفقیت اضافه شد.</string>
+    <string name="tray_again">لطفا مجدد تلاش کنید.</string>
+    <string name="tray_error_again">با خطا مواجه شدیم کمی بعد تلاش کنید.</string>
+    <string name="add_new_item">افزودن مورد جدید</string>
+    <string name="login_with">یا ورود با :</string>
+    <string name="user_and_password_error">نام کاربری و رمز عبور حداقل شامل 6 کارامتر است</string>
+    <string name="user_and_password_error_2">نام کاربری و رمز عبور حداقل باید 6 کاراکتر داشته باشند</string>
+    <string name="values_not_correct">فرم را به درستی تکمیل نکرده اید</string>
+    <string name="code_melli_not_true">کد ملی صحیح نیست</string>
+    <string name="data_not_true">اطلاعات را به درستی وارد نکرده اید.</string>
+    <string name="help2">درصورتی که شما مدت زمان زیادی هست به دنبال قطعه های کمیاب خودرو می گردید اطلاعات قطعه خود را در این اپ وارد کنید. به سرعت با شما تماس گرفته خواهد شد.</string>
+
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+
+    <string name="national_code">کد ملی</string>
+    <string name="search_by_name">جستجو با نام و نام خانوادگی</string>
+    <string name="searchRequest">جستجو</string>
+    <string name="serach_by_name">جستجو با نام</string>
+    <string name="family">نام خانوادگی</string>
+    <string name="father_name">نام پدر</string>
+    <string name="search_by_national_code">جستجو با کد ملی</string>
+    <string name="not_found">پیدا نشد</string>
+    <string name="countinue">ادامه</string>
+
+    <string name="forget_password">فراموشی رمز عبور</string>
+    <string name="text">متن</string>
+    <string name="social">شبکه های اجتماعی</string>
+    <string name="contact_us">تماس با ما</string>
+    <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
+    <string name="about_us">درباره ما</string>
+    <string name="help">راهنمایی</string>
+
+    <string name="error_message_1001">کد ملی صحبح نیست</string>
+    <string name="error_message_1002">نام صحیح نیست</string>
+    <string name="error_message_1003">نام خانوادگی صحیح نیست</string>
+    <string name="error_message_1004">نام پدر صحیح نیست</string>
+    <string name="error_message_104">رمزعبور صحیح نیست</string>
+
+    <string name="cancel_2">بیخیال</string>
+    <string name="see_result">مشاهده نتایج</string>
+    <string name="about_us_text">اپلیکیشن پیش روی شما یکی از نرم افزار های مجموعه تبوبلس مب یاشد .این نرم افزار به همت
+        متخصصین و توانمند های داخل کشور تهیه شده است.در صورت تمایل به همکاری با ما یا ارائه پیشنهادات و انتقادات از روش
+        های ارتباطی زیر استفاده کنید.
+    </string>
+    <string name="exit_double_tap_message">برای خروج مجدد کلیک کنید</string>
+
+    <string name="yadakMessage">درخواست ها هنوز به حد نصاب نرسیده اند. به اطلاع شما خواهیم رساند.</string>
+    <string name="simcardPermissionError">برای ادامه ی ورود با سیم کارت به این دسترسی احتیاج است.</string>
+    <string name="loginBySimcardDescription">برای ورود با سیم کارت به این دسترسی احتیاج است.</string>
+    <string name="passwordError">رمز عبور حداقل باید 6 کاراکتر داشته باشند</string>
+    <string name="phoneError">شماره موبایل صحیح نیست</string>
+    <string name="must_login">ابتدا وارد شوید.</string>
+    <string name="lost_documents1">مدارک گم شده</string>
+    <string name="find_documents1">مدارک پیدا شده</string>
+    <string name="stolen_documents1">مدارک به سرقت رفته</string>
+    <string name="where_miss_2">محل : کجا گم کردید / کجا پیدا کردید</string>
+    <string name="Delete">حذف</string>
+    <string name="Share">بازنشر</string>
+    <string name="Report">گزارش</string>
+    <string name="DeletePostMessage">آیا از حذف این مورد مطمئن هستید ؟</string>
+    <string name="yes">بله</string>
+    <string name="subject">موضوع</string>
+    <string name="contact_us_hint">متن</string>
+    <string name="estelam_by_plak">استعلام با شماره پلاک</string>
+    <string name="save">save</string>
+    <string name="not_any_file" >هیچ فایلی وجود ندارد</string>
+    <string name="end_of_list" >انتهای لیست</string>
+    <string name="add_files">افزودن فایل</string>
+
+
+    <string name="type1_yadak">درخواست قطعه</string>
+    <string name="type2_yadak">درخواست قطعه</string>
+    <string name="type3_yadak">قطعه موجود در انبار</string>
+
+
+    <string name="type1_yafte">گمشده</string>
+    <string name="type2_yafte">پیداشده</string>
+    <string name="type3_yafte">سرقتی</string>
+    <string name="select_image_source">تصویر را از کجا میخواهید انتخاب کنید ؟</string>
+    <string name="avatar_picture">تصویر آواتار</string>
+    <string name="message_grant_permission">message_need_permission</string>
+    <string name="message_need_permission">message_need_permission</string>
+    <string name="label_setting">label_setting</string>
+    <string name="error_message">error_message</string>
+    <string name="permission_title">مجوز دسترسی</string>
+    <string name="permission_gallery_text">برای این که بتوانیم تصویر را از گالری گوشی شما انتخاب کنیم باید اجازه دسترسی به گالری را به اپلیکیشن بدهید.</string>
+    <string name="permission_camera_text">برای گرفتن عکس باید دسترسی به دوربین را به اپلیکیشن بدهید.</string>
+    <string name="notEnugh">با افزایش فعالیتتان در اپ , این گذینه فعال خواهدشد.</string>
+    <string name="reg_new_comment">پاسخ</string>
+    <string name="your_reply">نظر یا پاسخ شما</string>
+    <string name="date">ساعت و تاریخ</string>
+    <string name="reg_new_blog">ثبت بلاگ جدید</string>
+    <string name="financial_info">اطلاعات مالی</string>
+    <string name="financial_detail">جزيیات حساب مالی</string>
+    <string name="pardakht_rule">مطالعه قوانین و پرداخت</string>
+    <string name="accept_and_pardakht">می پذیرم و پرداخت</string>
+    <string name="no_accept">نمی پذیرم</string>
+    <string name="pardakht_rule2">مطالعه و تایید قوانین</string>
+    <string name="accept_and_pardakht2">موافقم</string>
+    <string name="rial">ریال</string>
+    <string name="txtPriceComment">جهت بهره مندی از اطلاعات این صفحه می بایست آن را تایید نمایید</string>
+    <string name="toman">تومان</string>
+    <string name="userIsNull">"user null "</string>
+</resources>

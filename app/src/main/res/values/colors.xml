@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <color name="night_white_hint_text">#d65c5c5c</color>
+    <color name="day_white_hint_text">#cabcbcbc</color>
+
+    <color name="night_white_text">#b3aeae</color>
+    <color name="day_white_text">#fff</color>
+    <color name="day_white">#fff</color>
+    <color name="day_contact_us_back">#cabcbcbc</color>
+    <color name="day_contact_us_border">#0e0e0e</color>
+    <color name="day_username_text">#f9353535</color>
+    <color name="day_content_text">#f9353535</color>
+    <color name="day_contact_us_text">#121212</color>
+    <color name="day_title">@color/tubelessColor_blue_02</color>
+    <color name="day_horisontal_line">#caccd1</color>
+    <color name="day_border_line">#999999</color>
+
+    <color name="night_dark_transparent">#8b000000</color>
+    <color name="day_dark_transparent">#5d151515</color>
+
+    <color name="night_dark_accounting_border">#B1BCBE</color>
+    <color name="day_edittext_border">#fff</color>
+
+
+
+    <color name="refreshcolor1">#ff9800</color>
+    <color name="refreshcolor2">#ffaa2d</color>
+    <color name="refreshcolor3">#ffc775</color>
+    <color name="refreshcolor4">#ffe8c6</color>
+    <color name="refreshcolor5">#ffc775</color>
+    <color name="refreshcolor6">#ffaa2d</color>
+
+
+    <color name="tubelessColor_yellow_01">#FFDA10</color>
+    <color name="tubelessColor_yellow_02">#FFB60F</color>
+    <color name="tubelessColor_yellow_03">#FDA116</color>
+
+    <color name="tubelessColor_blue_01">#1c326b</color>
+    <color name="tubelessColor_blue_02">#111f43</color>
+
+
+
+
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorButton">#991041</color>
+
+
+
+
+<!--    <color name="colorPrimary">#FFC107</color>-->
+    <color name="colorTextGry">#5A5A5A</color>
+    <color name="colorPrimaryDark">#4267b2</color>
+    <color name="colorPrimary">#FFC107</color>
+
+    <color name="colorAccent">#4267b2</color>
+
+    <color name="colorProgress">@color/colorWhite</color>
+    <color name="fb_background_color">#e9ebee</color>
+    <color name="fb_foreground_color">#4267b2</color>
+
+
+
+    <color name="colorHorizontalLineGry">#B3E0E0E0</color>
+    <color name="colorBorderGry">#B3CCCCCC</color>
+
+    <color name="colorWhite">#ffffff</color>
+</resources>

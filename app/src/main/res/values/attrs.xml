@@ -1,0 +1,9 @@
+<resources>
+
+    <declare-styleable name="CustomImageview">
+        <attr name="widthAndHeightRatio" format="float" />
+    </declare-styleable>
+
+
+
+</resources>

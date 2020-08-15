@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/png_login"
+            android:title="@string/login" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/png_profile"
+            android:title="@string/profile" />
+<!--        <item-->
+<!--            android:id="@+id/nav_account"-->
+<!--            android:icon="@drawable/ic_menu_camera"-->
+<!--            android:title="register_and_login" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_gallery"-->
+            <!--android:icon="@drawable/ic_menu_camera"-->
+            <!--android:text="@string/profile" />-->
+
+    </group>
+    <group android:checkableBehavior="single">
+
+<!--        <item-->
+<!--            android:id="@+id/nav_search_by_name"-->
+<!--            android:icon="@drawable/png_find_doc"-->
+<!--            android:title="جستجوی مدارک" />-->
+
+
+    </group>
+
+
+    <item android:title="ارتباطات">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/png_info"
+                android:title="درباره ما" />
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@drawable/png_contact_us2"
+                android:title="تماس با ما" />
+
+<!--            <item-->
+<!--                android:id="@+id/nav_role"-->
+<!--                android:icon="@drawable/png_role"-->
+<!--                android:title="قوانین" />-->
+
+        </menu>
+    </item>
+
+    <item android:title="شبکه های اجتماعی">
+
+        <menu>
+            <item
+                android:id="@+id/nav_telegram"
+                android:icon="@drawable/png_telegram"
+                android:title="تلگرام" />
+<!--            <item-->
+<!--                android:id="@+id/nav_instagram"-->
+<!--                android:icon="@drawable/png_instagram"-->
+<!--                android:title="اینستاگرام" />-->
+            <item
+                android:title=" " />
+        </menu>
+    </item>
+
+
+</menu>

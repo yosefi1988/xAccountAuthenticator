@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ir.sajjadyosefi.android.xTubeless"
+    android:installLocation="preferExternal">
+
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"
+        android:maxSdkVersion="22" />
+
+
+    <uses-permission
+        android:name="android.permission.GET_ACCOUNTS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.MANAGE_ACCOUNTS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.USE_CREDENTIALS"
+        android:maxSdkVersion="22" />
+
+
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
+<!--    برای آواتار-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".Global"
+        android:allowBackup="true"
+        android:icon="@drawable/png_icon1"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/TubelessDayTheme"
+        tools:replace="android:theme ,android:icon"
+        tools:ignore="GoogleAppIndexingWarning">
+
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6595298957852131~7018766277"/>
+
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="tubeless.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="5" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="ir.sajjadyosefi.android.tubeless" />
+        <meta-data
+            android:name="AdadToken"
+            android:value="683bcb491cc6431ab73bc844f88c8a45" />
+        <meta-data
+            android:name="AdadTestMode"
+            android:value="False" />
+
+        <activity
+            android:name="ir.sajjadyosefi.android.xTubeless.activity.MainActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/TubelessDayTheme.NoActionBar.NoTranslucent2">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" ></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.BROWSABLE"></category>
+                <data android:scheme="return2" android:host="zarinpalpayment"></data>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.account.profile.MainActivityProfile"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+
+        <activity
+            android:name="ir.sajjadyosefi.android.xTubeless.activity.common.ContactUsActivity"
+            android:theme="@style/ThemeFullSCreen"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+
+
+        <activity
+            android:name="ir.sajjadyosefi.android.xTubeless.activity.common.WebViewActivity"
+            android:theme="@style/ThemeFullSCreen"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+        <activity
+            android:name="ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen.SplashScreen"
+            android:theme="@style/ThemeFullSCreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="ir.moslem_deris.apps.zarinpal.PaymentActivity" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
+
+        <meta-data
+            android:name="META_DATA_LOCATION"
+            android:value="true" />
+
+
+
+
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
+
+    </application>
+
+    <!--for JobIntentService-->
+    <!--fileupload service-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+</manifest>

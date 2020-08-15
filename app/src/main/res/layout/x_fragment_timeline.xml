@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:fitsSystemWindows="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+
+    <LinearLayout
+        android:id="@+id/metaRelativeLayout"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/bourseExpire"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtPriceComment"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="اعتبار اکانت شما به اتمام رسید.سیگنال های جدید را پس از شارژ مجدد خواهید دید. جهت ادامه و شارژ حساب خود روی دکمه زیر کلیک کنید:" />
+
+
+            <Button
+                android:id="@+id/countinueButton"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_gravity="center"
+                android:text="@string/countinue"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:orientation="vertical"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/metaRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_margin="3dp"
+            android:onClick="onClick"
+            android:textSize="25dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/search"
+            android:visibility="gone"
+            android:textColor="@android:color/white" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+
+            <include layout="@layout/x_content_scrolling" />
+
+<!--            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--                android:id="@+id/swipeRefreshLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recyclerView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+
+<!--                    android:descendantFocusability="afterDescendants"-->
+<!--                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+<!--            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
+<!--            android:src="@drawable/png_icon"-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabList"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@android:color/transparent"
+                android:layout_marginRight="35dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="30dp"
+                app:borderWidth="0dp"
+                app:elevation="2dp"
+                app:fabSize="normal"
+                android:visibility="gone"
+                app:layout_anchor="@id/recyclerView"
+                app:layout_anchorGravity="bottom|start" />
+<!--                app:layout_behavior=".classes.ScrollAwareFABBehavior" />-->
+
+            <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--android:id="@+id/fab2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="@dimen/fab_margin"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--app:backgroundTint="#42a5f5"-->
+            <!--android:src="@drawable/arrow_up"-->
+            <!--android:visibility="gone"-->
+            <!--app:borderWidth="0dp"-->
+            <!--app:elevation="2dp"-->
+            <!--app:fabSize="normal"-->
+            <!--app:layout_anchor="@id/listView"-->
+            <!--app:layout_anchorGravity="bottom|start"-->
+            <!--app:layout_behavior="ir.mahanco.mahansocial.Utilities.ScrollAwareFABBehavior" />-->
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <TextView
+            android:id="@+id/nothing_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="#000000"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textSize="20dp" />
+
+
+        <RelativeLayout
+            android:id="@+id/searchBoxRoot"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp">
+
+            <RelativeLayout
+                android:id="@+id/searchBox"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:visibility="gone" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textDirection="rtl"
+
+                    android:background="@color/colorPrimary"
+                    android:layoutDirection="rtl"
+                    android:gravity="right"
+                    android:layout_margin="10dp"
+                    android:foregroundGravity="right"
+                    android:weightSum="10">
+
+                    <EditText
+                        android:id="@+id/editTextComment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:hint="چیزی بنویسید"
+                        android:padding="3dp"
+                        android:inputType="textMultiLine"
+                        android:minLines="2"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:background="@android:color/white"
+                        android:textColor="#252525"
+                        android:textColorHint="#939393" />
+
+                    <Button
+                        android:id="@+id/buttonSendComment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:layout_margin="3dp"
+                        android:onClick="onClick"
+                        android:textSize="25dp"
+                        android:background="@color/colorPrimary"
+                        android:text="@string/search"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:visibility="gone"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_search"
+            android:text="@string/searchRequest"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

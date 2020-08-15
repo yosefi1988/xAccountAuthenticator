@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tubelessColor_blue_01">#1c326b</color>
+    <color name="tubelessColor_blue_02">#111f43</color>
+    <color name="tubelessColor_blue_03">#0b152d</color>
+
+    <color name="black">#000000</color>
+    <color name="day_white_hint_text">#cabcbcbc</color>
+    <color name="day_white_text">#fff</color>
+    <color name="fb_foreground_color">#4267b2</color>
+    <color name="fb_background_color">#e9ebee</color>
+</resources>
