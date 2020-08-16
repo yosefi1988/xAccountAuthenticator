@@ -21,6 +21,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:textSize="50dp"
+
         android:textColor="@android:color/white"
         android:text="authenticator" />
 
@@ -30,6 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:text="Tubeless v 3.01"/>
+        android:text="account authenticator"/>
 
 </RelativeLayout>
