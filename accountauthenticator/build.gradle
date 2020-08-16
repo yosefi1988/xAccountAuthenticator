@@ -1,15 +1,20 @@
-apply plugin: 'maven-publish' // Apply this plugin at the top of your library build.gradle
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+
+def final libName = "xAccountAuthenticator"
+def final lib_VersionName = "1.0.0"
+def final libversionCode = 1
+
+
 
 def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
-
 def getVersionName = { ->
-    return "1.0.0" // todo versionName
+    return "${lib_VersionName}"
 }
-
 def getArtificatId = { ->
-    return "accountauthenticator"
+    return libName
 }
 
 android {
@@ -22,7 +27,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0.0"
+        versionName "${lib_VersionName}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -38,7 +43,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -57,40 +61,24 @@ dependencies {
 }
 
 
-//
-//publishing {
-//    publications {
-//        bar(MavenPublication) {
-//            groupId 'ir.sajjadyosefi.libraries' // group ID
-//            artifactId getArtificatId()
-//            version getVersionName()
-//            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
-//        }
-//    }
-//    repositories {
-//        maven {
-//            name = "GitHubPackages"
-//            url = uri("https://maven.pkg.github.com/yosefi1988/Tubeless")
-//            credentials {
-//                /** Create github.properties in root project folder file with
-//                 ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
-//                 ** Set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
-//
-//                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-//                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-//            }
-//        }
-//    }
-//}
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId 'ir.sajjadyosefi.libraries'
+            artifactId "xAccountAuthenticator"
+            version "1.0.0"
+            artifact("$buildDir/outputs/aar/accountAuthenticator-release.aar")
+        }
+    }
 
-
-repositories {
-    maven {
-        name = "accountauthenticator"
-        url = uri("https://maven.pkg.github.com/yosefi1988/tubeless")
-        credentials {
-             username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/yosefi1988/xAccountAuthenticator")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
         }
     }
 }
