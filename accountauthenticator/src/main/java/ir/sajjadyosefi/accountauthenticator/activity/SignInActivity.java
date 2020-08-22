@@ -228,7 +228,7 @@ public class SignInActivity extends Activity {
 
 
     private void finishLogin(Intent intent) {
-        Log.d("udinicSajjad", TAG + "> finishLogin");
+        Log.d("TubelessSajjad", TAG + "> finishLogin");
         intent.hasExtra("MustRefresh");
         String accountName = intent.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
         String accountUserID = intent.getStringExtra(PARAM_USER_ID);
@@ -238,7 +238,7 @@ public class SignInActivity extends Activity {
         final Account account = new Account(accountName, intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE));
 
         if (getIntent().getBooleanExtra(ARG_IS_ADDING_NEW_ACCOUNT, false)) {
-            Log.d("udinicSajjad", TAG + "> finishLogin > addAccountExplicitly");
+            Log.d("TubelessSajjad", TAG + "> finishLogin > addAccountExplicitly");
             String authtoken = intent.getStringExtra(AccountManager.KEY_AUTHTOKEN);
             String authtokenType = mAuthTokenType;
 
@@ -257,7 +257,7 @@ public class SignInActivity extends Activity {
                 finish();
             }
         } else {
-            Log.d("udinicSajjad", TAG + "> finishLogin > setPassword");
+            Log.d("TubelessSajjad", TAG + "> finishLogin > setPassword");
             mAccountManager.setPassword(account, accountUserPass);
         }
 
@@ -331,7 +331,7 @@ public class SignInActivity extends Activity {
 
             @Override
             protected Intent doInBackground(String... params) {
-                Log.d("udinicSajjad", TAG + "> Started authenticating");
+                Log.d("TubelessSajjad", TAG + "> Started authenticating");
 
 
                 Bundle bundle = new Bundle();
@@ -391,7 +391,7 @@ public class SignInActivity extends Activity {
 
             @Override
             protected Intent doInBackground(String... params) {
-                Log.d("udinicSajjad", TAG + "> Started authenticating");
+                Log.d("TubelessSajjad", TAG + "> Started authenticating");
 
 
                 Bundle bundle = new Bundle();
@@ -457,7 +457,7 @@ public class SignInActivity extends Activity {
 
             @Override
             protected Intent doInBackground(String... params) {
-                Log.d("udinicSajjad", TAG + "> Started authenticating");
+                Log.d("TubelessSajjad", TAG + "> Started authenticating");
 
 
                 Bundle bundle = new Bundle();

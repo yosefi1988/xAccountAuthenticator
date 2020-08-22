@@ -25,7 +25,7 @@ import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 
 public class Authenticator extends AbstractAccountAuthenticator {
-    private String TAG = "UdinicAuthenticator";
+    private String TAG = "TubelessAuthenticator";
     private final Context mContext;
 
     public Authenticator(Context context) {
@@ -35,7 +35,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle addAccount(AccountAuthenticatorResponse response, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws NetworkErrorException {
-        Log.d("udinicSajjad", TAG + "> addAccount");
+        Log.d("TubelessSajjad", TAG + "> addAccount");
 
 //        final Intent intent = new Intent(mContext, AuthenticatorActivity.class);
         final Intent intent = new Intent(mContext, SignInActivity.class);
@@ -53,7 +53,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
 
-        Log.d("udinicSajjad", TAG + "> getAuthToken");
+        Log.d("TubelessSajjad", TAG + "> getAuthToken");
 
         // If the caller requested an authToken type we don't support, then
         // return an error
@@ -69,14 +69,14 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
         String authToken = am.peekAuthToken(account, authTokenType);
 
-        Log.d("udinicSajjad", TAG + "> peekAuthToken returned - " + authToken);
+        Log.d("TubelessSajjad", TAG + "> peekAuthToken returned - " + authToken);
 
         // Lets give another try to authenticate the user
         if (TextUtils.isEmpty(authToken)) {
             final String password = am.getPassword(account);
             if (password != null) {
                 try {
-                    Log.d("udinicSajjad", TAG + "> re-authenticating with the existing password");
+                    Log.d("TubelessSajjad", TAG + "> re-authenticating with the existing password");
 
                     LoginRequest loginRequest = new LoginRequest("userNamee",password, util.GetAndroidId(mContext));
 

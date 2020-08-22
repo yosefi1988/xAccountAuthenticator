@@ -109,7 +109,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
 
             @Override
             protected Intent doInBackground(String... params) {
-                Log.d("udinicSajjad", TAG + "> Started authenticating");
+                Log.d("TubelessSajjad", TAG + "> Started authenticating");
 
 
                 final Intent intent = new Intent();
@@ -153,7 +153,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
 
 
     private void finishLogin(Intent intent) {
-        Log.d("udinicSajjad", TAG + "> finishLogin");
+        Log.d("TubelessSajjad", TAG + "> finishLogin");
 
         String accountName = intent.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
         String accountUserID = intent.getStringExtra(PARAM_USER_ID);
@@ -163,7 +163,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
         final Account account = new Account(accountName, intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE));
 
         if (getIntent().getBooleanExtra(ARG_IS_ADDING_NEW_ACCOUNT, false)) {
-            Log.d("udinicSajjad", TAG + "> finishLogin > addAccountExplicitly");
+            Log.d("TubelessSajjad", TAG + "> finishLogin > addAccountExplicitly");
             String authtoken = intent.getStringExtra(AccountManager.KEY_AUTHTOKEN);
             String authtokenType = mAuthTokenType;
 
@@ -176,7 +176,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
             mAccountManager.addAccountExplicitly(account, accountUserPass, data);
             mAccountManager.setAuthToken(account, authtokenType, authtoken);
         } else {
-            Log.d("udinicSajjad", TAG + "> finishLogin > setPassword");
+            Log.d("TubelessSajjad", TAG + "> finishLogin > setPassword");
             mAccountManager.setPassword(account, accountUserPass);
         }
 

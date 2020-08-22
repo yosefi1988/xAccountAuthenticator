@@ -67,7 +67,7 @@ public class SignUpActivity extends Activity {
             @Override
             protected Intent doInBackground(String... params) {
 
-                Log.d("udinicSajjad", TAG + "> Started authenticating");
+                Log.d("TubelessSajjad", TAG + "> Started authenticating");
 
                 final Intent intent = new Intent();
                 Bundle bundle = new Bundle();
