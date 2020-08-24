@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 
 
 def final libName = "xAccountAuthenticator"
-def final lib_VersionName = "1.0.0"
+def final lib_VersionName = "1.1.0"
 def final libversionCode = 1
 
 
@@ -60,17 +60,39 @@ dependencies {
 
 }
 
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                // Applies the component for the release build variant.
+//                //from components.release
+//
+//                // You can then customize attributes of the publication as shown below.
+//                groupId = 'ir.sajjadyosefi.libraries'
+//                artifactId = 'final'
+//                version = '1.1.0'
+//            }
+//            // Creates a Maven publication called “debug”.
+//            debug(MavenPublication) {
+//                // Applies the component for the debug build variant.
+//                //from components.debug
+//
+//                groupId = 'ir.sajjadyosefi.libraries'
+//                artifactId = 'final-debug'
+//                version = '1.1.0'
+//            }
+//        }
+//    }
+//}
 
 publishing {
     publications {
         bar(MavenPublication) {
             groupId 'ir.sajjadyosefi.libraries'
             artifactId "xAccountAuthenticator"
-            version "1.0.0"
-            artifact("$buildDir/outputs/aar/accountAuthenticator-release.aar")
+            version "1.1.0"
         }
     }
-
     repositories {
         maven {
             name = "GitHubPackages"

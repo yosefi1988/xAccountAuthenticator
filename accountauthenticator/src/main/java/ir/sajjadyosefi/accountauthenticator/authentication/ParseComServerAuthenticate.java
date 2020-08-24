@@ -138,7 +138,6 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     public User userSignIn(LoginRequest loginRequest) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
         String url = "http://test.sajjadyosefi.ir/Api/User/Login";
-//        String url = "http://192.168.20.106:3071/Api/User/Login";
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();

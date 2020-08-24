@@ -4,7 +4,7 @@ apply plugin: 'io.fabric'
 
 //todo change version code before publish
 def final appNameAAA = 'authenticator'
-def final AAA_VersionName = "1.0.2"
+def final AAA_VersionName = "1.1.0"
 def final AAA_VersionCode = 1
 
 
