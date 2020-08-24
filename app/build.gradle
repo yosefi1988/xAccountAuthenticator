@@ -22,10 +22,11 @@ android {
     }
 
 
+//            storeFile file("D:\\Documents\\sajjad\\Key\\xTubeless\\xTubeless98")
 
     signingConfigs {
         TubelessSajjadSigning {
-            storeFile file("D:\\Documents\\sajjad\\Key\\xTubeless\\xTubeless98")
+            storeFile file("../xTubeless98")
             storePassword "sajjadolsvutv@42viubdvf"
             keyAlias "keySajjad"
             keyPassword 'Yosefi$24s;dgoj'
