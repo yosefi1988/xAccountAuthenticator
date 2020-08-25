@@ -52,7 +52,7 @@ ext {
     butterKnifeVersion = '10.1.0'
     rxjava2Version = '2.1.9'
     rxandroidVersion = '2.0.1'
-    accountauthenticatorVersion = '1.1.0'
+    accountauthenticatorVersion = '1.3.0'
 }
 
 task clean(type: Delete) {
