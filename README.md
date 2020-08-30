@@ -12,11 +12,12 @@ allprojects {
 
 2-app level
 
-```implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'
+```
+implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'
 ```
 
 3-
-            ```
+```
             <Button
                 android:id="@+id/btn"
                 android:layout_width="0dp"
