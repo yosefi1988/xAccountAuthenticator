@@ -6,10 +6,12 @@ allprojects {
     repositories {
         maven { url "https://jitpack.io" }
     }
-}```
+}
+```
 
 2-app level
-```implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'```
+```implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0
+'```
 
 3-
             ```<Button
@@ -18,7 +20,8 @@ allprojects {
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:onClick="onClick"
-                android:text="btn"  />```
+                android:text="btn"  />
+                ```
 
 4-
     ```public static final String ACCOUNT_TYPE = "ir.sajjadyosefi.android";
@@ -39,7 +42,8 @@ allprojects {
                 this.startActivityForResult(intent, LOGIN_REQUEST_CODE);
                 break;
         }
-    } ```
+    } 
+    ```
 
 5-
     ```@Override
@@ -60,7 +64,8 @@ allprojects {
                     }
             }
         }
-   }```
+   }
+   ```
 
 
 6- User Model:
@@ -71,7 +76,8 @@ allprojects {
 	private String mobileNumber;
 	private String userImage;
 	private String profileImage;
-	public long balanse;```
+	public long balanse;
+	```
 
 
 
