@@ -1,4 +1,5 @@
 # a library from persia 💖
+creator sajjad yosefi 09123678522
 
 1-
 ```project level
@@ -10,11 +11,13 @@ allprojects {
 ```
 
 2-app level
+
 ```implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'
 ```
 
 3-
-            ```<Button
+            ```
+            <Button
                 android:id="@+id/btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -97,7 +100,7 @@ allprojects {
 
 
 
-creator sajjad yosefi 09123678522
+
 
 برای مثال
 ```xml
@@ -108,5 +111,3 @@ creator sajjad yosefi 09123678522
         android:layout_height="match_parent">
     </ir.sajjadyosefi.beautifulprogressbar.ProgressbarContainer>
 ```
-![alt text](https://raw.githubusercontent.com/yosefi1988/beautifulprogressbar/master/app/src/main/res/drawable/device20190917083815.gif)
-
