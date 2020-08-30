@@ -28,7 +28,8 @@ implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'
 ```
 
 4-
-    ```public static final String ACCOUNT_TYPE = "ir.sajjadyosefi.android";
+```
+    public static final String ACCOUNT_TYPE = "ir.sajjadyosefi.android";
     public static final String AUTHTOKEN_TYPE_FULL_ACCESS = "Full access";
     private static int LOGIN_REQUEST_CODE = 101 ;
 
@@ -50,7 +51,8 @@ implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'
 ```
 
 5-
-    ```@Override
+```
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LOGIN_REQUEST_CODE) {
@@ -73,8 +75,8 @@ implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'
 
 
 6- User Model:
-
-	```private long userId;
+```
+private long userId;
 	private String userName;
 	private String email;
 	private String mobileNumber;
