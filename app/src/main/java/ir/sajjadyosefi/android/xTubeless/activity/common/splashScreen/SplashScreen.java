@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.activity.MainActivity;
+import ir.sajjadyosefi.android.xTubeless.activity.MainTestActivity;
 import ir.sajjadyosefi.android.xTubeless.classes.SAccounts;
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 
@@ -68,8 +69,9 @@ public class SplashScreen extends AppCompatActivity  {
                 } catch (Exception e) {
                     //FirebaseCrash.report(e);
                 }
-
+                context.startActivity(new Intent(context, MainTestActivity.class));
                 context.startActivity(new Intent(context, MainActivity.class));
+
                 ((Activity)context).finish();
 
             }

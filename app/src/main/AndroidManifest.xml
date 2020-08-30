@@ -72,11 +72,10 @@
             android:value="False" />
 
         <activity
-            android:name="ir.sajjadyosefi.android.xTubeless.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:theme="@style/TubelessDayTheme.NoActionBar.NoTranslucent2">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" ></action>
                 <category android:name="android.intent.category.DEFAULT"></category>
@@ -84,6 +83,12 @@
                 <data android:scheme="return2" android:host="zarinpalpayment"></data>
             </intent-filter>
         </activity>
+
+
+
+        <activity
+            android:name=".activity.MainTestActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name=".activity.account.profile.MainActivityProfile"
