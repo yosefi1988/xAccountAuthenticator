@@ -84,33 +84,3 @@ private long userId;
 	private String profileImage;
 	public long balanse;
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-برای مثال
-```xml
-    <ir.sajjadyosefi.beautifulprogressbar.ProgressbarContainer
-        app:titleText="Please Wait..."
-        android:id="@+id/loading_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ir.sajjadyosefi.beautifulprogressbar.ProgressbarContainer>
-```
