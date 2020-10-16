@@ -56,7 +56,7 @@
 
         <Button
             android:id="@+id/submit"
-            android:text="@string/loginbySaman"
+            android:text="@string/login"
             style="@style/AppTheme.DayButton" />
 
         <TextView
