@@ -12,21 +12,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
-
-import java.util.concurrent.TimeUnit;
 
 import ir.sajjadyosefi.accountauthenticator.R;
-import ir.sajjadyosefi.accountauthenticator.activity.SignUpActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.util;
-import ir.sajjadyosefi.accountauthenticator.model.LoginRequest;
-import ir.sajjadyosefi.accountauthenticator.model.User;
+import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
+import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 
@@ -38,6 +30,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
     public static final String KEY_ERROR_MESSAGE = "ERR_MSG";
     public final static String PARAM_USER_PASS = "USER_PASS";
     public final static String PARAM_USER = "USER";
+    public final static String PARAM_CONFIG = "CONFIG";
     public final static String PARAM_USER_NAME = "PARAM_USER_NAME";
     public final static String PARAM_USER_ID = "USER_ID";
 
@@ -61,7 +54,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
         String accountName = getIntent().getStringExtra(ARG_ACCOUNT_NAME);
         mAuthTokenType = getIntent().getStringExtra(ARG_AUTH_TYPE);
         if (mAuthTokenType == null)
-            mAuthTokenType = AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS;
+            mAuthTokenType = AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER;
 
         if (accountName != null) {
             ((TextView)findViewById(R.id.accountName)).setText(accountName);
@@ -115,23 +108,23 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
                 final Intent intent = new Intent();
                 Bundle bundle = new Bundle();
 
-                User signInUser = null;
+                ALoginResponse signInUser = null;
                 try {
-                    LoginRequest loginRequest = new LoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
+                    ALoginRequest ALoginRequest = new ALoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
 
-                    signInUser = sServerAuthenticate.userSignIn(loginRequest);
+                    signInUser = sServerAuthenticate.userSignIn(ALoginRequest);
 
 
-                    if (accountName != null && accountName.length() > 2)
-                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
-                    else
-                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
-
-                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
-                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
-                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
-                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
-                    bundle.putString(PARAM_USER_PASS, accountPassword);
+//                    if (accountName != null && accountName.length() > 2)
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
+//                    else
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
+//
+//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+//                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
+//                    bundle.putString(PARAM_USER_PASS, accountPassword);
                 } catch (Exception e) {
                     bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
                 }

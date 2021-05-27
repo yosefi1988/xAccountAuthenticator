@@ -72,6 +72,11 @@
             android:text="@string/simcart"
             style="@style/AppTheme.DayButton" />
 
+        <Button
+            android:id="@+id/submitByCodeMelli"
+            android:text="@string/codeMelli"
+            style="@style/AppTheme.DayButton" />
+
         <TextView
             android:id="@+id/signUp"
             android:layout_width="match_parent"

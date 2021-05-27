@@ -14,10 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import ir.sajjadyosefi.accountauthenticator.R;
-import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.util;
-import ir.sajjadyosefi.accountauthenticator.model.LoginRequest;
-import ir.sajjadyosefi.accountauthenticator.model.User;
+import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
+import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_ID;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_NAME;
@@ -72,8 +71,8 @@ public class SignUpActivity extends Activity {
                 final Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 try {
-                    LoginRequest loginRequest = new LoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
-                    User signUpUser = sServerAuthenticate.userSignUp(loginRequest);
+                    ALoginRequest ALoginRequest = new ALoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
+                    ALoginResponse signUpUser = sServerAuthenticate.userSignUp(ALoginRequest);
 
                     if (accountName != null && accountName.length() > 2)
                         bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signUpUser.getUserName() + ")");
@@ -81,8 +80,8 @@ public class SignUpActivity extends Activity {
                         bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signUpUser.getUserName());
 
                     bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, mAccountType);
-                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signUpUser.getAuthtoken());
-                    bundle.putString(PARAM_USER_ID, signUpUser.getUserId().toString());
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signUpUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signUpUser.getUserId().toString());
                     bundle.putString(PARAM_USER_NAME, signUpUser.getUserName());
                     bundle.putString(PARAM_USER_PASS, accountPassword);
                 } catch (Exception e) {

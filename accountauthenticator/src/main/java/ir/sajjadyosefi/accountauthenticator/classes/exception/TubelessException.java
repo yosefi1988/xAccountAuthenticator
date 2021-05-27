@@ -3,8 +3,10 @@ package ir.sajjadyosefi.accountauthenticator.classes.exception;
 
 import android.util.Log;
 
+import java.io.IOException;
 
-public class TubelessException extends Exception{
+
+public class TubelessException extends IOException {
 
     public static final int TUBELESS_OPERATION_COMPLETE = 0;
     public static final int TUBELESS_OPERATION_NOT_COMPLETE = 10;

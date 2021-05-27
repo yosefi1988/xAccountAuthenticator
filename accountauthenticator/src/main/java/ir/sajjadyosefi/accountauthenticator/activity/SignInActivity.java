@@ -36,17 +36,20 @@ import com.google.gson.Gson;
 
 import ir.sajjadyosefi.accountauthenticator.R;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
+import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.classes.util;
-import ir.sajjadyosefi.accountauthenticator.model.LoginRequest;
-import ir.sajjadyosefi.accountauthenticator.model.User;
+import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
+import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
+import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
+import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_ACCOUNT_NAME;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_ACCOUNT_TYPE;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_AUTH_TYPE;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER;
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_CONFIG;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_ID;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_NAME;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_PASS;
@@ -62,6 +65,7 @@ public class SignInActivity extends Activity {
 
     //widget
     Button submitBySimCard;
+    Button submitByCodeMelli;
     SignInButton submitByGoogle;
     public Dialog progressDialog;
 
@@ -159,12 +163,13 @@ public class SignInActivity extends Activity {
 
         mAccountManager = AccountManager.get(getBaseContext());
         submitBySimCard     = findViewById(R.id.submitBySimCard);
+        submitByCodeMelli     = findViewById(R.id.submitByCodeMelli);
         submitByGoogle      = findViewById(R.id.submitByGoogle);
 
         String accountName = getIntent().getStringExtra(ARG_ACCOUNT_NAME);
         mAuthTokenType = getIntent().getStringExtra(ARG_AUTH_TYPE);
         if (mAuthTokenType == null)
-            mAuthTokenType = AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS;
+            mAuthTokenType = AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER;
 
         if (accountName != null) {
             ((TextView)findViewById(R.id.accountName)).setText(accountName);
@@ -174,7 +179,7 @@ public class SignInActivity extends Activity {
             @Override
             public void onClick(View v) {
                 try {
-                    submit(intentxxxxxxx);
+                    tyrToLoginByMobileNumber(intentxxxxxxx);
                 }catch (Exception ex){
                     Toast.makeText(getBaseContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
                     hideProgressBar();
@@ -192,19 +197,34 @@ public class SignInActivity extends Activity {
             }
         });
 
+        //Code melli
+        submitByCodeMelli.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Toast.makeText(activity, context.getString(R.string.comming_soon), Toast.LENGTH_LONG).show();
+                   try {
+//                       tryToLoginByCodeMelli(intentxxxxxxx,0);
+                       tryToLoginByUserCode("110012",intentxxxxxxx);
+                   } catch (TubelessException e) {
+                       e.printStackTrace();
+                   }
+
+
+               }
+           });
 
         //simcard
         submitBySimCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!checkPermission(context, wantPermission)) {
-                    if (shouldShowRequestPermissionRationale(activity, wantPermission)){
+                    if (shouldShowRequestPermissionRationale(activity, wantPermission)) {
                         Toast.makeText(activity, context.getString(R.string.loginBySimcardDescription), Toast.LENGTH_LONG).show();
                     }
-                    requestPermissions(activity, new String[]{wantPermission},PERMISSION_REQUEST_CODE);
+                    requestPermissions(activity, new String[]{wantPermission}, PERMISSION_REQUEST_CODE);
 
                 } else {
-                    tryToLoginBySimCard(intentxxxxxxx,getPhoneNumber(context));
+                    tryToLoginBySimCard(intentxxxxxxx, getPhoneNumber(context));
                 }
             }
         });
@@ -336,88 +356,28 @@ public class SignInActivity extends Activity {
 
                 Bundle bundle = new Bundle();
 
-                User signInUser = null;
+                ALoginResponse signInUser = null;
                 try {
-//                    LoginRequest loginRequest = new LoginRequest(userName, accountPassword, util.GetAndroidId(getApplicationContext()));
-                    LoginRequest loginRequest = new LoginRequest(simId);
+                    ALoginRequest ALoginRequest = new ALoginRequest(simId);
 
-                    signInUser = sServerAuthenticate.userSignIn(loginRequest);
-
-
-                    if (accountName != null && accountName.length() > 2)
-                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
-                    else
-                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
-
-                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
-                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
-                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
-                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
-                    bundle.putString(PARAM_USER_PASS, accountPassword);
-
-                    Gson gson = new Gson();
-                    bundle.putString(PARAM_USER, gson.toJson(signInUser));
-                    bundle.remove(KEY_ERROR_MESSAGE);
-
-                } catch (Exception e) {
-                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
-                }
-
-                intent.putExtras(bundle);
-                return intent;
-            }
-
-            @Override
-            protected void onPostExecute(Intent intent) {
-                if (intent.hasExtra(KEY_ERROR_MESSAGE)) {
-                    Toast.makeText(getBaseContext(), intent.getStringExtra(KEY_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
-                } else {
-                    finishLogin(intent);
-                }
-            }
-        }.execute();
-    }
-
-    public void tryToLoginByMail(final Intent intent, final String email, final String photoUrl) {
-        showProgressBar();
-
-        final String userName = email;//((TextView) findViewById(R.id.userName)).getText().toString();
-        final String accountName = "";//((TextView) findViewById(R.id.accountName)).getText().toString().trim();
-        final String accountPassword = "";//((TextView) findViewById(R.id.accountPassword)).getText().toString();
-
-        final String accountType = getIntent().getStringExtra(ARG_ACCOUNT_TYPE);
-
-        new AsyncTask<String, Void, Intent>() {
-
-            @Override
-            protected Intent doInBackground(String... params) {
-                Log.d("TubelessSajjad", TAG + "> Started authenticating");
+                    signInUser = sServerAuthenticate.userSignIn(ALoginRequest);
 
 
-                Bundle bundle = new Bundle();
+//                    if (accountName != null && accountName.length() > 2)
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
+//                    else
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
+//
+//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+//                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
+//                    bundle.putString(PARAM_USER_PASS, accountPassword);
+//
+//                    Gson gson = new Gson();
+//                    bundle.putString(PARAM_USER, gson.toJson(signInUser));
+//                    bundle.remove(KEY_ERROR_MESSAGE);
 
-                User signInUser = null;
-                try {
-//                    LoginRequest loginRequest = new LoginRequest(userName, accountPassword, util.GetAndroidId(getApplicationContext()));
-                    LoginRequest loginRequest = new LoginRequest(userName, (photoUrl == null ? "" : photoUrl));
-
-                    signInUser = sServerAuthenticate.userSignIn(loginRequest);
-
-
-                    if (accountName != null && accountName.length() > 2)
-                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
-                    else
-                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
-
-                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
-                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
-                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
-                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
-                    bundle.putString(PARAM_USER_PASS, accountPassword);
-
-                    Gson gson = new Gson();
-                    bundle.putString(PARAM_USER, gson.toJson(signInUser));
-                    bundle.remove(KEY_ERROR_MESSAGE);
                 } catch (Exception e) {
                     bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
                 }
@@ -438,7 +398,67 @@ public class SignInActivity extends Activity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    public void submit(final Intent intent) throws TubelessException {
+    public void tryToLoginByMail(final Intent intent, final String email, final String photoUrl) {
+        showProgressBar();
+
+        final String userName = email;//((TextView) findViewById(R.id.userName)).getText().toString();
+        final String accountName = "";//((TextView) findViewById(R.id.accountName)).getText().toString().trim();
+        final String accountPassword = "";//((TextView) findViewById(R.id.accountPassword)).getText().toString();
+
+        final String accountType = getIntent().getStringExtra(ARG_ACCOUNT_TYPE);
+
+        new AsyncTask<String, Void, Intent>() {
+
+            @SuppressLint("StaticFieldLeak")
+            @Override
+            protected Intent doInBackground(String... params) {
+                Log.d("TubelessSajjad", TAG + "> Started authenticating");
+
+
+                Bundle bundle = new Bundle();
+
+                ALoginResponse signInUser = null;
+                try {
+                    ALoginRequest ALoginRequest = new ALoginRequest(userName, (photoUrl == null ? "" : photoUrl));
+
+                    signInUser = sServerAuthenticate.userSignIn(ALoginRequest);
+
+//
+//                    if (accountName != null && accountName.length() > 2)
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
+//                    else
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
+//
+//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+//                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
+//                    bundle.putString(PARAM_USER_PASS, accountPassword);
+//
+//                    Gson gson = new Gson();
+//                    bundle.putString(PARAM_USER, gson.toJson(signInUser));
+//                    bundle.remove(KEY_ERROR_MESSAGE);
+                } catch (Exception e) {
+                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
+                }
+
+                intent.putExtras(bundle);
+                return intent;
+            }
+
+            @Override
+            protected void onPostExecute(Intent intent) {
+                if (intent.hasExtra(KEY_ERROR_MESSAGE)) {
+                    Toast.makeText(getBaseContext(), intent.getStringExtra(KEY_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
+                } else {
+                    finishLogin(intent);
+                }
+            }
+        }.execute();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public void tyrToLoginByMobileNumber(final Intent intent) throws TubelessException {
         showProgressBar();
         final String userName = ((TextView) findViewById(R.id.userName)).getText().toString();
         final String accountName = ((TextView) findViewById(R.id.accountName)).getText().toString().trim();
@@ -462,28 +482,28 @@ public class SignInActivity extends Activity {
 
                 Bundle bundle = new Bundle();
 
-                User signInUser = null;
+                ALoginResponse signInUser = null;
                 try {
-                    LoginRequest loginRequest = new LoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
+                    ALoginRequest ALoginRequest = new ALoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
 
-                    signInUser = sServerAuthenticate.userSignIn(loginRequest);
+                    signInUser = sServerAuthenticate.userSignIn(ALoginRequest);
 
 
-                    if (accountName != null && accountName.length() > 2)
-                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
-                    else
-                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
-
-                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
-                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
-                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
-                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
-                    bundle.putString(PARAM_USER_PASS, accountPassword);
-
-                    Gson gson = new Gson();
-                    bundle.putString(PARAM_USER, gson.toJson(signInUser));
-
-                    bundle.remove(KEY_ERROR_MESSAGE);
+//                    if (accountName != null && accountName.length() > 2)
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
+//                    else
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
+//
+//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+//                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
+//                    bundle.putString(PARAM_USER_PASS, accountPassword);
+//
+//                    Gson gson = new Gson();
+//                    bundle.putString(PARAM_USER, gson.toJson(signInUser));
+//
+//                    bundle.remove(KEY_ERROR_MESSAGE);
                 } catch (Exception e) {
                     bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
                 }
@@ -504,4 +524,176 @@ public class SignInActivity extends Activity {
         }.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
+    public void tryToLoginByCodeMelli(final Intent intent, final int pin) throws TubelessException {
+        showProgressBar();
+        final String userName = "4371903754";
+        final String accountName = "";
+        final String accountPassword = "";
+
+//        if (userName.length() < 1){
+//            throw new TubelessException(TUBELESS_USERNAME_IS_EMPTY);
+//        }
+//        if (accountPassword.length() < 1){
+//            throw new TubelessException(TUBELESS_PASSWORD_IS_EMPTY);
+//        }
+//
+//        final String accountType = getIntent().getStringExtra(ARG_ACCOUNT_TYPE);
+
+        new AsyncTask<String, Void, Intent>() {
+
+            @Override
+            protected Intent doInBackground(String... params) {
+                Bundle bundle = new Bundle();
+
+                ALoginResponse signInUser = null;
+                try {
+                    ALoginRequest ALoginRequest = new ALoginRequest(userName,pin);
+
+                    signInUser = sServerAuthenticate.userSignIn(ALoginRequest);
+
+
+//                    if (accountName != null && accountName.length() > 2)
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
+//                    else
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
+//
+//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+//                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
+//                    bundle.putString(PARAM_USER_PASS, accountPassword);
+//
+//                    Gson gson = new Gson();
+//                    bundle.putString(PARAM_USER, gson.toJson(signInUser));
+//
+//                    bundle.remove(KEY_ERROR_MESSAGE);
+                } catch (Exception e) {
+                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
+                }
+
+                intent.putExtras(bundle);
+                return intent;
+            }
+
+            @Override
+            protected void onPostExecute(Intent intent) {
+                if (intent.hasExtra(KEY_ERROR_MESSAGE)) {
+                    Toast.makeText(getBaseContext(), intent.getStringExtra(KEY_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    hideProgressBar();
+                } else {
+                    finishLogin(intent);
+                }
+            }
+        }.execute();
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    public void tryToLoginByUserCode(final String UserCode ,final Intent intent) throws TubelessException {
+        showProgressBar();
+        final String userName = null;
+        final String accountName = "";
+        final String accountPassword = "";
+
+//        if (userName.length() < 1){
+//            throw new TubelessException(TUBELESS_USERNAME_IS_EMPTY);
+//        }
+//        if (accountPassword.length() < 1){
+//            throw new TubelessException(TUBELESS_PASSWORD_IS_EMPTY);
+//        }
+//
+//        final String accountType = getIntent().getStringExtra(ARG_ACCOUNT_TYPE);
+
+        new AsyncTask<String, Void, Intent>() {
+
+            @Override
+            protected Intent doInBackground(String... params) {
+                Bundle bundle = new Bundle();
+
+                ALoginResponse signInUser = null;
+                try {
+                    ALoginRequest ALoginRequest = new ALoginRequest(0,UserCode);
+
+                    signInUser = sServerAuthenticate.userSignIn(ALoginRequest);
+
+
+//                    if (accountName != null && accountName.length() > 2)
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
+//                    else
+//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
+//
+//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+//                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
+//                    bundle.putString(PARAM_USER_PASS, accountPassword);
+//
+//                    Gson gson = new Gson();
+//                    bundle.putString(PARAM_USER, gson.toJson(signInUser));
+//
+//                    bundle.remove(KEY_ERROR_MESSAGE);
+                } catch (Exception e) {
+                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
+                }
+
+                intent.putExtras(bundle);
+                return intent;
+            }
+
+            @Override
+            protected void onPostExecute(Intent intent) {
+                if (intent.hasExtra(KEY_ERROR_MESSAGE)) {
+                    Toast.makeText(getBaseContext(), intent.getStringExtra(KEY_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    hideProgressBar();
+                } else {
+                    finishLogin(intent);
+                }
+            }
+        }.execute();
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    public void tryDeviceRegister(final ADeviceRegisterRequest aDeviceRegisterRequest, final IDeviceRegister<Boolean,Intent> callback){
+        //showProgressBar();
+
+        new AsyncTask<String, Void, Intent>() {
+            @Override
+            protected Intent doInBackground(String... params) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                AConfigResponse aConfig = null;
+
+                try {
+                    aConfig = sServerAuthenticate.deviceRegister(aDeviceRegisterRequest);
+
+//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+
+                    Gson gson = new Gson();
+                    bundle.putString(PARAM_CONFIG, gson.toJson(aConfig));
+                    bundle.remove(KEY_ERROR_MESSAGE);
+                    intent.putExtras(bundle);
+                } catch (Exception e) {
+                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
+                }
+                return intent;
+            }
+
+            @Override
+            protected void onPostExecute(Intent intent) {
+
+                if (intent.hasExtra(PARAM_CONFIG))
+                    callback.onResponse(true,intent);
+                else
+                    callback.onResponse(false,intent);
+
+                //start activity for result
+                //retData(intent);
+            }
+        }.execute();
+
+    }
 }

@@ -19,9 +19,6 @@ public class SAccounts {
 
     //val
     public final static String SAMANIUM_AUTH_TYPE = "AUTH_TYPE";
-    public static final String AUTHTOKEN_TYPE_NORMAL_ACCESS = "Normal access";
-    public static final String AUTHTOKEN_TYPE_ADMIN_ACCESS = "Admin access";
-//    public static final String ACCOUNT_TYPE = "ir.sajjadyosefi.android";
     public final static String SAMANIUM_ACCOUNT_TYPE = "ACCOUNT_TYPE";
     public final static String SAMANIUM_ACCOUNT_NAME = "ACCOUNT_NAME";
 

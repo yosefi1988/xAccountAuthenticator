@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.accountauthenticator.model.response;
+package ir.sajjadyosefi.accountauthenticator.model.response.base;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.accountauthenticator.model.response;
+package ir.sajjadyosefi.accountauthenticator.model.response.base;
 
 
 import ir.sajjadyosefi.accountauthenticator.model.TubelessException;

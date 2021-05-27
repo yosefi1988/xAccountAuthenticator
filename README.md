@@ -30,7 +30,6 @@ implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'
 4-
 ```
     public static final String ACCOUNT_TYPE = "ir.sajjadyosefi.android";
-    public static final String AUTHTOKEN_TYPE_FULL_ACCESS = "Full access";
     private static int LOGIN_REQUEST_CODE = 101 ;
 
     @Override

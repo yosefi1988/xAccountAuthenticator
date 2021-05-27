@@ -21,7 +21,7 @@ import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.android.xTubeless.R;
 
-import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS;
+import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER;
 
 public class MainTestActivity extends AppCompatActivity {
 
@@ -47,7 +47,7 @@ public class MainTestActivity extends AppCompatActivity {
         findViewById(R.id.btnAddAccount).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addNewAccount(context, AccountGeneral.ACCOUNT_TYPE, AUTHTOKEN_TYPE_FULL_ACCESS);
+                addNewAccount(context, AccountGeneral.ACCOUNT_TYPE, AUTHTOKEN_TYPE_ADMIN_USER);
             }
         });
 
@@ -65,7 +65,7 @@ public class MainTestActivity extends AppCompatActivity {
                     for (int i = 0; i < availableAccounts.length; i++) {
                         name[i] = availableAccounts[i].name;
                     }
-                    getExistingAccountAuthToken(availableAccounts[0], AUTHTOKEN_TYPE_FULL_ACCESS);
+                    getExistingAccountAuthToken(availableAccounts[0], AUTHTOKEN_TYPE_ADMIN_USER);
                 }
             }
         });
@@ -75,7 +75,7 @@ public class MainTestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final AccountManagerFuture<Bundle> future = mAccountManager.getAuthTokenByFeatures(
                         AccountGeneral.ACCOUNT_TYPE,
-                        AUTHTOKEN_TYPE_FULL_ACCESS,
+                        AUTHTOKEN_TYPE_ADMIN_USER,
                         null,
                         context,
                         null,
@@ -111,7 +111,7 @@ public class MainTestActivity extends AppCompatActivity {
                     for (int i = 0; i < availableAccounts.length; i++) {
                         name[i] = availableAccounts[i].name;
                     }
-                    invalidateAuthToken(availableAccounts[0], AUTHTOKEN_TYPE_FULL_ACCESS);
+                    invalidateAuthToken(availableAccounts[0], AUTHTOKEN_TYPE_ADMIN_USER);
                 }
             }
         });

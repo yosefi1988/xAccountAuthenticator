@@ -12,12 +12,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
+import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
+import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
+import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
+import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.activity.MainActivity;
 import ir.sajjadyosefi.android.xTubeless.activity.MainTestActivity;
 import ir.sajjadyosefi.android.xTubeless.classes.SAccounts;
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
+
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_CONFIG;
 
 //mvp
 public class SplashScreen extends AppCompatActivity  {
@@ -75,6 +83,41 @@ public class SplashScreen extends AppCompatActivity  {
                 ((Activity)context).finish();
 
             }
-        },1500);
+        },3000);
+
+
+        AccountGeneral.setIDApplication(2);
+        AccountGeneral.setIDApplicationVersion(1);
+        AccountGeneral.setStore("myket");
+        AccountGeneral.setIP("55.55.55.55");
+        AccountGeneral.setAndroidID("55.55.55.55");
+        AccountGeneral.setAndroidID("9");
+
+
+        SignInActivity signInActivity = new SignInActivity();
+        ADeviceRegisterRequest aDeviceRegisterRequest = new ADeviceRegisterRequest();
+        aDeviceRegisterRequest.setAndroidVersion(1);
+        aDeviceRegisterRequest.setAndroidAPI(1);
+        aDeviceRegisterRequest.setBoard("1");
+        aDeviceRegisterRequest.setBrand("1");
+        aDeviceRegisterRequest.setBuildId("1");
+        aDeviceRegisterRequest.setDisplay("1");
+        aDeviceRegisterRequest.setManufacturer("1");
+        aDeviceRegisterRequest.setModel("1");
+        aDeviceRegisterRequest.setSerial("1");
+        final boolean[] flag = new boolean[1];
+
+        signInActivity.tryDeviceRegister(aDeviceRegisterRequest, new IDeviceRegister<Boolean,Intent>() {
+            @Override
+            public void onResponse(Boolean isSuccess,Intent intent) {
+                flag[0] = isSuccess;
+
+                Bundle bundle = intent.getExtras();
+                String config = bundle.getString(PARAM_CONFIG);
+                String error = bundle.getString(KEY_ERROR_MESSAGE);
+                AConfigResponse responseX2 = new Gson().fromJson(config, AConfigResponse.class);
+            }
+        });
+
     }
 }

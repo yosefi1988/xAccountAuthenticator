@@ -1,9 +1,13 @@
 package ir.sajjadyosefi.accountauthenticator.authentication;
 
-import ir.sajjadyosefi.accountauthenticator.model.LoginRequest;
-import ir.sajjadyosefi.accountauthenticator.model.User;
+import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
+import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
+import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
+import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 
 public interface ServerAuthenticate {
-    public User userSignUp(final LoginRequest loginRequest) throws Exception;
-    public User userSignIn(final LoginRequest loginRequest) throws Exception;
+    public ALoginResponse userSignUp(final ALoginRequest ALoginRequest) throws Exception;
+
+    public ALoginResponse userSignIn(final ALoginRequest ALoginRequest) throws Exception;
+    public AConfigResponse deviceRegister(final ADeviceRegisterRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
 }

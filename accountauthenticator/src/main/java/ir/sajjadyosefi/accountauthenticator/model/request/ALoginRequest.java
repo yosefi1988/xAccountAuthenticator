@@ -1,27 +1,31 @@
-package ir.sajjadyosefi.accountauthenticator.model;
+package ir.sajjadyosefi.accountauthenticator.model.request;
 
 
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 
-public class LoginRequest {
+public class ALoginRequest {
 
-    private int IDApplicationVersion  = AccountGeneral.IDApplicationVersion;
+    private int IDApplicationVersion = AccountGeneral.getIDApplicationVersion();
+    private String IP = AccountGeneral.getIP();
+    private String AndroidID = AccountGeneral.getAndroidID();
+
     private String UserName;
+    private String UserCode = null;
     private String Password;
-    private String AndroidID;
-    private String Email;
-    private String MobileNumber;
     private String UserMoarefID;
     private String UserImage;
     private String ProfileImage;
 
-
-    public int getIDApplicationVersion() {
-        return IDApplicationVersion;
+    public String getAndroidID() {
+        return AndroidID;
     }
 
-    public void setIDApplicationVersion(int IDApplicationVersion) {
-        this.IDApplicationVersion = IDApplicationVersion;
+    public String getIDApplicationVersion() {
+        return IDApplicationVersion + "";
+    }
+
+    public String getIP() {
+        return IP;
     }
 
     public String getUserName() {
@@ -38,30 +42,6 @@ public class LoginRequest {
 
     public void setPassword(String password) {
         Password = password;
-    }
-
-    public String getAndroidID() {
-        return AndroidID;
-    }
-
-    public void setAndroidID(String androidID) {
-        AndroidID = androidID;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public String getMobileNumber() {
-        return MobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        MobileNumber = mobileNumber;
     }
 
     public String getUserMoarefID() {
@@ -88,46 +68,58 @@ public class LoginRequest {
         ProfileImage = profileImage;
     }
 
+    public String getUserCode() {
+        return UserCode;
+    }
+
 
 
     //manual
-    public LoginRequest(String userName, String password, String androidID) {
-        UserName = userName;
-        Password = password;
-        AndroidID = androidID;
-
-        Email = "";
-        MobileNumber = "";
-        UserMoarefID = "";
+    public ALoginRequest(String mobile, String password, String androidID) {
         UserImage = "";
+        UserName = mobile;
+        Password = password;
+        UserMoarefID = "";
         ProfileImage = "";
     }
 
 
     //google
-    public LoginRequest(String email, String userImage) {
-        Email = email;
+    public ALoginRequest(String email, String userImage) {
         UserImage = userImage;
-
         UserName = email;
         Password = "";
-        AndroidID = "";
-        MobileNumber = "";
         UserMoarefID = "";
         ProfileImage = "";
     }
 
 
     //sim
-    public LoginRequest(String mobileNumber) {
-        MobileNumber = mobileNumber;
-
-        Email = "";
-        UserImage = "";
-        UserName = mobileNumber;
-        Password = "";
-        AndroidID = "";
+    public ALoginRequest(String simID) {
+        UserName = "simcard:" + simID;
+        Password = null;
         UserMoarefID = "";
+        UserImage = "";
+        ProfileImage = "";
+    }
+
+
+    //Code Melli
+    public ALoginRequest(String CodeMelli , int pin) {
+        UserName = CodeMelli;
+        Password = null;
+        UserMoarefID = "";
+        UserImage = "";
+        ProfileImage = "";
+    }
+
+    //User Code
+    public ALoginRequest(int userCode,String userCodeX) {
+        UserName = null;
+        Password = "";
+        this.UserCode = userCodeX;
+        UserMoarefID = "";
+        UserImage = "";
         ProfileImage = "";
     }
 

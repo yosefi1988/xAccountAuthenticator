@@ -21,5 +21,7 @@
     <string name="error_message_500">مشکلی در سرور به وجود آمد. کمی بعد تلاش کنید.</string>
     <string name="server_not_response">متاسفانه سرور پاسخی نداد</string>
     <string name="loginbySaman">ورود با سامان</string>
+    <string name="codeMelli">کد ملی</string>
+    <string name="comming_soon">به زودی...</string>
 
 </resources>
