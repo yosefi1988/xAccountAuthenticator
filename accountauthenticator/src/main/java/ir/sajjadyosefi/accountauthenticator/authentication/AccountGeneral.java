@@ -2,12 +2,20 @@ package ir.sajjadyosefi.accountauthenticator.authentication;
 
 public class AccountGeneral {
 
+    //tubeless
     private static int IDApplicationVersion = 0;
     private static int IDApplication = 0;
     private static String Store = null;
     private static String IP = null;
     private static String AndroidID = null;
+    private static String userCode;
 
+    //zarinpal
+    private static String appName = null;
+    private static String zarinpalpayment = null;
+    private static String schemezarinpalpayment = null;
+
+    //android
     public static final String ACCOUNT_TYPE = "ir.sajjadyosefi.android";
     public static final String ACCOUNT_NAME = "Tubeless";
 
@@ -59,5 +67,37 @@ public class AccountGeneral {
 
     public static void setAndroidID(String androidID) {
         AndroidID = androidID;
+    }
+
+    public static void setAppName(String string) {
+        appName = string;
+    }
+
+    public static String getAppName() {
+        return appName;
+    }
+
+    public static void setZarinpalpayment(String zarinpalpayment11) {
+        zarinpalpayment = zarinpalpayment11;
+    }
+
+    public static void setSchemezarinpalpayment(String return11) {
+        schemezarinpalpayment = return11;
+    }
+
+    public static String getZarinpalpayment() {
+        return zarinpalpayment;
+    }
+
+    public static String getSchemezarinpalpayment() {
+        return schemezarinpalpayment;
+    }
+
+    public static void setUserCode(String usercode) {
+        userCode = usercode;
+    }
+
+    public static String getUserCode() {
+        return userCode;
     }
 }

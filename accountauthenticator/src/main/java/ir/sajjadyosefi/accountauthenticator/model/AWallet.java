@@ -1,6 +1,6 @@
 package ir.sajjadyosefi.accountauthenticator.model;
 
-public class DWallet {
+public class AWallet {
     private long Amount;
 
     public long getAmount() {

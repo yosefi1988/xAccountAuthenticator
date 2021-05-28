@@ -1,6 +1,7 @@
 package ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen;
 
 import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import ir.sajjadyosefi.accountauthenticator.activity.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
+import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
@@ -30,6 +33,7 @@ import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivit
 //mvp
 public class SplashScreen extends AppCompatActivity  {
 
+    public static final int WALLETCHARGE_REQUEST_CODE = 01225;
     Context context;
     private static final int        PERMISSION_REQUEST_CODE     = 1;
 
@@ -86,14 +90,24 @@ public class SplashScreen extends AppCompatActivity  {
         },3000);
 
 
+        //library
         AccountGeneral.setIDApplication(2);
         AccountGeneral.setIDApplicationVersion(1);
         AccountGeneral.setStore("myket");
         AccountGeneral.setIP("55.55.55.55");
         AccountGeneral.setAndroidID("55.55.55.55");
-        AccountGeneral.setAndroidID("9");
+        AccountGeneral.setAndroidID("11");
+
+        //zarinpal
+        AccountGeneral.setAppName(getString(R.string.app_name));
+        AccountGeneral.setZarinpalpayment(context.getString(R.string.zarinpalpayment));
+        AccountGeneral.setSchemezarinpalpayment(context.getString(R.string.schemezarinpalpayment));
+
+        //after login
+        AccountGeneral.setUserCode("112028");
 
 
+        //device register
         SignInActivity signInActivity = new SignInActivity();
         ADeviceRegisterRequest aDeviceRegisterRequest = new ADeviceRegisterRequest();
         aDeviceRegisterRequest.setAndroidVersion(1);
@@ -119,5 +133,26 @@ public class SplashScreen extends AppCompatActivity  {
             }
         });
 
+//        //Charge Activity
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("type" , 1);
+//        Intent intent = PaymentActivity.getIntent(context,bundle);
+//        //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
+//        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+//        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+
+//        //charge by method
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("type" , 2);
+//        Intent intent = PaymentActivity.getIntent(this,bundle);
+//        //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
+//        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+//        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
     }
 }

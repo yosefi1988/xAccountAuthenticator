@@ -2,11 +2,9 @@ package ir.sajjadyosefi.accountauthenticator.model;
 
 import java.util.List;
 
-import ir.sajjadyosefi.accountauthenticator.model.Store;
-
 public class AConfig  {
 
-    private List<Store> StoreList;
+    private List<AStore> StoreList;
     private int DeviceId;
 
 
@@ -18,11 +16,11 @@ public class AConfig  {
         DeviceId = deviceId;
     }
 
-    public List<Store> getStoreList() {
+    public List<AStore> getStoreList() {
         return StoreList;
     }
 
-    public void setStoreList(List<Store> storeList) {
+    public void setStoreList(List<AStore> storeList) {
         StoreList = storeList;
     }
 

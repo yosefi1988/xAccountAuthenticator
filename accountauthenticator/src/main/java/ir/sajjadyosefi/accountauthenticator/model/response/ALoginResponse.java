@@ -1,12 +1,7 @@
 
 package ir.sajjadyosefi.accountauthenticator.model.response;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import ir.sajjadyosefi.accountauthenticator.model.AUser;
-import ir.sajjadyosefi.accountauthenticator.model.DWallet;
-import ir.sajjadyosefi.accountauthenticator.model.TubelessException;
+import ir.sajjadyosefi.accountauthenticator.model.AWallet;
 import ir.sajjadyosefi.accountauthenticator.model.response.base.ServerResponseBase;
 
 public class ALoginResponse  extends ServerResponseBase {
@@ -27,7 +22,7 @@ public class ALoginResponse  extends ServerResponseBase {
     private int UserTypeCode;
     private String CreateDate;
     private String TokenType;
-    private DWallet wallet;
+    private AWallet wallet;
 
     public Integer getUserCode() {
         return UserCode;
@@ -149,11 +144,11 @@ public class ALoginResponse  extends ServerResponseBase {
         CreateDate = createDate;
     }
 
-    public DWallet getWallet() {
+    public AWallet getWallet() {
         return wallet;
     }
 
-    public void setWallet(DWallet wallet) {
+    public void setWallet(AWallet wallet) {
         this.wallet = wallet;
     }
 

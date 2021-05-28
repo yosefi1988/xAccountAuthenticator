@@ -23,5 +23,16 @@
     <string name="loginbySaman">ورود با سامان</string>
     <string name="codeMelli">کد ملی</string>
     <string name="comming_soon">به زودی...</string>
+    <string name="phoneNumber">شماره تلفن</string>
+    <string name="Discription">توضیحات (اختیاری)</string>
+    <string name="back">بازگشت</string>
+    <string name="new_yafte_new_yafte_inserted">با موفقیت انجام شد</string>
+    <string name="tray_again">دوباره تلاش کنید</string>
+    <string name="chargeWallet">شارژ حساب</string>
+
+
+
+    <string name="zarinpalpayment">zarinpalpayment10</string>
+    <string name="schemezarinpalpayment">return10</string>
 
 </resources>

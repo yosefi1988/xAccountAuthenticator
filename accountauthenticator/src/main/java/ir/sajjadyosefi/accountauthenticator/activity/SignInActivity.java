@@ -202,14 +202,12 @@ public class SignInActivity extends Activity {
                @Override
                public void onClick(View view) {
                    Toast.makeText(activity, context.getString(R.string.comming_soon), Toast.LENGTH_LONG).show();
-                   try {
+//                   try {
 //                       tryToLoginByCodeMelli(intentxxxxxxx,0);
-                       tryToLoginByUserCode("110012",intentxxxxxxx);
-                   } catch (TubelessException e) {
-                       e.printStackTrace();
-                   }
-
-
+//                       tryToLoginByUserCode("110012",intentxxxxxxx);
+//                   } catch (TubelessException e) {
+//                       e.printStackTrace();
+//                   }
                }
            });
 

@@ -31,8 +31,12 @@ import com.google.gson.Gson;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
+import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
+import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
+import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.Adapter.FirstFragmentsAdapter;
@@ -46,7 +50,10 @@ import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
 import static android.util.Log.VERBOSE;
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_CONFIG;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER;
+import static ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen.SplashScreen.WALLETCHARGE_REQUEST_CODE;
 import static ir.sajjadyosefi.android.xTubeless.networkLayout.networkLayout.Url.Telegram;
 
 @TargetApi (Build.VERSION_CODES.KITKAT_WATCH)
@@ -137,6 +144,9 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
         }
         initializeBottomNavigation(savedInstanceState);
         initializeUI(savedInstanceState);
+
+
+
     }
 
     @Override
@@ -146,6 +156,13 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
             drawer_layout.openDrawer(Gravity.LEFT);
             setFirstRunIsDone();
         }
+
+
+
+
+
+
+
     }
     private void drawableMenu(Toolbar toolbar) {
 

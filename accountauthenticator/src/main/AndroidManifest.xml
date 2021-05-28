@@ -17,6 +17,20 @@
         <activity android:name=".activity.SignInActivity" android:label="@string/login_label"/>
         <activity android:name=".activity.SignUpActivity" android:label="@string/signup_title" />
 
+        <!--          todo fix = zarinpalpayment-->
+        <activity android:name=".activity.PaymentActivity" android:label="@string/chargeWallet">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="@string/zarinpalpayment"
+                    android:scheme="@string/schemezarinpalpayment" />
+            </intent-filter>
+        </activity>
+        <activity android:name="ir.moslem_deris.apps.zarinpal.PaymentActivity"  />
+
+
         <service
             android:name=".authentication.AuthenticatorService"
             android:enabled="true">

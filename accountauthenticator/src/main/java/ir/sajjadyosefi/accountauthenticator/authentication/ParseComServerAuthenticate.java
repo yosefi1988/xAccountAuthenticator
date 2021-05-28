@@ -21,8 +21,10 @@ import java.util.List;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
+import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
+import ir.sajjadyosefi.accountauthenticator.model.response.AWalletChargeResponse;
 
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_NORMAL_USER;
 
@@ -199,6 +201,51 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
             throw new TubelessException(httpResponse.getStatusLine().getStatusCode());
         }
     }
+
+    @Override
+    public AWalletChargeResponse chargeWallet(AWalletChargeRequest request) throws Exception {
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        String url = "http://test.balabarkaran.com/Api/Wallet/WalletChargeTransaction";
+        HttpPost httpPost = new HttpPost(url);
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("IP", request.getIP()));
+        params.add(new BasicNameValuePair("AndroidAPI", request.getAndroidID() + ""));
+        params.add(new BasicNameValuePair("IDApplicationVersion", request.getIDApplicationVersion() + ""));
+
+        params.add(new BasicNameValuePair("metaData", request.getMetaData() + ""));
+        params.add(new BasicNameValuePair("UserCode", request.getUserCode() + ""));
+        params.add(new BasicNameValuePair("Amount", request.getAmount() + ""));
+
+        httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+//        for(NameValuePair valPair : params) { //foreach loop
+//            if(valPair.getValue().equals(strToCompareAgainst)) { //retrieve value of the current NameValuePair and compare
+//            Log.d(valPair.toString(),valPair.toString()); //success
+//            }
+//        }
+
+        HttpResponse httpResponse = httpClient.execute(httpPost);
+
+        if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            String authtoken = null;
+            String responseString = EntityUtils.toString(httpResponse.getEntity());
+
+//                Log.d("sajjadx",responseString);
+//                Log.d("sajjadx",responseString.substring(1));
+//                Log.d("sajjadx",responseString.substring(1,responseString.length()-1));
+
+            AWalletChargeResponse responseX2 = new Gson().fromJson(responseString.substring(1,responseString.length()-1).replace("\\" ,""), AWalletChargeResponse.class);
+
+            if (responseX2.getTubelessException().getCode() == 200) {
+                return responseX2;
+            }else {
+                throw new TubelessException(responseX2.getTubelessException().getCode());
+            }
+        }else {
+            throw new TubelessException(httpResponse.getStatusLine().getStatusCode());
+        }
+    }
+
 //    public String userSignIn(String user, String pass, String authType) throws Exception {
 //        Log.d("udini", "userSignIn");
 //

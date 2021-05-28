@@ -1,6 +1,6 @@
 package ir.sajjadyosefi.accountauthenticator.model;
 
-public class Store {
+public class AStore {
     public int getId() {
         return Id;
     }

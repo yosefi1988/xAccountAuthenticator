@@ -434,4 +434,9 @@
     <string name="txtPriceComment">جهت بهره مندی از اطلاعات این صفحه می بایست آن را تایید نمایید</string>
     <string name="toman">تومان</string>
     <string name="userIsNull">"user null "</string>
+
+
+    <string name="zarinpalpayment">zarinpalpayment10</string>
+    <string name="schemezarinpalpayment">return10</string>
+
 </resources>

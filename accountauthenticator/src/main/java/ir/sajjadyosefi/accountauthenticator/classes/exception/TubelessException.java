@@ -1,9 +1,18 @@
 package ir.sajjadyosefi.accountauthenticator.classes.exception;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.IOException;
+
+import ir.sajjadyosefi.accountauthenticator.R;
 
 
 public class TubelessException extends IOException {
@@ -127,5 +136,17 @@ public class TubelessException extends IOException {
         code = errorCode;
     }
 
+    public static void ShowSheetDialogMessage(Context context, BottomSheetDialog dialog, String title , String message , View.OnClickListener onClickListener) {
+        try {
+            View view = ((Activity) context).getLayoutInflater().inflate(R.layout.bottom_sheet_dialog_connection_lost, null);
+            dialog.setContentView(view);
+            Button buttonTryAgain = view.findViewById(R.id.buttonTryAgain);
+            TextView buttonMessage = view.findViewById(R.id.textView);
+            buttonMessage.setText(message);
+            buttonTryAgain.setOnClickListener(onClickListener);
+            dialog.show();
+        }catch (Exception ex){
 
+        }
+    }
 }
