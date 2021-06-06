@@ -141,12 +141,15 @@ public class TubelessException extends IOException {
             View view = ((Activity) context).getLayoutInflater().inflate(R.layout.bottom_sheet_dialog_connection_lost, null);
             dialog.setContentView(view);
             Button buttonTryAgain = view.findViewById(R.id.buttonTryAgain);
-            TextView buttonMessage = view.findViewById(R.id.textView);
-            buttonMessage.setText(message);
+            TextView textViewMessage = view.findViewById(R.id.textView);
+            buttonTryAgain.setText(message);
+            textViewMessage.setText(title);
             buttonTryAgain.setOnClickListener(onClickListener);
             dialog.show();
         }catch (Exception ex){
 
+            int a = 5 ;
+            a ++;
         }
     }
 }

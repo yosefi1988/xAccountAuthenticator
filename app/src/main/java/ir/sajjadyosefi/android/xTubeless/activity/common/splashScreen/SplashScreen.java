@@ -6,9 +6,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -18,12 +19,9 @@ import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
-import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
-import ir.sajjadyosefi.android.xTubeless.activity.MainActivity;
-import ir.sajjadyosefi.android.xTubeless.activity.MainTestActivity;
 import ir.sajjadyosefi.android.xTubeless.classes.SAccounts;
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 
@@ -44,6 +42,26 @@ public class SplashScreen extends AppCompatActivity  {
         setContentView(R.layout.activity_splash_screen);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Intent x;
+        if (requestCode == 661) {
+            if (PaymentActivity.isPaymentSuccess()) {
+                x = PaymentActivity.getPaymentIntent();
+
+                Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
+
+            }else {
+                Toast.makeText(context,"pay not ok" ,Toast.LENGTH_LONG).show();
+            }
+
+            PaymentActivity.PaymentDone();
+        }
+    }
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -61,33 +79,33 @@ public class SplashScreen extends AppCompatActivity  {
             Global.user = null;
 
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    int v = getPackageManager().getPackageInfo("com.google.android.gms", 0 ).versionCode;
-                    if(v>11020000){
-                        //show error
-                    }
-//                    Toast.makeText(context,"gms version : " + v ,Toast.LENGTH_LONG).show();
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                //FirebaseCrash.log("this is log");
-                try {
-                    int a = 10/0;
-                } catch (Exception e) {
-                    //FirebaseCrash.report(e);
-                }
-                context.startActivity(new Intent(context, MainTestActivity.class));
-                context.startActivity(new Intent(context, MainActivity.class));
-
-                ((Activity)context).finish();
-
-            }
-        },3000);
+//        final Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    int v = getPackageManager().getPackageInfo("com.google.android.gms", 0 ).versionCode;
+//                    if(v>11020000){
+//                        //show error
+//                    }
+////                    Toast.makeText(context,"gms version : " + v ,Toast.LENGTH_LONG).show();
+//                } catch (PackageManager.NameNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                //FirebaseCrash.log("this is log");
+//                try {
+//                    int a = 10/0;
+//                } catch (Exception e) {
+//                    //FirebaseCrash.report(e);
+//                }
+//                context.startActivity(new Intent(context, MainTestActivity.class));
+//                context.startActivity(new Intent(context, MainActivity.class));
+//
+//                ((Activity)context).finish();
+//
+//            }
+//        },3000);
 
 
         //library
@@ -133,26 +151,34 @@ public class SplashScreen extends AppCompatActivity  {
             }
         });
 
-//        //Charge Activity
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("type" , 1);
-//        Intent intent = PaymentActivity.getIntent(context,bundle);
-//        //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
-//        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-//        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-//        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
-//        //charge by method
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("type" , 2);
-//        Intent intent = PaymentActivity.getIntent(this,bundle);
-//        //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
-//        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-//        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-//        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+
+        if (count == 0) {
+    //Charge Activity
+            Bundle bundle = new Bundle();
+            bundle.putInt("type" , 1);
+            Intent intent = PaymentActivity.getIntent(context,bundle);
+            //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
+            //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+            //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+            count++;
+        }
+
+        //charge by method
+        //done
+//            Bundle bundle = new Bundle();
+//            bundle.putInt("type", 2);
+//            bundle.putInt("amount", 1000);
+//            bundle.putString("metaData", "sajjad 1000");
+//            Intent intent = PaymentActivity.getIntent(this, bundle);
+//            //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+//            //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+//            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
     }
+    int count = 0;
 }

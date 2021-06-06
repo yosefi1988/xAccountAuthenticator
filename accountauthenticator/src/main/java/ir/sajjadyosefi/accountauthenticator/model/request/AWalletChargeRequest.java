@@ -21,12 +21,10 @@ public class AWalletChargeRequest {
         this.metaData = metaData;
     }
 
-
     public AWalletChargeRequest(String amount) {
         UserCode = AccountGeneral.getUserCode();
         Amount = amount;
     }
-
 
     public String getAndroidID() {
         return AndroidID;

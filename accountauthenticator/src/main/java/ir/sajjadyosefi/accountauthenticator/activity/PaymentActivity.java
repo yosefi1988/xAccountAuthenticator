@@ -25,29 +25,59 @@ import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
-import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.accountauthenticator.model.response.AWalletChargeResponse;
 
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_CONFIG;
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 
 public class PaymentActivity extends Activity {
 
-    private ViewGroup rootActivity;
     public static final int GO_TO_LOGIN = 20;
-    public static boolean noUi = false;
-    public Button btnPay  ;
-    Intent intent;
 
+    private static boolean noUi = false;
+    private static boolean paySuccess = false;
+    private static Intent paymentIntent;
+    private static Bundle bundle;
+
+    private ViewGroup rootActivity;
+    public Button btnPay , buttonBack ;
     EditText editTextPhone, editTextAmount,editTextDiscription;
+    Context context;
     private static String phone ,amount,discription ;
 
     public synchronized static Intent getIntent(Context context) {
         return getIntent(context,null);
     }
 
+    public static boolean isPaymentSuccess() {
+        return paySuccess;
+    }
+
+    public static void PaymentDone() {
+        try {
+            noUi = false;
+            paySuccess = false;
+            paymentIntent = null;
+            bundle = null;
+        }catch (Exception e){
+
+        }
+    }
+
+    public static Intent getPaymentIntent() {
+        if (paySuccess == false)
+            return null;
+        else {
+            return paymentIntent;
+//            noUi = false;
+//            paySuccess = false;
+//            paymentIntent = null;
+//            bundle = null;
+        }
+    }
+
     public synchronized static Intent getIntent(Context context, Bundle bundle) {
+        if (bundle == null)
+            bundle = new Bundle();
         bundle.putString("item1","value1");
         Intent intent = new Intent(context,PaymentActivity.class);
         intent.putExtras(bundle);
@@ -59,27 +89,31 @@ public class PaymentActivity extends Activity {
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        context = this;
         Uri data2 = getIntent().getData();
-        ZarinPal.getPurchase(getApplicationContext()).verificationPayment(data2, new OnCallbackVerificationPaymentListener() {
+        ZarinPal.getPurchase(context).verificationPayment(data2, new OnCallbackVerificationPaymentListener() {
             @Override
             public void onCallbackResultVerificationPayment(boolean isPaymentSuccess, String refID, PaymentRequest paymentRequest) {
 
 
                 if(isPaymentSuccess){
-                    Toast.makeText(getApplicationContext(),"pay success" ,Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
+                    paySuccess = true;
 //                    AWalletChargeRequest req = new AWalletChargeRequest(usercode, amount, refID, phone+ "|" + discription);
                     AWalletChargeRequest req = new AWalletChargeRequest(amount);
-                    req.setMetaData("sssssssssss");
+                    req.setMetaData(discription);
                     chargeAccount(req);
                 }else {
                     //not ok
 //                    show message refID
-                    Toast.makeText(getApplicationContext(),"not ok " , Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
+                    paySuccess = false;
 
-                    if (getIntent().hasExtra("type")){
-                        if (getIntent().getIntExtra("type",1) == 2){
+                    if (paymentIntent.hasExtra("type")){
+//                        if (paymentIntent.getIntExtra("type",1) == 2){
+                            setResult(Activity.RESULT_CANCELED);
                             finish();
-                        }
+//                        }
                     }
 
                 }
@@ -87,53 +121,82 @@ public class PaymentActivity extends Activity {
         });
 
 
-        intent = getIntent();
-        if (intent.hasExtra("type")){
-            if (getIntent().getIntExtra("type",1) == 2){
-                noUi = true;
-                AWalletChargeRequest request = new AWalletChargeRequest("1000");
-                request.setMetaData("sssssssssss");
-                amount = request.getAmount();
-                payment(Integer.parseInt(amount),this);
+        if (paymentIntent != null) {
+            if (paymentIntent.hasExtra("type")) {
+                if (paymentIntent.getIntExtra("type", 1) == 2) {
+//                    noUi = true;
+//                    AWalletChargeRequest request = new AWalletChargeRequest("1000");
+//                    request.setMetaData(discription);
+//                    amount = request.getAmount();
+//                    payment(Integer.parseInt(amount), this);
+                } else {
+                    setContentView(R.layout.activity_payment);
+                }
+//                paymentIntent = getIntent();
+//                bundle = paymentIntent.getExtras();
+            } else {
+                setContentView(R.layout.activity_payment);
+            }
+        }else {
+            if (getIntent().hasExtra("type")) {
+                paymentIntent = getIntent();
+                bundle = paymentIntent.getExtras();
+                if (paymentIntent.getIntExtra("type", 1) == 2) {
+                    noUi = true;
+                    amount = paymentIntent.getIntExtra("amount", 1000) + "";
+                    discription = paymentIntent.getStringExtra("metaData");
+
+                    AWalletChargeRequest request = new AWalletChargeRequest(amount);
+                    request.setMetaData(discription);
+                    payment(Integer.parseInt(amount), this);
+                }else {
+                    setContentView(R.layout.activity_payment);
+                }
             }else {
                 setContentView(R.layout.activity_payment);
             }
         }
 
-        rootActivity = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-        btnPay = findViewById(R.id.btnPay);
-        editTextPhone = findViewById(R.id.editTextPhone);
-        editTextAmount = findViewById(R.id.editTextAmount);
-        editTextDiscription = findViewById(R.id.editTextDiscription);
+            rootActivity = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+            btnPay = findViewById(R.id.btnPay);
+            buttonBack = findViewById(R.id.buttonBack);
+            editTextPhone = findViewById(R.id.editTextPhone);
+            editTextAmount = findViewById(R.id.editTextAmount);
+            editTextDiscription = findViewById(R.id.editTextDiscription);
 
 
-        if (btnPay != null) {
-            btnPay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    phone = editTextPhone.getText().toString();
-                    amount = editTextAmount.getText().toString();
-                    discription = editTextDiscription.getText().toString();
-                    payment(Integer.parseInt(editTextAmount.getText().toString()), getApplicationContext());
-                }
-            });
-        }
+            if (btnPay != null) {
+                btnPay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        phone = editTextPhone.getText().toString();
+                        amount = editTextAmount.getText().toString();
+                        discription = editTextDiscription.getText().toString();
+                        payment(Integer.parseInt(editTextAmount.getText().toString()), context);
+
+
+
+                    }
+                });
+            }
 
 //        if (Global.IDUser == NOT_LOGN_USER ){
 //        if (Global.user == null || Global.user.getUserId() == NOT_LOGN_USER ){
 //            Bundle bundle = new Bundle();
-//            Intent intent = SignInActivity.getIntent(getApplicationContext(),bundle);
+//            Intent intent = SignInActivity.getIntent(context,bundle);
 //            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 //            startActivityForResult(intent, GO_TO_LOGIN);
 //        }
 
 
-
-
-
-
+//            Bundle bundle = new Bundle();
+//            Gson gson = new Gson();
+//            bundle.putString("ReturnData", gson.toJson("response"));
+//            intent.putExtras(bundle);
+//            setResult(Activity.RESULT_OK, intent);
+//
+//            finish();
     }
-
 
     private void payment(long amount,Context context) {
         ZarinPal purches = ZarinPal.getPurchase(context);
@@ -155,7 +218,7 @@ public class PaymentActivity extends Activity {
                     startActivity(intent);
                 }else {
 //                    error in payment
-//                    ((TubelessActivity)getApplicationContext()).progressDialog.hide();
+//                    ((TubelessActivity)context).progressDialog.hide();
                 }
 
             }
@@ -190,24 +253,32 @@ public class PaymentActivity extends Activity {
             }
 
             @Override
-            protected void onPostExecute(AWalletChargeResponse response) {
-                final BottomSheetDialog dialog = new BottomSheetDialog(getApplicationContext());
+            protected void onPostExecute(final AWalletChargeResponse response) {
+                final BottomSheetDialog dialog = new BottomSheetDialog(context);
                 if (noUi) {
                     if (response.getTubelessException().getCode() == 200) {
-                        finish();
-                        //todo باید به فراخواننده بگه که موفق بود یا نه
-                        //البته ابنجا موفق هستش
+                        Bundle bundle = new Bundle();
+                        Gson gson = new Gson();
+                        bundle.putString("ReturnData",gson.toJson(response));
+                        paymentIntent.putExtras(bundle);
+                        ((Activity)context).setResult(Activity.RESULT_OK, paymentIntent);
+                        ((Activity)context).finish();
                     }
                 } else {
                     if (response.getTubelessException().getCode() == 200) {
-                        TubelessException.ShowSheetDialogMessage(getApplicationContext(), dialog, getApplicationContext().getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
+                        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+
+                                Gson gson = new Gson();
+                                bundle.putString("ReturnData",gson.toJson(response));
+                                paymentIntent.putExtras(bundle);
+                                setResult(Activity.RESULT_OK, paymentIntent);
                                 finish();
                             }
                         });
                     } else {
-                        TubelessException.ShowSheetDialogMessage(getApplicationContext(), dialog, getApplicationContext().getString(R.string.tray_again), getApplicationContext().getString(R.string.tray_again), new View.OnClickListener() {
+                        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.tray_again), context.getString(R.string.tray_again), new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 dialog.dismiss();
@@ -217,6 +288,13 @@ public class PaymentActivity extends Activity {
                 }
             }
         }.execute();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        paymentIntent = null;
+        paySuccess = false;
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -262,4 +340,31 @@ public class PaymentActivity extends Activity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+
+    //    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//
+//        final BottomSheetDialog dialog = new BottomSheetDialog(context);
+//
+//        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Bundle bundle = new Bundle();
+//                Gson gson = new Gson();
+//                bundle.putString("ReturnData",gson.toJson("response"));
+//                intent.putExtras(bundle);
+//                setResult(Activity.RESULT_OK, intent);
+//
+//                finish();
+//            }
+//        });
+//    }
 }
