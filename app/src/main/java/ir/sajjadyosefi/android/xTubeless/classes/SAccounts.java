@@ -62,7 +62,7 @@ public class SAccounts {
     public int getUserAccountID() {
         try {
             if (hasUserAccount()) {
-                return Integer.parseInt(mAccountManager.getUserData(getUserAccount(), AuthenticatorActivity.PARAM_USER_ID));
+                return Integer.parseInt(mAccountManager.getUserData(getUserAccount(), AuthenticatorActivity.PARAM_USER_CODE));
             } else {
                 return NOT_LOGN_USER;
             }

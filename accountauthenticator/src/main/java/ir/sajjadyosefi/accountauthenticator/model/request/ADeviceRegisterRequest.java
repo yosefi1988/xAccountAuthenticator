@@ -6,7 +6,7 @@ public class ADeviceRegisterRequest {
 
     private String DeviceId;
     private int AndroidAPI;
-    private int AndroidVersion;
+    private String AndroidVersion;
     private int ApplicationId;
     private String Board;
     private String Brand;
@@ -37,11 +37,11 @@ public class ADeviceRegisterRequest {
         AndroidAPI = androidAPI;
     }
 
-    public int getAndroidVersion() {
+    public String getAndroidVersion() {
         return AndroidVersion;
     }
 
-    public void setAndroidVersion(int androidVersion) {
+    public void setAndroidVersion(String androidVersion) {
         AndroidVersion = androidVersion;
     }
 

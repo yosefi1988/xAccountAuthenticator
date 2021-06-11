@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
@@ -114,7 +115,7 @@ public class SplashScreen extends AppCompatActivity  {
         AccountGeneral.setStore("myket");
         AccountGeneral.setIP("55.55.55.55");
         AccountGeneral.setAndroidID("55.55.55.55");
-        AccountGeneral.setAndroidID("11");
+        AccountGeneral.setAndroidID("15df3b3a90dc5688");
 
         //zarinpal
         AccountGeneral.setAppName(getString(R.string.app_name));
@@ -122,52 +123,52 @@ public class SplashScreen extends AppCompatActivity  {
         AccountGeneral.setSchemezarinpalpayment(context.getString(R.string.schemezarinpalpayment));
 
         //after login
-        AccountGeneral.setUserCode("112028");
+//        AccountGeneral.setUserCode("112028");
 
 
-        //device register
-        SignInActivity signInActivity = new SignInActivity();
-        ADeviceRegisterRequest aDeviceRegisterRequest = new ADeviceRegisterRequest();
-        aDeviceRegisterRequest.setAndroidVersion(1);
-        aDeviceRegisterRequest.setAndroidAPI(1);
-        aDeviceRegisterRequest.setBoard("1");
-        aDeviceRegisterRequest.setBrand("1");
-        aDeviceRegisterRequest.setBuildId("1");
-        aDeviceRegisterRequest.setDisplay("1");
-        aDeviceRegisterRequest.setManufacturer("1");
-        aDeviceRegisterRequest.setModel("1");
-        aDeviceRegisterRequest.setSerial("1");
-        final boolean[] flag = new boolean[1];
+//        //device register
+//        SignInActivity signInActivity = new SignInActivity();
+//        ADeviceRegisterRequest aDeviceRegisterRequest = new ADeviceRegisterRequest();
+//        aDeviceRegisterRequest.setAndroidVersion("1");
+//        aDeviceRegisterRequest.setAndroidAPI(1);
+//        aDeviceRegisterRequest.setBoard("1");
+//        aDeviceRegisterRequest.setBrand("1");
+//        aDeviceRegisterRequest.setBuildId("1");
+//        aDeviceRegisterRequest.setDisplay("1");
+//        aDeviceRegisterRequest.setManufacturer("1");
+//        aDeviceRegisterRequest.setModel("1");
+//        aDeviceRegisterRequest.setSerial("1");
+//        final boolean[] flag = new boolean[1];
+//
+//        signInActivity.tryDeviceRegister(aDeviceRegisterRequest, new IDeviceRegister<Boolean,Intent>() {
+//            @Override
+//            public void onResponse(Boolean isSuccess,Intent intent) {
+//                flag[0] = isSuccess;
+//
+//                Bundle bundle = intent.getExtras();
+//                String config = bundle.getString(PARAM_CONFIG);
+//                String error = bundle.getString(KEY_ERROR_MESSAGE);
+//                AConfigResponse responseX2 = new Gson().fromJson(config, AConfigResponse.class);
+//            }
+//        });
 
-        signInActivity.tryDeviceRegister(aDeviceRegisterRequest, new IDeviceRegister<Boolean,Intent>() {
-            @Override
-            public void onResponse(Boolean isSuccess,Intent intent) {
-                flag[0] = isSuccess;
-
-                Bundle bundle = intent.getExtras();
-                String config = bundle.getString(PARAM_CONFIG);
-                String error = bundle.getString(KEY_ERROR_MESSAGE);
-                AConfigResponse responseX2 = new Gson().fromJson(config, AConfigResponse.class);
-            }
-        });
 
 
+//        if (count == 0) {
+//    //payment = Charge Activity
+//            Bundle bundle = new Bundle();
+//            bundle.putInt("type" , 1);
+//            Intent intent = PaymentActivity.getIntent(context,bundle);
+//            //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
+//            //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+//            //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+//            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+//            count++;
+//        }
 
-        if (count == 0) {
-    //Charge Activity
-            Bundle bundle = new Bundle();
-            bundle.putInt("type" , 1);
-            Intent intent = PaymentActivity.getIntent(context,bundle);
-            //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
-            //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-            //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
-            count++;
-        }
-
-        //charge by method
+        //payment = charge by method
         //done
 //            Bundle bundle = new Bundle();
 //            bundle.putInt("type", 2);
@@ -179,6 +180,21 @@ public class SplashScreen extends AppCompatActivity  {
 //            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
 //            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 //            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+
+
+
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("type" , 1);
+        Intent intent = SignInActivity.getIntent(context,bundle);
+//        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);     //todo not need
+//                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS); //todo check and fix
+        intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+        startActivityForResult(intent, 1000);
     }
     int count = 0;
+
+
 }

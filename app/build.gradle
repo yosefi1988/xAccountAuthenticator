@@ -76,6 +76,8 @@ android {
             versionNameSuffix "-dev"
             manifestPlaceholders = [pn: "ir.sajjadyosefi.android.xTubeless"]
 
+
+
             buildConfigField 'String', 'HOST', "\"http://www.example.com\""
             buildConfigField 'String', 'URL_PREFIX', "\"devapi\""
             //resValue "string", "app_name", appName + "-debug"

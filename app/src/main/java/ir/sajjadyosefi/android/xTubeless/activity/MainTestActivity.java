@@ -171,7 +171,7 @@ public class MainTestActivity extends AppCompatActivity {
     private void addNewAccount(Context context , String accountType, String authTokenType) {
 
         final Intent intent = new Intent(context, SignInActivity.class);
-        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, accountType);
+        intent.putExtra(AccountGeneral.ACCOUNT_TYPE, accountType);
         intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, authTokenType);
         intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
 //        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);

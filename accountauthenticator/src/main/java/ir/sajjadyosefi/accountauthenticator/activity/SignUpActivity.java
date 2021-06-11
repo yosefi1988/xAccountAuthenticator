@@ -14,14 +14,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import ir.sajjadyosefi.accountauthenticator.R;
+import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.util;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_ID;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_NAME;
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_ACCOUNT_TYPE;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_PASS;
 
@@ -34,7 +33,7 @@ public class SignUpActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAccountType = getIntent().getStringExtra(ARG_ACCOUNT_TYPE);
+        mAccountType = getIntent().getStringExtra(AccountGeneral.ACCOUNT_TYPE);
 
         setContentView(R.layout.act_register);
 

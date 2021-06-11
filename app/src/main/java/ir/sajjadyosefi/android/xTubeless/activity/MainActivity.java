@@ -31,12 +31,8 @@ import com.google.gson.Gson;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
-import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
-import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
-import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.Adapter.FirstFragmentsAdapter;
@@ -50,10 +46,7 @@ import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
 import static android.util.Log.VERBOSE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_CONFIG;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER;
-import static ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen.SplashScreen.WALLETCHARGE_REQUEST_CODE;
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_OBJECT;
 import static ir.sajjadyosefi.android.xTubeless.networkLayout.networkLayout.Url.Telegram;
 
 @TargetApi (Build.VERSION_CODES.KITKAT_WATCH)
@@ -78,9 +71,9 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == LOGIN_REQUEST_CODE){
-                if (data.hasExtra(PARAM_USER)){
+                if (data.hasExtra(PARAM_USER_OBJECT)){
                     Gson gson = new Gson();
-                    User user = gson.fromJson(data.getExtras().getString(PARAM_USER),User.class);
+                    User user = gson.fromJson(data.getExtras().getString(PARAM_USER_OBJECT),User.class);
                     if(savedToDataBase(user)){
                         if (Global.user != null && Global.user.isAdmin()) {
                             updatedrawableMenuItems();
@@ -197,7 +190,7 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
                     Bundle bundle = new Bundle();
                     bundle.putInt("type" , 1);
                     Intent intent = SignInActivity.getIntent(getContext(),bundle);
-                    intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
+                    //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE); todo not need
                     intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
                     intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
                     //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);

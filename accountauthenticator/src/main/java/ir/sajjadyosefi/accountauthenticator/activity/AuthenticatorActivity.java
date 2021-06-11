@@ -23,16 +23,36 @@ import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 
 public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
-    public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
+    //used
+    public final static String PARAM_USER_CODE = "USER_CODE";
+    public final static String PARAM_USER_TYPE = "USER_TYPE";
+    public final static String PARAM_USER_CODEMELLI = "USER_CODEMELLI";
+    public final static String PARAM_USER_NAME = "USER_NAME";
+    public final static String PARAM_EMAIL = "EMAIL";
+    public final static String PARAM_USER_PASS = "USER_PASS";
+    public final static String PARAM_MOBILE = "MOBILE";
+    public final static String PARAM_MOBILE_NUMBER_CONFIRMED = "MOBILE_NUMBER_CONFIRMED";
+    public final static String PARAM_SIMCARD_ID = "SIMCARD_ID";
+    public final static String PARAM_NAME = "NAME";
+    public final static String PARAM_FAMILY = "FAMILY";
+    public final static String PARAM_AVATAR = "AVATAR";
+    public final static String PARAM_PROFILE_IMAGE = "PROFILE_IMAGE";
+    public final static String PARAM_IS_ACTIVE = "IS_ACTIVE";
+    public final static String PARAM_IS_DELETED = "IS_DELETED";
+    public final static String PARAM_CREATED_DATE = "CREATED_DATE";
+    public final static String PARAM_WALLET_AMOUNT = "WALLET_AMOUNT";
+    public final static String PARAM_USER_OBJECT = "USER_OBJECT";
+
+    public final static String ARG_IS_ADDING_NEW_ACCOUNT = "IS_ADDING_ACCOUNT";         //todo بررسی کن درست استفاده شده باشه
+    //public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
+    public static final String KEY_ERROR_MESSAGE = "ERR_MSG";
+    public final static String PARAM_CONFIG = "CONFIG";
+
+
+
+    //check
     public final static String ARG_AUTH_TYPE = "AUTH_TYPE";
     public final static String ARG_ACCOUNT_NAME = "ACCOUNT_NAME";
-    public final static String ARG_IS_ADDING_NEW_ACCOUNT = "IS_ADDING_ACCOUNT";
-    public static final String KEY_ERROR_MESSAGE = "ERR_MSG";
-    public final static String PARAM_USER_PASS = "USER_PASS";
-    public final static String PARAM_USER = "USER";
-    public final static String PARAM_CONFIG = "CONFIG";
-    public final static String PARAM_USER_NAME = "PARAM_USER_NAME";
-    public final static String PARAM_USER_ID = "USER_ID";
 
     private final int REQ_SIGNUP = 1;
 
@@ -96,7 +116,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
         final String accountName = ((TextView) findViewById(R.id.accountName)).getText().toString().trim();
         final String accountPassword = ((TextView) findViewById(R.id.accountPassword)).getText().toString();
 
-        final String accountType = getIntent().getStringExtra(ARG_ACCOUNT_TYPE);
+        final String accountType = getIntent().getStringExtra(AccountGeneral.ACCOUNT_TYPE);
 
         new AsyncTask<String, Void, Intent>() {
 
@@ -149,7 +169,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
         Log.d("TubelessSajjad", TAG + "> finishLogin");
 
         String accountName = intent.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-        String accountUserID = intent.getStringExtra(PARAM_USER_ID);
+        String accountUserID = intent.getStringExtra(PARAM_USER_CODE);
         String accountUserName = intent.getStringExtra(PARAM_USER_NAME);
         String accountUserPass = intent.getStringExtra(PARAM_USER_PASS);
 
@@ -161,7 +181,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
             String authtokenType = mAuthTokenType;
 
             Bundle data = new Bundle();
-            data.putString(PARAM_USER_ID, String.valueOf(accountUserID));
+            data.putString(PARAM_USER_CODE, String.valueOf(accountUserID));
             data.putString(PARAM_USER_NAME,accountUserName);
 
             // Creating the account on the device and setting the auth token we got

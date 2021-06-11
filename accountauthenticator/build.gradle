@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
-//apply plugin: 'maven-publish'
+apply plugin: 'maven-publish'
 //def final libName = "xAccountAuthenticator"
 //def final lib_VersionName = "1.3.0"
 //def final libversionCode = 1
-//def githubProperties = new Properties()
-//githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 //def getVersionName = { ->
 //    return "${lib_VersionName}"
 //}
@@ -23,8 +23,8 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 2
-        versionName "2.0.0"
+        versionCode 1
+        versionName "1.3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -59,6 +59,35 @@ dependencies {
 
 }
 
+
+publishing {
+    repositories {
+        maven {
+            name = "githubpackages"
+            url = uri("https://maven.pkg.github.com/yosefi1988/xaccountauthenticator")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+    }
+    publications {
+        bar(MavenPublication) {
+            groupId 'ir.sajjadyosefi.libraries'
+            artifactId "xaccountauthenticator"
+            version "2.1.1"
+
+//            artifact(sourceJar)
+//            artifact("$buildDir/outputs/aar/bar-release.aar")
+        }
+
+//        gpr(MavenPublication) {
+//            from(components.java)
+//        }
+    }
+}
+
+
 //afterEvaluate {
 //    publishing {
 //        publications {
@@ -79,26 +108,6 @@ dependencies {
 //                groupId = 'ir.sajjadyosefi.libraries'
 //                artifactId = 'final-debug'
 //                version = '1.1.0'
-//            }
-//        }
-//    }
-//}
-
-//publishing {
-//    publications {
-//        bar(MavenPublication) {
-//            groupId 'ir.sajjadyosefi.libraries'
-//            artifactId "xAccountAuthenticator"
-//            version "1.1.0"
-//        }
-//    }
-//    repositories {
-//        maven {
-//            name = "GitHubPackages"
-//            url = uri("https://maven.pkg.github.com/yosefi1988/xAccountAuthenticator")
-//            credentials {
-//                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-//                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
 //            }
 //        }
 //    }
