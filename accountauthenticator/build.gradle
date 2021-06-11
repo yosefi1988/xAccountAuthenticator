@@ -40,6 +40,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -75,7 +78,7 @@ publishing {
         bar(MavenPublication) {
             groupId 'ir.sajjadyosefi.libraries'
             artifactId "xaccountauthenticator"
-            version "2.1.1"
+            version "2.2.2"
 
 //            artifact(sourceJar)
 //            artifact("$buildDir/outputs/aar/bar-release.aar")
