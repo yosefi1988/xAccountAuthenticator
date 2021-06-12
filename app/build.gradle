@@ -13,7 +13,7 @@ android {
 
 //    flavorDimensions "default"
     flavorDimensions("version_name", "market")
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion '28.0.3'
 
     configurations {

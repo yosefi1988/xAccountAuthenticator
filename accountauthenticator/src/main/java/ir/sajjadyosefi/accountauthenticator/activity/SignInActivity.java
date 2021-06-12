@@ -71,7 +71,7 @@ import static ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessExc
 import static ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException.TUBELESS_USERNAME_IS_EMPTY;
 
 public class SignInActivity extends Activity {
-//g
+
     private final int REQ_SIGNUP = 1;
     //widget
     Button submitBySimCard;
@@ -153,7 +153,6 @@ public class SignInActivity extends Activity {
         intent.putExtras(bundle);
         return intent;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
