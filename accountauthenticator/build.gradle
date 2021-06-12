@@ -78,7 +78,7 @@ publishing {
         bar(MavenPublication) {
             groupId 'ir.sajjadyosefi.libraries'
             artifactId "xaccountauthenticator"
-            version "4.0.0"
+            version "4.0.1"
 
 //            artifact(sourceJar)
 //            artifact("$buildDir/outputs/aar/bar-release.aar")
