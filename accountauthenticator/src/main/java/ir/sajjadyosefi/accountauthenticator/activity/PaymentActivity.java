@@ -59,7 +59,6 @@ public class PaymentActivity extends Activity {
             paymentIntent = null;
             bundle = null;
         }catch (Exception e){
-
         }
     }
 
@@ -94,7 +93,6 @@ public class PaymentActivity extends Activity {
         ZarinPal.getPurchase(context).verificationPayment(data2, new OnCallbackVerificationPaymentListener() {
             @Override
             public void onCallbackResultVerificationPayment(boolean isPaymentSuccess, String refID, PaymentRequest paymentRequest) {
-
 
                 if(isPaymentSuccess){
                     Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();

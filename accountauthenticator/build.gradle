@@ -101,7 +101,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'ir.sajjadyosefi.libraries'
                 artifactId = 'final'
-                version = '4.1.0'
+                version = '5.0.0'
             }
             // Creates a Maven publication called “debug”.
             debug(MavenPublication) {

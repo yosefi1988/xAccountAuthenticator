@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 
 import ir.sajjadyosefi.accountauthenticator.R;
@@ -27,7 +26,6 @@ import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivit
 public class SignUpActivity extends Activity {
     private String TAG = getClass().getSimpleName();
     private String mAccountType;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
