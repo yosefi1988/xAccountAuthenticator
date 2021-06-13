@@ -88,6 +88,9 @@ public class PaymentActivity extends Activity {
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+
+
+        //
         context = this;
         Uri data2 = getIntent().getData();
         ZarinPal.getPurchase(context).verificationPayment(data2, new OnCallbackVerificationPaymentListener() {
@@ -113,6 +116,9 @@ public class PaymentActivity extends Activity {
                             finish();
 //                        }
                     }
+
+
+                    //
 
                 }
             }
