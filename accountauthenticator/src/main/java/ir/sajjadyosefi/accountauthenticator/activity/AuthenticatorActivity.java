@@ -47,6 +47,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
     //public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
     public static final String KEY_ERROR_MESSAGE = "ERR_MSG";
     public final static String PARAM_CONFIG = "CONFIG";
+    public final static String PARAM_TRANSACTION_LIST = "TRANSACTION LIST";
 
 
 

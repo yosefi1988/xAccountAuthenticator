@@ -35,6 +35,7 @@ public class TubelessException extends IOException {
     public static final int DEVICE_NOT_REGISTER = 2004;
 
 
+    public static final int Wallet_1 = -1;
     public static final int NATIONAL_CODE_NOT_TRUE = 1001;
     public static final int NAME_NOT_TRUE = 1002;
     public static final int FAMILY_NOT_TRUE = 1003;
@@ -83,6 +84,11 @@ public class TubelessException extends IOException {
 
     public TubelessException(int errorCode) {
         switch (errorCode){
+            case Wallet_1:{
+                message = "sajjad Error : have not wallet.";
+                break;
+            }
+
             case NATIONAL_CODE_NOT_TRUE:{
                 message = "sajjad Error : National Code Not true.";
                 break;

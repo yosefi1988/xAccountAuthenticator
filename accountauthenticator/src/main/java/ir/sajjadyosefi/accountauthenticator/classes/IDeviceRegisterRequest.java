@@ -1,5 +1,5 @@
 package ir.sajjadyosefi.accountauthenticator.classes;
 
-public interface IDeviceRegister<T,X> {
+public interface IDeviceRegisterRequest<T,X> {
     void onResponse(T isSuccess,X intent);
 }

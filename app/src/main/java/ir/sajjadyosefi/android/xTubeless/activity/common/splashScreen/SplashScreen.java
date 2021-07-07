@@ -1,8 +1,6 @@
 package ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,20 +12,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
-import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
-import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
-import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
-import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
-import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
+import ir.sajjadyosefi.accountauthenticator.classes.ITransactionsListRequest;
+import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionListRequest;
+import ir.sajjadyosefi.accountauthenticator.model.response.ATransactionListResponse;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.classes.SAccounts;
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_CONFIG;
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_TRANSACTION_LIST;
 
 //mvp
 public class SplashScreen extends AppCompatActivity  {
@@ -109,25 +105,25 @@ public class SplashScreen extends AppCompatActivity  {
 //        },3000);
 
 
-        //library
-        AccountGeneral.setIDApplication(2);
-        AccountGeneral.setIDApplicationVersion(1);
-        AccountGeneral.setStore("myket");
-        AccountGeneral.setIP("55.55.55.55");
-        AccountGeneral.setAndroidID("55.55.55.55");
-        AccountGeneral.setAndroidID("15df3b3a90dc5688");
-
-        //zarinpal
-        AccountGeneral.setAppName(getString(R.string.app_name));
-        AccountGeneral.setZarinpalpayment(context.getString(R.string.zarinpalpayment));
-        AccountGeneral.setSchemezarinpalpayment(context.getString(R.string.schemezarinpalpayment));
-
-        //after login
-//        AccountGeneral.setUserCode("112028");
-
-
+//        //library
+//        AccountGeneral.setIDApplication(2);
+//        AccountGeneral.setIDApplicationVersion(1);
+//        AccountGeneral.setStore("myket");
+//        AccountGeneral.setIP("55.55.55.55");
+//        AccountGeneral.setAndroidID("55.55.55.55");
+//        AccountGeneral.setAndroidID("15df3b3a90dc5688");
+//
+//        //zarinpal
+//        AccountGeneral.setAppName(getString(R.string.app_name));
+//        AccountGeneral.setZarinpalpayment(context.getString(R.string.zarinpalpayment));
+//        AccountGeneral.setSchemezarinpalpayment(context.getString(R.string.schemezarinpalpayment));
+//
+//        //after login
+////        AccountGeneral.setUserCode("112028");
+//
+//
 //        //device register
-//        SignInActivity signInActivity = new SignInActivity();
+        SignInActivity signInActivity = new SignInActivity();
 //        ADeviceRegisterRequest aDeviceRegisterRequest = new ADeviceRegisterRequest();
 //        aDeviceRegisterRequest.setAndroidVersion("1");
 //        aDeviceRegisterRequest.setAndroidAPI(1);
@@ -153,8 +149,19 @@ public class SplashScreen extends AppCompatActivity  {
 //        });
 
 
+//        ATransactionListRequest xxxxxxxxxxx = new ATransactionListRequest("110012","10","0");
+//        signInActivity.getTransactionsList(xxxxxxxxxxx, new ITransactionsListRequest<Boolean, Intent>() {
+//            @Override
+//            public void onResponse(Boolean isSuccess,Intent intent) {
+//                Bundle bundle = intent.getExtras();
+//                String config = bundle.getString(PARAM_TRANSACTION_LIST);
+//                //String error = bundle.getString(KEY_ERROR_MESSAGE);
+//                ATransactionListResponse responseX2 = new Gson().fromJson(config, ATransactionListResponse.class);
+//            }
+//        });
 
-//        if (count == 0) {
+
+
 //    //payment = Charge Activity
 //            Bundle bundle = new Bundle();
 //            bundle.putInt("type" , 1);
@@ -165,11 +172,10 @@ public class SplashScreen extends AppCompatActivity  {
 //            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
 //            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 //            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
-//            count++;
-//        }
 
-        //payment = charge by method
-        //done
+
+//        //payment = charge by method
+//        //done
 //            Bundle bundle = new Bundle();
 //            bundle.putInt("type", 2);
 //            bundle.putInt("amount", 1000);
@@ -182,19 +188,16 @@ public class SplashScreen extends AppCompatActivity  {
 //            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
 
-
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("type" , 1);
-        Intent intent = SignInActivity.getIntent(context,bundle);
-//        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);     //todo not need
-//                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS); //todo check and fix
-        intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-        startActivityForResult(intent, 1000);
+        //SignInActivity
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("type" , 1);
+//        Intent intent = SignInActivity.getIntent(context,bundle);
+////        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);     //todo not need
+////                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS); //todo check and fix
+//        intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//        startActivityForResult(intent, 1000);
     }
-    int count = 0;
-
 
 }

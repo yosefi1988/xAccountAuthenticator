@@ -22,7 +22,7 @@ import com.zarinpal.ewallets.purchase.ZarinPal;
 
 import ir.sajjadyosefi.accountauthenticator.R;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
-import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
+import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.AWalletChargeResponse;
@@ -210,7 +210,6 @@ public class PaymentActivity extends Activity {
         payment.setAmount(amount);
         payment.setDescription(AccountGeneral.getAppName());
         payment.setCallbackURL(String.format("%s://%s",AccountGeneral.getSchemezarinpalpayment(),AccountGeneral.getZarinpalpayment()));
-
 //        MainActivity.payType = 100 ;
 
         purches.startPayment(payment, new OnCallbackRequestPaymentListener() {
@@ -227,7 +226,6 @@ public class PaymentActivity extends Activity {
 
             }
         });
-
     }
 
     @Override
@@ -260,6 +258,15 @@ public class PaymentActivity extends Activity {
             protected void onPostExecute(final AWalletChargeResponse response) {
                 final BottomSheetDialog dialog = new BottomSheetDialog(context);
                 if (noUi) {
+                    if (response == null){
+                        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.tray_again), context.getString(R.string.tray_again), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        return;
+                    }
                     if (response.getTubelessException().getCode() == 200) {
                         Bundle bundle = new Bundle();
                         Gson gson = new Gson();
@@ -302,7 +309,7 @@ public class PaymentActivity extends Activity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    public void chargeAcountWithoutUi(final AWalletChargeRequest request,Context context, final IDeviceRegister<Boolean,Intent> callback){
+    public void chargeAcountWithoutUi(final AWalletChargeRequest request,Context context, final IDeviceRegisterRequest<Boolean,Intent> callback){
         //showProgressBar();
 
 //        new AsyncTask<String, Void, Intent>() {

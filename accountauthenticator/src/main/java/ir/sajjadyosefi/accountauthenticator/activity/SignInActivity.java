@@ -35,13 +35,16 @@ import com.google.gson.Gson;
 
 import ir.sajjadyosefi.accountauthenticator.R;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
-import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegister;
+import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegisterRequest;
+import ir.sajjadyosefi.accountauthenticator.classes.ITransactionsListRequest;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.classes.util;
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
+import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionListRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
+import ir.sajjadyosefi.accountauthenticator.model.response.ATransactionListResponse;
 
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_ACCOUNT_NAME;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_AUTH_TYPE;
@@ -59,6 +62,7 @@ import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivit
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_NAME;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_PROFILE_IMAGE;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_SIMCARD_ID;
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_TRANSACTION_LIST;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_OBJECT;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_CODE;
 import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_CODEMELLI;
@@ -531,7 +535,7 @@ public class SignInActivity extends Activity {
 
 
     @SuppressLint("StaticFieldLeak")
-    public void tryDeviceRegister(final ADeviceRegisterRequest aDeviceRegisterRequest, final IDeviceRegister<Boolean,Intent> callback){
+    public void tryDeviceRegister(final ADeviceRegisterRequest aDeviceRegisterRequest, final IDeviceRegisterRequest<Boolean,Intent> callback){
         new AsyncTask<String, Void, Intent>() {
             @Override
             protected Intent doInBackground(String... params) {
@@ -556,6 +560,44 @@ public class SignInActivity extends Activity {
             @Override
             protected void onPostExecute(Intent intent) {
                 if (intent.hasExtra(PARAM_CONFIG))
+                    callback.onResponse(true,intent);
+                else
+                    callback.onResponse(false,intent);
+                //start activity for result
+                //retData(intent);
+            }
+        }.execute();
+
+    }
+
+
+
+    @SuppressLint("StaticFieldLeak")
+    public void getTransactionsList(final ATransactionListRequest transactionListRequest, final ITransactionsListRequest<Boolean,Intent> callback){
+        new AsyncTask<String, Void, Intent>() {
+            @Override
+            protected Intent doInBackground(String... params) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                ATransactionListResponse transactionListResponse = null;
+                try {
+                    transactionListResponse = sServerAuthenticate.transactionList(transactionListRequest);
+//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+                    Gson gson = new Gson();
+                    bundle.putString(PARAM_TRANSACTION_LIST, gson.toJson(transactionListResponse));
+                    bundle.remove(KEY_ERROR_MESSAGE);
+                    intent.putExtras(bundle);
+                } catch (Exception e) {
+                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
+                }
+                return intent;
+            }
+
+            @Override
+            protected void onPostExecute(Intent intent) {
+                if (intent.hasExtra(PARAM_TRANSACTION_LIST))
                     callback.onResponse(true,intent);
                 else
                     callback.onResponse(false,intent);

@@ -41,5 +41,25 @@
       <option name="name" value="maven3" />
       <option name="url" value="https://dl.bintray.com/kategory/maven" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/sdk724-repo/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven3" />
+      <option name="name" value="maven3" />
+      <option name="url" value="file:/$PROJECT_DIR$/../sdk724-repo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/app/sdk724-repo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/accountauthenticator/sdk724-repo" />
+    </remote-repository>
   </component>
 </project>
