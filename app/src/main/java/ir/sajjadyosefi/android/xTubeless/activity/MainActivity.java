@@ -31,6 +31,8 @@ import com.google.gson.Gson;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.ChangePasswordActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.ResetPasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.android.xTubeless.R;
@@ -55,6 +57,7 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
     //val
     private static int LOGIN_REQUEST_CODE = 101 ;
     private static int OPEN_PROFILE_REQUEST_CODE = 102 ;
+    private static int CHANGE_PASSWORD_REQUEST_CODE = 103;
 
 
     private BottomNavigation mBottomNavigation;
@@ -71,6 +74,18 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == LOGIN_REQUEST_CODE){
+                if (data.hasExtra(PARAM_USER_OBJECT)){
+                    Gson gson = new Gson();
+                    User user = gson.fromJson(data.getExtras().getString(PARAM_USER_OBJECT),User.class);
+                    if(savedToDataBase(user)){
+                        if (Global.user != null && Global.user.isAdmin()) {
+                            updatedrawableMenuItems();
+                        }
+                    }
+                    Toast.makeText(getContext(),getContext().getString(R.string.welcome) ,Toast.LENGTH_LONG).show();
+                }
+            }
+            if (requestCode == CHANGE_PASSWORD_REQUEST_CODE){
                 if (data.hasExtra(PARAM_USER_OBJECT)){
                     Gson gson = new Gson();
                     User user = gson.fromJson(data.getExtras().getString(PARAM_USER_OBJECT),User.class);
@@ -196,6 +211,32 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
                     //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
                     bundle.putParcelable(AccountManager.KEY_INTENT, intent);
                     getActivity().startActivityForResult(intent, LOGIN_REQUEST_CODE);
+
+                }else  if (id == R.id.nav_changepassword) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("type" , 1);
+                    Intent intent = ChangePasswordActivity.getIntent(getContext(),bundle);
+                    //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE); todo not need
+                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+                    intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+                    intent.putExtra(AuthenticatorActivity.PARAM_USER_CODE, "110015" );//Global.user AccountGeneral.getUserCode());
+                    //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+                    bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                    getActivity().startActivityForResult(intent, CHANGE_PASSWORD_REQUEST_CODE);
+
+                }else  if (id == R.id.nav_forgetpassword) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("type" , 1);
+                    Intent intent = ResetPasswordActivity.getIntent(getContext(),bundle);
+
+                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+                    intent.putExtra(AuthenticatorActivity.PARAM_USER_CODE, "110015" );
+                    intent.putExtra(AuthenticatorActivity.PARAM_MOBILE, "09123678522");
+
+                    bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                    getActivity().startActivityForResult(intent, CHANGE_PASSWORD_REQUEST_CODE);
 
                 } else if (id == R.id.nav_contact_us) {
 

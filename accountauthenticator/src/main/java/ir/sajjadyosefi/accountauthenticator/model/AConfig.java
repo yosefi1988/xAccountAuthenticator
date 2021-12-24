@@ -5,6 +5,7 @@ import java.util.List;
 public class AConfig  {
 
     private List<AStore> StoreList;
+    private List<AUMIC> umic;
     private int DeviceId;
 
 
@@ -25,4 +26,11 @@ public class AConfig  {
     }
 
 
+    public List<AUMIC> getUmic() {
+        return umic;
+    }
+
+    public void setUmic(List<AUMIC> umic) {
+        this.umic = umic;
+    }
 }

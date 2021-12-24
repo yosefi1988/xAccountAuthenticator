@@ -5,6 +5,21 @@
 
 <!--    android:theme="@style/TubelessDayTheme"-->
 <!--    android:icon="@drawable/png_icon"-->
+    <uses-permission
+        android:name="android.permission.GET_ACCOUNTS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.MANAGE_ACCOUNTS"
+        android:maxSdkVersion="22" />
+
+
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+<!--    <uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+
+
+
     <application
         android:theme="@style/TubelessDayTheme"
         android:icon="@drawable/png_icon1"
@@ -14,6 +29,8 @@
 
             <!-- *** Not really needed here, but convenient for copying to other apps that will use this module *** -->
         <activity android:name=".activity.AuthenticatorActivity" android:label="@string/login_label"/>
+        <activity android:name=".activity.ChangePasswordActivity" android:label="@string/changePassword"/>
+        <activity android:name=".activity.ResetPasswordActivity" android:label="@string/forgetPassword"/>
         <activity android:name=".activity.SignInActivity" android:label="@string/login_label"/>
         <activity android:name=".activity.SignUpActivity" android:label="@string/signup_title" />
 
@@ -38,7 +55,7 @@
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
             <meta-data android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/authenticator" />
+                android:resource="@xml/authenticatorxxx" />
         </service>
 
 

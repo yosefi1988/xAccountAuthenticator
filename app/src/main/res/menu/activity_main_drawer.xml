@@ -12,6 +12,15 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/png_profile"
             android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_changepassword"
+            android:icon="@drawable/png_profile"
+            android:title="@string/changePassword" />
+
+        <item
+            android:id="@+id/nav_forgetpassword"
+            android:icon="@drawable/png_profile"
+            android:title="@string/forget_password" />
 <!--        <item-->
 <!--            android:id="@+id/nav_account"-->
 <!--            android:icon="@drawable/ic_menu_camera"-->

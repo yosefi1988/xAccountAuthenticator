@@ -1,5 +1,6 @@
 package ir.sajjadyosefi.accountauthenticator.authentication;
 
+import ir.sajjadyosefi.accountauthenticator.model.request.AChangePasswordRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionListRequest;
@@ -13,6 +14,7 @@ public interface ServerAuthenticate {
     public ALoginResponse userSignUp(final ALoginRequest ALoginRequest) throws Exception;
 
     public ALoginResponse userSignIn(final ALoginRequest ALoginRequest) throws Exception;
+    public ALoginResponse changePassword(final AChangePasswordRequest aChangePasswordRequest) throws Exception;
     public AConfigResponse deviceRegister(final ADeviceRegisterRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
     public ATransactionListResponse transactionList(final ATransactionListRequest aTransactionListRequest) throws Exception;
     public AWalletChargeResponse chargeWallet(final AWalletChargeRequest aDeviceRequestRegisterRegisterRequest) throws Exception;

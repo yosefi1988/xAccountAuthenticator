@@ -6,7 +6,6 @@
 
     <string name="app_price">1000</string>
     <string name="app_pardakht_text" formatted="false">با پرداخت مبلغ %s تومان به صورت نامحدود از مطالب این نرم افزار استفاده کنید.\nقسمتی از این مبلغ صرف ایتام خواهد شد.\nدر صورت عدم تمایل به پرداخت مبلغ ، میتوانید تمام مطالب را به صورت رایگان در سایت ما مشاهده کنید :\n\n %s</string>
-    <string name="app_web_address">http://owl.sajjadyosefi.ir</string>
     <string name="pardakht">پرداخت</string>
     <string name="cancelAndExit">انصراف و خروج</string>
     <string name="internetConnectionForPaymentErrorText">برای انجام عملیات پرداخت می بایست به اینترنت متصل باشید</string>

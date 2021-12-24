@@ -177,7 +177,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
         final Account account = new Account(accountName, intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE));
 
         if (getIntent().getBooleanExtra(ARG_IS_ADDING_NEW_ACCOUNT, false)) {
-            Log.d("TubelessSajjad", TAG + "> finishLogin > addAccountExplicitly");
+//            Log.d("TubelessSajjad", TAG + "> finishLogin > addAccountExplicitly");
             String authtoken = intent.getStringExtra(AccountManager.KEY_AUTHTOKEN);
             String authtokenType = mAuthTokenType;
 
@@ -187,8 +187,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
 
             // Creating the account on the device and setting the auth token we got
             // (Not setting the auth token will cause another call to the server to authenticate the user)
-            mAccountManager.addAccountExplicitly(account, accountUserPass, data);
-            mAccountManager.setAuthToken(account, authtokenType, authtoken);
+//            mAccountManager.addAccountExplicitly(account, accountUserPass, data);
+//            mAccountManager.setAuthToken(account, authtokenType, authtoken);
         } else {
             Log.d("TubelessSajjad", TAG + "> finishLogin > setPassword");
             mAccountManager.setPassword(account, accountUserPass);

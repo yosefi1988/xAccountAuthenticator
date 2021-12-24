@@ -41,8 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="شماره پشتیبانی 09227087288"
-                android:textColor="@color/day_contact_us_text"
-                android:textSize="20dp"  />
+                android:textColor="@color/day_contact_us_text"  />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -126,8 +125,7 @@
                     android:background="@drawable/btn_search"
                     android:text="@string/reg"
                     android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp" />
+                    android:textColor="#fff" />
 
                 <Button
                     android:id="@+id/buttonBack"
@@ -137,8 +135,7 @@
                     android:background="@drawable/btn_search"
                     android:text="@string/back"
                     android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp" />
+                    android:textColor="#fff" />
 
             </LinearLayout>
 

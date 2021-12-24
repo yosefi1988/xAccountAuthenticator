@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.android.xTubeless.classes;
+package ir.sajjadyosefi.accountauthenticator.classes;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -8,48 +8,38 @@ import android.os.Bundle;
 import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 
-import static ir.sajjadyosefi.android.xTubeless.classes.StaticValue.NOT_LOGN_USER;
-
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_PASS;
 
 public class SAccounts {
 
     private final Context context;
-    //var
     private AccountManager mAccountManager;
-
-    //val
-    public final static String SAMANIUM_AUTH_TYPE = "AUTH_TYPE";
-    public final static String SAMANIUM_ACCOUNT_TYPE = "ACCOUNT_TYPE";
-    public final static String SAMANIUM_ACCOUNT_NAME = "ACCOUNT_NAME";
-
     public SAccounts(Context context) {
         this.context = context;
         mAccountManager = AccountManager.get(context);
     }
-
     private AccountManager getAccountManager() {
         return mAccountManager;
     }
 
-    public int performAccount(String name , int UserID , String password) {
+    public int performAccount(String accountName, Bundle data) {
         SAccounts sAccounts = new SAccounts(context);
         if (!sAccounts.hasUserAccount()){
-            if (password == null){
-                sAccounts.createAccount(name,UserID);
-            }else {
-                sAccounts.createAccount(name,UserID,password);
-            }
-            return UserID;
+            sAccounts.createAccount(accountName,data);
+            return sAccounts.getUserAccountID();
         }else {
             int userid = sAccounts.getUserAccountID();
             return userid;
         }
     }
-    public int performAccount(String name , int UserID) {
-        return performAccount(name,UserID,null);
+
+    public Account getAccountX() {
+        if (hasUserAccount()) {
+            return getUserAccount();
+        }else {
+            return null;
+        }
     }
-
-
     public Account getUserAccount() {
         Account availableAccounts[] = mAccountManager.getAccountsByType(AccountGeneral.ACCOUNT_TYPE);
 
@@ -64,7 +54,7 @@ public class SAccounts {
             if (hasUserAccount()) {
                 return Integer.parseInt(mAccountManager.getUserData(getUserAccount(), AuthenticatorActivity.PARAM_USER_CODE));
             } else {
-                return NOT_LOGN_USER;
+                return 654798;
             }
         }catch (Exception ex) {
             return 0;
@@ -84,7 +74,13 @@ public class SAccounts {
             return null;
         }
     }
-
+    public String getUserAccountPassword() {
+        if (hasUserAccount()) {
+            return mAccountManager.getUserData(getUserAccount(), "UserPassword");
+        }else {
+            return null;
+        }
+    }
     public String getUserAccountName() {
         if (hasUserAccount()) {
             return getUserAccount().name;
@@ -92,13 +88,7 @@ public class SAccounts {
             return null;
         }
     }
-    public Account getAccountX() {
-        if (hasUserAccount()) {
-            return getUserAccount();
-        }else {
-            return null;
-        }
-    }
+
 
     public boolean hasUserAccount() {
         if (getUserAccount() == null) {
@@ -116,26 +106,12 @@ public class SAccounts {
             return false;
         }
     }
-
-    private void createAccount(String name,int UserID) {
-        final Account account = new Account(name, AccountGeneral.ACCOUNT_TYPE) ;
-        Bundle data = new Bundle();
-        data.putString("UserID", String.valueOf(UserID));
-        this.getAccountManager().addAccountExplicitly(account, "tubeless",data);
-    }
-    private void createAccount(String name,int UserID,String password) {
-        final Account account = new Account(name, AccountGeneral.ACCOUNT_TYPE) ;
-        Bundle data = new Bundle();
-        data.putString("UserID", String.valueOf(UserID));
-        data.putString("UserPassword",password);
-        this.getAccountManager().addAccountExplicitly(account, "tubeless",data);
+    private void createAccount(String accountName, Bundle data) {
+        final Account account = new Account(accountName, AccountGeneral.ACCOUNT_TYPE);
+        data.putString("accountName",accountName);
+        this.getAccountManager().addAccountExplicitly(account,data.getString(PARAM_USER_PASS), data);
+        this.getAccountManager().setAuthToken(account, data.getString("authtokenType"), data.getString("authtoken"));
     }
 
-    public String getUserAccountPassword() {
-        if (hasUserAccount()) {
-            return mAccountManager.getUserData(getUserAccount(), "UserPassword");
-        }else {
-            return null;
-        }
-    }
+
 }

@@ -18,7 +18,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.sajjadyosefi.accountauthenticator.classes.Config;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
+import ir.sajjadyosefi.accountauthenticator.model.request.AChangePasswordRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionListRequest;
@@ -120,7 +122,8 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     @Override
     public ALoginResponse userSignIn(ALoginRequest ALoginRequest) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = "http://test.balabarkaran.com/Api/User/Login";
+        String url = Config.MAINHOST + "/Api/User/Login";
+//        String url = "http://192.168.1.5:80/Api/User/Login";
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -129,11 +132,17 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
         params.add(new BasicNameValuePair("IP", ALoginRequest.getIP()));
 
         params.add(new BasicNameValuePair("UserCode", ALoginRequest.getUserCode()));
+
+        if (ALoginRequest.getUserCode() != null && ALoginRequest.getUserCode().length() > 3) {
+            params.add(new BasicNameValuePair("Password", "x"));
+        } else {
+            params.add(new BasicNameValuePair("Password", ALoginRequest.getPassword()));
+        }
         params.add(new BasicNameValuePair("UserName", ALoginRequest.getUserName()));
-        params.add(new BasicNameValuePair("Password", ALoginRequest.getPassword()));
         params.add(new BasicNameValuePair("UserMoarefID", ALoginRequest.getUserMoarefID()));
         params.add(new BasicNameValuePair("UserImage", ALoginRequest.getUserImage()));
         params.add(new BasicNameValuePair("ProfileImage", ALoginRequest.getProfileImage()));
+        params.add(new BasicNameValuePair("MetaData", "Testbazar"));            //todo check bazar CafeBazar
         httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 
         HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -154,9 +163,40 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     }
 
     @Override
+    public ALoginResponse changePassword(AChangePasswordRequest aChangePasswordRequest) throws Exception {
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        String url = Config.MAINHOST + "/Api/User/changepassword";
+        HttpPost httpPost = new HttpPost(url);
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+        params.add(new BasicNameValuePair("o", aChangePasswordRequest.getOldPassword()));
+        params.add(new BasicNameValuePair("n", aChangePasswordRequest.getNewPassword()));
+        params.add(new BasicNameValuePair("u", aChangePasswordRequest.getUserCode()));
+        params.add(new BasicNameValuePair("a", aChangePasswordRequest.getAndroidID()));
+
+        httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+
+        HttpResponse httpResponse = httpClient.execute(httpPost);
+
+        if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            String responseString = EntityUtils.toString(httpResponse.getEntity());
+
+            ALoginResponse loggedUser = new Gson().fromJson(responseString.substring(1, responseString.length() - 1).replace("\\", ""), ALoginResponse.class);
+            if (loggedUser.getTubelessException().getCode() == 200) {
+                return loggedUser;
+            }else {
+                throw new TubelessException(loggedUser.getTubelessException().getCode());
+            }
+        }else {
+            throw new Exception("Error signing-in [" + httpResponse.getStatusLine().getStatusCode() + "]");
+        }
+    }
+
+    @Override
     public AConfigResponse deviceRegister(ADeviceRegisterRequest request) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = "http://test.balabarkaran.com/Api/Device/RegDevice";
+        String url = Config.MAINHOST + "/Api/Device/RegDevice";
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -207,7 +247,7 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     @Override
     public ATransactionListResponse transactionList(ATransactionListRequest request) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = "http://test.balabarkaran.com/Api/Wallet/WalletTransactionList";
+        String url = Config.MAINHOST + "/Api/Wallet/WalletTransactionList";
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -265,7 +305,7 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     @Override
     public AWalletChargeResponse chargeWallet(AWalletChargeRequest request) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = "http://test.balabarkaran.com/Api/Wallet/WalletChargeTransaction";
+        String url = Config.MAINHOST + "/Api/Wallet/WalletChargeTransaction";
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();

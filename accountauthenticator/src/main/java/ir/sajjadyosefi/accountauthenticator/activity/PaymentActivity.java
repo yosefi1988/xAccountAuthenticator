@@ -101,7 +101,7 @@ public class PaymentActivity extends Activity {
                     Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
                     paySuccess = true;
 //                    AWalletChargeRequest req = new AWalletChargeRequest(usercode, amount, refID, phone+ "|" + discription);
-                    AWalletChargeRequest req = new AWalletChargeRequest(amount);
+                    AWalletChargeRequest req = new AWalletChargeRequest(amount + "0"); // تبدیل به ریال
                     req.setMetaData(discription);
                     chargeAccount(req);
                 }else {

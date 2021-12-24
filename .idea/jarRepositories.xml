@@ -61,5 +61,15 @@
       <option name="name" value="maven4" />
       <option name="url" value="file:/$PROJECT_DIR$/accountauthenticator/sdk724-repo" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="MavenRepo" />
+      <option name="name" value="MavenRepo" />
+      <option name="url" value="https://repo.maven.apache.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="https://repo.spring.io/release" />
+    </remote-repository>
   </component>
 </project>

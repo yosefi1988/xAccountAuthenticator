@@ -28,6 +28,7 @@ public class TubelessException extends IOException {
 
 
     public static final int PASSWORD_NOT_TRUE = -104;
+    public static final int PASSWORD_MOBILE_NOT_CONFIRMED = -3;
 
 
     public static final int TUBELESS_RESPONSE_BODY_IS_NULL = 2001;
@@ -132,6 +133,11 @@ public class TubelessException extends IOException {
             }
             case PASSWORD_NOT_TRUE:{
                 message = "رمز صحیح نیست.";
+                break;
+            }
+
+            case PASSWORD_MOBILE_NOT_CONFIRMED:{
+                message = "هنوز موبایل تایید نشده.";
                 break;
             }
 

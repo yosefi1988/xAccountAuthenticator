@@ -50,9 +50,9 @@
 
         <TextView
             android:id="@+id/textViewForgetpass"
+            android:clickable="true"
             style="@style/AppTheme.DayTextView"
-            android:visibility="gone"
-            android:text="forget_password" />
+            android:text="@string/forgetPassword" />
 
         <Button
             android:id="@+id/submit"
@@ -61,6 +61,7 @@
 
         <TextView
             style="@style/AppTheme.DayTextView"
+            android:textColor="@color/cardview_dark_background"
             android:text="@string/login_with" />
 
         <com.google.android.gms.common.SignInButton
@@ -70,11 +71,13 @@
         <Button
             android:id="@+id/submitBySimCard"
             android:text="@string/simcart"
+            android:visibility="gone"
             style="@style/AppTheme.DayButton" />
 
         <Button
             android:id="@+id/submitByCodeMelli"
             android:text="@string/codeMelli"
+            android:visibility="gone"
             style="@style/AppTheme.DayButton" />
 
         <TextView

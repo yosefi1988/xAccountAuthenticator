@@ -54,8 +54,7 @@
                 android:background="@drawable/btn_search"
                 android:text="@string/accept_and_pardakht"
                 android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="18sp" />
+                android:textColor="#fff" />
 
             <Button
                 android:id="@+id/button_back"
@@ -65,8 +64,7 @@
                 android:background="@drawable/btn_search"
                 android:text="@string/cancel"
                 android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="18sp" />
+                android:textColor="#fff"  />
         </LinearLayout>
 
         <Button
@@ -75,8 +73,7 @@
             android:background="@drawable/btn_search"
             android:text="@string/accept_and_pardakht"
             android:textColor="#fff"
-            android:visibility="invisible"
-            android:textSize="10sp" />
+            android:visibility="invisible"  />
 
     </LinearLayout>
 
