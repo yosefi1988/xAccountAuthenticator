@@ -118,7 +118,7 @@ public class RetrofitHelperTubeless {
 
 
         @Override
-        public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+        public okhttp3.Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
             String host = this.host;
             if (host != null) {

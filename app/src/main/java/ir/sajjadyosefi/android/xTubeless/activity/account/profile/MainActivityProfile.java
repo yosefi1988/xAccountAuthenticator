@@ -286,7 +286,7 @@ public class MainActivityProfile extends TubelessTransparentStatusBarActivity im
     }
 
     private void getImageFromSevice() {
-        ir.sajjadyosefi.android.xTubeless.classes.model.network.request.accounting.LoginRequest request =
+        LoginRequest request =
                 new LoginRequest(Global.user.getUserName(), "" , DeviceUtil.GetAndroidId(context));
         retrofit2.Callback callback = new retrofit2.Callback() {
 

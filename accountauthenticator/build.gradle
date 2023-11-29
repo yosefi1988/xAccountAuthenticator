@@ -6,8 +6,8 @@ def final libGroupId = "ir.sajjadyosefi.libraries"
 def final lib_VersionName = "7.3.1"
 def final libversionCode = 1
 
-def githubProperties = new Properties()
-githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+//def githubProperties = new Properties()
+//githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 def getVersionName = { ->
     return "${lib_VersionName}"
 }
@@ -85,8 +85,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/yosefi1988/xaccountauthenticator")
             credentials {
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+//                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+//                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
             }
         }
     }
