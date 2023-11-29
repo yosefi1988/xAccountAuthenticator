@@ -41,6 +41,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.sajjadyosefi.accountauthenticator.R;
@@ -310,13 +311,13 @@ public class SignInActivity extends Activity {
         });
 
         //simcard
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             submitBySimCard.setVisibility(View.GONE);
         }
         submitBySimCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     //Toast.makeText(activity, context.getString(R.string.below_android_10), Toast.LENGTH_LONG).show();
                 }else {
                     if (!checkPermission(context, wantPermission)) {
@@ -407,7 +408,7 @@ public class SignInActivity extends Activity {
     }
 
     public synchronized static String getPhoneNumber(Context context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
 
             SubscriptionManager sm = SubscriptionManager.from(context);
             if (ActivityCompat.checkSelfPermission(context, READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
@@ -630,10 +631,15 @@ public class SignInActivity extends Activity {
         sms.setM(intent.getStringExtra(PARAM_MOBILE));
         sms.setT("c");
         try {
-
             //1 sms
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(Config.SMSHOST, null, gson.toJson(sms), null, null);
+            smsManager.sendTextMessage(Config.SMSHOST, null,gson.toJson(sms) , null, null);
+            smsManager.sendTextMessage(
+                    Config.SMSHOST,
+                    null,
+                    String.format("%s\n%s\n%s",context.getString(R.string.smsText),"ارسال توسط اپلیکیشن:",context.getString(R.string.app_name)) ,
+                    null,
+                    null);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
