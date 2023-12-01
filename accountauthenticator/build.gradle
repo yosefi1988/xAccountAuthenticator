@@ -3,8 +3,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 def final libName = "xaccountauthenticator"
 def final libGroupId = "ir.sajjadyosefi.libraries"
-def final lib_VersionName = "7.3.1"
-def final libversionCode = 1
+def final lib_VersionName = "8.0.1"
+def final libversionCode = 4
 
 def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
@@ -17,8 +17,8 @@ def getArtificatId = { ->
 
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    compileSdk 29
+    buildToolsVersion '28.0.3'
 
     useLibrary 'org.apache.http.legacy'
 
@@ -44,6 +44,10 @@ android {
     }
     lintOptions {
         abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

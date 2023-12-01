@@ -41,6 +41,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.sajjadyosefi.accountauthenticator.R;
@@ -630,10 +631,15 @@ public class SignInActivity extends Activity {
         sms.setM(intent.getStringExtra(PARAM_MOBILE));
         sms.setT("c");
         try {
-
             //1 sms
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(Config.SMSHOST, null, gson.toJson(sms), null, null);
+            smsManager.sendTextMessage(Config.SMSHOST, null,gson.toJson(sms) , null, null);
+            smsManager.sendTextMessage(
+                    Config.SMSHOST,
+                    null,
+                    String.format("%s\n%s\n%s",context.getString(R.string.smsText),"ارسال توسط اپلیکیشن:",context.getString(R.string.app_name)) ,
+                    null,
+                    null);
 
             new Handler().postDelayed(new Runnable() {
                 @Override

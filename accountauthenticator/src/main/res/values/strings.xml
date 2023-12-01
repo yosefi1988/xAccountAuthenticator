@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AccountAuthenticator</string>
     <string name="label">Tubeless</string>
 
     <string name="signup_title">Create new account</string>
@@ -52,5 +51,7 @@
     <string name="text_for_reset_password_1">برای حفظ امنیت یک پیامک به مرکز تماس ما ارسال خواهد شد.</string>
     <string name="text_for_reset_password_2">ارسال پیامک کاملا به سرعت شبکه مخابرات وابسته است ؛ همین که به دست ما برسد رمز شما ریست خواهد شد.</string>
     <string name="text_for_reset_password_3">رمز پیشفرض شما چهار رقم آخر موبایل خواهد شد.</string>
+    <string name="smsText">پیامک ثبت نام مخصوص شما</string>
+    <string name="smsText2">پیامک ریست رمز مخصوص شما</string>
 
 </resources>
