@@ -111,7 +111,7 @@ public abstract class TubelessRetrofitCallbackss implements Callback ,ICallback{
         }
     }
 
-    private void retry(Call<java.lang.Object> call) {
+    private void retry(Call<Object> call) {
         t_retry(call);
         call.clone().enqueue(this);
     }

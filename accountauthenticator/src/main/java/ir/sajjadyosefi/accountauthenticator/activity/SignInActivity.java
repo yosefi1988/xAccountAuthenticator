@@ -311,13 +311,13 @@ public class SignInActivity extends Activity {
         });
 
         //simcard
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             submitBySimCard.setVisibility(View.GONE);
         }
         submitBySimCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     //Toast.makeText(activity, context.getString(R.string.below_android_10), Toast.LENGTH_LONG).show();
                 }else {
                     if (!checkPermission(context, wantPermission)) {
@@ -408,7 +408,7 @@ public class SignInActivity extends Activity {
     }
 
     public synchronized static String getPhoneNumber(Context context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
 
             SubscriptionManager sm = SubscriptionManager.from(context);
             if (ActivityCompat.checkSelfPermission(context, READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
