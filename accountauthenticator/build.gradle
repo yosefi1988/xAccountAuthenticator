@@ -3,8 +3,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 def final libName = "xaccountauthenticator"
 def final libGroupId = "ir.sajjadyosefi.libraries"
-def final lib_VersionName = "8.0.1"
-def final libversionCode = 4
+def final lib_VersionName = "8.0.2"
+def final libversionCode = 5
 
 //def githubProperties = new Properties()
 //githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
