@@ -6,8 +6,9 @@ def final libGroupId = "ir.sajjadyosefi.libraries"
 def final lib_VersionName = "8.0.1"
 def final libversionCode = 4
 
-def githubProperties = new Properties()
-githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+
+//def githubProperties = new Properties()
+//githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 def getVersionName = { ->
     return "${lib_VersionName}"
 }
@@ -56,7 +57,9 @@ dependencies {
 
 //    implementation files('D:\\Projects\\Android repositories\\purchase-0.0.8-beta.aar')
 //    implementation files('D:\\Projects\\Android repositories\\purchase-0.0.10.aar')
-    implementation 'com.zarinpal:purchase:0.0.10'
+//    implementation 'com.zarinpal:purchase:0.0.10'
+
+
 
 
 //    implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -89,8 +92,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/yosefi1988/xaccountauthenticator")
             credentials {
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+//                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+//                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
             }
         }
     }
