@@ -4,8 +4,8 @@ apply plugin: 'com.android.application'
 
 //todo change version code before publish
 def final appNameAAA = 'authenticator'
-def final AAA_VersionName = "1.3.1"     //4 shahrivar
-def final AAA_VersionCode = 2
+def final AAA_VersionName = "2.0.0"     //4 shahrivar
+def final AAA_VersionCode = 3
 
 
 android {
