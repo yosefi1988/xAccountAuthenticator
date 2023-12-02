@@ -25,8 +25,8 @@ import ir.sajjadyosefi.android.xTubeless.R;
  * language : 0 fa , 1 en.
  */
 public class CustomEditText extends AppCompatEditText {
-//    public static final String FONT_IRANSANS_MOBILE_NORMAL_TTF = "fonts/IRANSansMobile_Normal.ttf";
-    public static final String FONT_IRANSANS_MOBILE_NORMAL_TTF = "fonts/byekan.ttf";
+    public static final String FONT_IRANSANS_MOBILE_NORMAL_TTF = "fonts/IRANSansMobile_Normal.ttf";
+//    public static final String FONT_IRANSANS_MOBILE_NORMAL_TTF = "fonts/byekan.ttf";
     static int flag;
     //    SqlEngine sqlEngine;
     Context context;

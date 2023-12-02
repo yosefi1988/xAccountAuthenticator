@@ -1,10 +1,21 @@
 package ir.sajjadyosefi.accountauthenticator.classes.exception;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.io.IOException;
+
+import ir.sajjadyosefi.accountauthenticator.R;
 
 
-public class TubelessException extends Exception{
+public class TubelessException extends IOException {
 
     public static final int TUBELESS_OPERATION_COMPLETE = 0;
     public static final int TUBELESS_OPERATION_NOT_COMPLETE = 10;
@@ -17,6 +28,7 @@ public class TubelessException extends Exception{
 
 
     public static final int PASSWORD_NOT_TRUE = -104;
+    public static final int PASSWORD_MOBILE_NOT_CONFIRMED = -3;
 
 
     public static final int TUBELESS_RESPONSE_BODY_IS_NULL = 2001;
@@ -24,6 +36,7 @@ public class TubelessException extends Exception{
     public static final int DEVICE_NOT_REGISTER = 2004;
 
 
+    public static final int Wallet_1 = -1;
     public static final int NATIONAL_CODE_NOT_TRUE = 1001;
     public static final int NAME_NOT_TRUE = 1002;
     public static final int FAMILY_NOT_TRUE = 1003;
@@ -72,6 +85,11 @@ public class TubelessException extends Exception{
 
     public TubelessException(int errorCode) {
         switch (errorCode){
+            case Wallet_1:{
+                message = "sajjad Error : have not wallet.";
+                break;
+            }
+
             case NATIONAL_CODE_NOT_TRUE:{
                 message = "sajjad Error : National Code Not true.";
                 break;
@@ -118,6 +136,11 @@ public class TubelessException extends Exception{
                 break;
             }
 
+            case PASSWORD_MOBILE_NOT_CONFIRMED:{
+                message = "هنوز موبایل تایید نشده.";
+                break;
+            }
+
             default:{
                 message = "sajjad Error";
             }
@@ -125,5 +148,20 @@ public class TubelessException extends Exception{
         code = errorCode;
     }
 
+    public static void ShowSheetDialogMessage(Context context, BottomSheetDialog dialog, String title , String message , View.OnClickListener onClickListener) {
+        try {
+            View view = ((Activity) context).getLayoutInflater().inflate(R.layout.bottom_sheet_dialog_connection_lost, null);
+            dialog.setContentView(view);
+            Button buttonTryAgain = view.findViewById(R.id.buttonTryAgain);
+            TextView textViewMessage = view.findViewById(R.id.textView);
+            buttonTryAgain.setText(message);
+            textViewMessage.setText(title);
+            buttonTryAgain.setOnClickListener(onClickListener);
+            dialog.show();
+        }catch (Exception ex){
 
+            int a = 5 ;
+            a ++;
+        }
+    }
 }

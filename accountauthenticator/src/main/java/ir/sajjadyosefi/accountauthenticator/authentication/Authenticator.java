@@ -14,14 +14,14 @@ import android.util.Log;
 import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.classes.util;
-import ir.sajjadyosefi.accountauthenticator.model.LoginRequest;
-import ir.sajjadyosefi.accountauthenticator.model.User;
+import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
+import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 
 import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
-import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS;
-import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS_LABEL;
-import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_READ_ONLY;
-import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_READ_ONLY_LABEL;
+import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER;
+import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER_LABEL;
+import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_NORMAL_USER;
+import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_NORMAL_USER_LABEL;
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 
 public class Authenticator extends AbstractAccountAuthenticator {
@@ -39,7 +39,8 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
 //        final Intent intent = new Intent(mContext, AuthenticatorActivity.class);
         final Intent intent = new Intent(mContext, SignInActivity.class);
-        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, accountType);
+//        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, accountType);
+        intent.putExtra(AccountGeneral.ACCOUNT_TYPE, accountType);
         intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, authTokenType);
         intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
@@ -57,7 +58,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
         // If the caller requested an authToken type we don't support, then
         // return an error
-        if (!authTokenType.equals(AUTHTOKEN_TYPE_READ_ONLY) && !authTokenType.equals(AUTHTOKEN_TYPE_FULL_ACCESS)) {
+        if (!authTokenType.equals(AUTHTOKEN_TYPE_NORMAL_USER) && !authTokenType.equals(AUTHTOKEN_TYPE_ADMIN_USER)) {
             final Bundle result = new Bundle();
             result.putString(AccountManager.KEY_ERROR_MESSAGE, "invalid authTokenType");
             return result;
@@ -78,9 +79,9 @@ public class Authenticator extends AbstractAccountAuthenticator {
                 try {
                     Log.d("TubelessSajjad", TAG + "> re-authenticating with the existing password");
 
-                    LoginRequest loginRequest = new LoginRequest("userNamee",password, util.GetAndroidId(mContext));
+                    ALoginRequest ALoginRequest = new ALoginRequest("userNamee",password, util.GetAndroidId(mContext));
 
-                    User user = sServerAuthenticate.userSignIn(loginRequest);
+                    ALoginResponse user = sServerAuthenticate.userSignIn(ALoginRequest);
 
                     authToken = user.getAuthtoken();
 
@@ -106,7 +107,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
         final Intent intent = new Intent(mContext, SignInActivity.class);
 
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, account.type);
+        intent.putExtra(AccountGeneral.ACCOUNT_TYPE, account.type);
         intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, authTokenType);
         intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_NAME, account.name);
         final Bundle bundle = new Bundle();
@@ -116,10 +117,10 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
     @Override
     public String getAuthTokenLabel(String authTokenType) {
-        if (AUTHTOKEN_TYPE_FULL_ACCESS.equals(authTokenType))
-            return AUTHTOKEN_TYPE_FULL_ACCESS_LABEL;
-        else if (AUTHTOKEN_TYPE_READ_ONLY.equals(authTokenType))
-            return AUTHTOKEN_TYPE_READ_ONLY_LABEL;
+        if (AUTHTOKEN_TYPE_ADMIN_USER.equals(authTokenType))
+            return AUTHTOKEN_TYPE_ADMIN_USER_LABEL;
+        else if (AUTHTOKEN_TYPE_NORMAL_USER.equals(authTokenType))
+            return AUTHTOKEN_TYPE_NORMAL_USER_LABEL;
         else
             return authTokenType + " (Label)";
     }

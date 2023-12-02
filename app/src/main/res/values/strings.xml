@@ -6,7 +6,6 @@
 
     <string name="app_price">1000</string>
     <string name="app_pardakht_text" formatted="false">با پرداخت مبلغ %s تومان به صورت نامحدود از مطالب این نرم افزار استفاده کنید.\nقسمتی از این مبلغ صرف ایتام خواهد شد.\nدر صورت عدم تمایل به پرداخت مبلغ ، میتوانید تمام مطالب را به صورت رایگان در سایت ما مشاهده کنید :\n\n %s</string>
-    <string name="app_web_address">http://owl.sajjadyosefi.ir</string>
     <string name="pardakht">پرداخت</string>
     <string name="cancelAndExit">انصراف و خروج</string>
     <string name="internetConnectionForPaymentErrorText">برای انجام عملیات پرداخت می بایست به اینترنت متصل باشید</string>
@@ -187,6 +186,7 @@
     <string name="regit">ثبت می کنم</string>
     <string name="addCar">افزودن اتوموبیل</string>
 
+<!--    <string name="app_name">authenticator-X</string>-->
     <string name="app_name_tablet">Bottom Navigation (Tablet)</string>
     <string name="app_name_custom_badges">Custom Badges</string>
     <string name="app_name_no_coordinator">No Coordinator</string>
@@ -434,4 +434,9 @@
     <string name="txtPriceComment">جهت بهره مندی از اطلاعات این صفحه می بایست آن را تایید نمایید</string>
     <string name="toman">تومان</string>
     <string name="userIsNull">"user null "</string>
+
+
+    <string name="zarinpalpayment">zarinpalpayment10</string>
+    <string name="schemezarinpalpayment">return10</string>
+
 </resources>

@@ -6,13 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen.SplashScreen">
 
+
     <ImageView
         android:id="@+id/ivVisableBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/jpg_back2"  />
-
+        android:src="@drawable/jpg_back2" />
 
     <TextView
         android:id="@+id/textView4"
@@ -20,10 +20,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:textSize="50dp"
 
         android:textColor="@android:color/white"
-        android:text="authenticator" />
+        android:text="@string/app_name" />
 
     <TextView
         android:id="@+id/textViewVersionName"
@@ -31,6 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:text="account authenticator"/>
+        android:text="@string/app_name"/>
 
 </RelativeLayout>

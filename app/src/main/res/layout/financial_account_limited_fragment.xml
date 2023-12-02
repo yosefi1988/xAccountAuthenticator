@@ -114,8 +114,7 @@
                     android:background="@drawable/btn_search"
                     android:text="@string/pardakht_rule"
                     android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp" />
+                    android:textColor="#fff" />
 
                 <Button
                     android:id="@+id/button_back"
@@ -126,8 +125,7 @@
                     android:text="@string/back"
                     android:textAllCaps="false"
                     android:textColor="#fff"
-                    android:visibility="gone"
-                    android:textSize="18sp" />
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>

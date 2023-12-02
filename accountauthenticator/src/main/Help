@@ -1,0 +1,9 @@
+1- copy sdk724 to root of project
+2- add aar lib to project
+3- add this code to root gradle:
+    dependencies {
+        implementation files('D:\\Projects\\Android repositories\\accountauthenticator-release.aar')
+        implementation 'com.zarinpal:purchase:0.0.10'
+    }
+
+4- sync gradle

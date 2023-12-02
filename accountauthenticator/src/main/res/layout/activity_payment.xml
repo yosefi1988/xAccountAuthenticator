@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fb_background_color"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:fitsSystemWindows="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:activity="ir.moslem_deris.apps.zarinpal_pay_android.MainActivity">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="شارژ حساب کاربری"
+                android:textColor="#4267b2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:layout_marginRight="10dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="5dp"
+                android:text="@string/phoneNumber" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/editTextPhone"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:layout_marginRight="10dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="5dp"
+                android:text="مبلغ"/>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextAmount"
+                android:layout_gravity="right"
+                android:inputType="number"
+                android:ems="10"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:layout_marginRight="10dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="5dp"
+                android:text="@string/Discription" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextDiscription"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnPay"
+            android:text="پــــــــــــــــــــرداخت"
+            style="@style/AppTheme.DayButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"  />
+        <Button
+            style="@style/AppTheme.DayButton"
+            android:id="@+id/buttonBack"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/back"  />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+

@@ -27,6 +27,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/tubelessColor_blue_02</item>
         <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/iransans</item>
+        <item name="android:fontFamily">@font/iransans</item>
+
     </style>
 
     <style name="AppTheme.DayTextViewBigTitle" parent="AppTheme.DayTextView">
@@ -51,6 +54,9 @@
         <item name="android:imeOptions">flagNoExtractUi</item>
         <item name="android:textColorHint">@color/day_white_hint_text</item>
         <item name="android:textSize">16dp</item>
+
+        <item name="fontFamily">@font/iransans</item>
+        <item name="android:fontFamily">@font/iransans</item>
     </style>
 
     <style name="AppTheme.DayButton" parent="Base.Widget.AppCompat.Button">
@@ -61,6 +67,9 @@
         <item name="android:background">@drawable/btn_search</item>
         <item name="android:textSize">18dp</item>
         <item name="android:textAllCaps">false</item>
+
+        <item name="fontFamily">@font/iransans</item>
+        <item name="android:fontFamily">@font/iransans</item>
     </style>
 
 

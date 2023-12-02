@@ -30,7 +30,6 @@ implementation 'com.github.yosefi1988:xAccountAuthenticator:1.3.0'
 4-
 ```
     public static final String ACCOUNT_TYPE = "ir.sajjadyosefi.android";
-    public static final String AUTHTOKEN_TYPE_FULL_ACCESS = "Full access";
     private static int LOGIN_REQUEST_CODE = 101 ;
 
     @Override
@@ -84,3 +83,45 @@ private long userId;
 	private String profileImage;
 	public long balanse;
 ```
+_________________________________________________________________________________
+
+--payment
+1- pay method 1
+    //payment = charge by method 
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 2);
+        bundle.putInt("amount", 1000);
+        bundle.putString("metaData", "sajjad 1000");
+        Intent intent = PaymentActivity.getIntent(this, bundle); 
+        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+
+2- pay method 2
+        Bundle bundle = new Bundle();
+        bundle.putInt("type" , 1);
+        Intent intent = SignInActi
+        intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+        startActivityForResult(intent, 1000);
+
+
+3- get pay result
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Intent x;
+        if (requestCode == 661) {
+            if (PaymentActivity.isPaymentSuccess()) {
+                x = PaymentActivity.getPaymentIntent();
+
+                Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
+
+            }else {
+                Toast.makeText(context,"pay not ok" ,Toast.LENGTH_LONG).show();
+            }
+
+            PaymentActivity.PaymentDone();
+        }
+    }

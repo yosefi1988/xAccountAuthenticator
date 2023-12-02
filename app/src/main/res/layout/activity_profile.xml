@@ -102,8 +102,7 @@
             android:background="@drawable/btn_search"
             android:text="@string/sign_out"
             android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textColor="#fff"  />
 
         <Button
             android:id="@+id/buttonBack"
@@ -113,8 +112,7 @@
             android:background="@drawable/btn_search"
             android:text="@string/back"
             android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textColor="#fff"  />
 
     </LinearLayout>
 

@@ -23,8 +23,8 @@ import ir.sajjadyosefi.android.xTubeless.R;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+//import com.crashlytics.android.Crashlytics;
+//import io.fabric.sdk.android.Fabric;
 
 import static ir.sajjadyosefi.android.xTubeless.classes.StaticValue.NOT_LOGN_USER;
 
@@ -47,8 +47,8 @@ public abstract class TubelessActivity extends AppCompatActivity {
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 
-        Crashlytics.setUserIdentifier((Global.user == null ? NOT_LOGN_USER : Global.user.getUserId()) + "");
-        Fabric.with(this, new Crashlytics());
+//        Crashlytics.setUserIdentifier((Global.user == null ? NOT_LOGN_USER : Global.user.getUserId()) + "");
+//        Fabric.with(this, new Crashlytics());
         progressDialog.setCancelable(false);
     }
 

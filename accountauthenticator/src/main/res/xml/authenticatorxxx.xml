@@ -3,5 +3,7 @@
                        android:accountType="ir.sajjadyosefi.android"
                        android:icon="@drawable/png_icon1"
                        android:smallIcon="@drawable/png_icon1"
-                       android:label="@string/label"
-                       android:accountPreferences="@xml/prefs"/>
+                       android:label="@string/label" />
+
+
+<!--    android:accountPreferences="@xml/prefs"-->

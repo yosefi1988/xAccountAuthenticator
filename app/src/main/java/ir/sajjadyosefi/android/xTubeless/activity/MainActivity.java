@@ -4,10 +4,8 @@ import android.accounts.AccountManager;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,36 +26,29 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.zarinpal.ewallets.purchase.OnCallbackRequestPaymentListener;
-import com.zarinpal.ewallets.purchase.PaymentRequest;
-import com.zarinpal.ewallets.purchase.ZarinPal;
 
 import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.ChangePasswordActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.ResetPasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
-import ir.sajjadyosefi.android.xTubeless.BuildConfig;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.Adapter.FirstFragmentsAdapter;
 import ir.sajjadyosefi.android.xTubeless.activity.account.profile.MainActivityProfile;
 import ir.sajjadyosefi.android.xTubeless.activity.common.ContactUsActivity;
 import ir.sajjadyosefi.android.xTubeless.activity.common.WebViewActivity;
-import ir.sajjadyosefi.android.xTubeless.classes.StaticValue;
 import ir.sajjadyosefi.android.xTubeless.classes.Validator;
 
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
-import ir.sajjadyosefi.android.xTubeless.utility.DialogUtil;
 import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
-import it.sephiroth.android.library.bottomnavigation.FloatingActionButtonBehavior;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
 import static android.util.Log.VERBOSE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER;
+import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_OBJECT;
 import static ir.sajjadyosefi.android.xTubeless.networkLayout.networkLayout.Url.Telegram;
 
 @TargetApi (Build.VERSION_CODES.KITKAT_WATCH)
@@ -66,6 +57,7 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
     //val
     private static int LOGIN_REQUEST_CODE = 101 ;
     private static int OPEN_PROFILE_REQUEST_CODE = 102 ;
+    private static int CHANGE_PASSWORD_REQUEST_CODE = 103;
 
 
     private BottomNavigation mBottomNavigation;
@@ -82,9 +74,21 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == LOGIN_REQUEST_CODE){
-                if (data.hasExtra(PARAM_USER)){
+                if (data.hasExtra(PARAM_USER_OBJECT)){
                     Gson gson = new Gson();
-                    User user = gson.fromJson(data.getExtras().getString(PARAM_USER),User.class);
+                    User user = gson.fromJson(data.getExtras().getString(PARAM_USER_OBJECT),User.class);
+                    if(savedToDataBase(user)){
+                        if (Global.user != null && Global.user.isAdmin()) {
+                            updatedrawableMenuItems();
+                        }
+                    }
+                    Toast.makeText(getContext(),getContext().getString(R.string.welcome) ,Toast.LENGTH_LONG).show();
+                }
+            }
+            if (requestCode == CHANGE_PASSWORD_REQUEST_CODE){
+                if (data.hasExtra(PARAM_USER_OBJECT)){
+                    Gson gson = new Gson();
+                    User user = gson.fromJson(data.getExtras().getString(PARAM_USER_OBJECT),User.class);
                     if(savedToDataBase(user)){
                         if (Global.user != null && Global.user.isAdmin()) {
                             updatedrawableMenuItems();
@@ -148,6 +152,9 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
         }
         initializeBottomNavigation(savedInstanceState);
         initializeUI(savedInstanceState);
+
+
+
     }
 
     @Override
@@ -157,6 +164,13 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
             drawer_layout.openDrawer(Gravity.LEFT);
             setFirstRunIsDone();
         }
+
+
+
+
+
+
+
     }
     private void drawableMenu(Toolbar toolbar) {
 
@@ -191,12 +205,38 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
                     Bundle bundle = new Bundle();
                     bundle.putInt("type" , 1);
                     Intent intent = SignInActivity.getIntent(getContext(),bundle);
-                    intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
-                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS);
+                    //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE); todo not need
+                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
                     intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
                     //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
                     bundle.putParcelable(AccountManager.KEY_INTENT, intent);
                     getActivity().startActivityForResult(intent, LOGIN_REQUEST_CODE);
+
+                }else  if (id == R.id.nav_changepassword) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("type" , 1);
+                    Intent intent = ChangePasswordActivity.getIntent(getContext(),bundle);
+                    //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE); todo not need
+                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+                    intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+                    intent.putExtra(AuthenticatorActivity.PARAM_USER_CODE, "110015" );//Global.user AccountGeneral.getUserCode());
+                    //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+                    bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                    getActivity().startActivityForResult(intent, CHANGE_PASSWORD_REQUEST_CODE);
+
+                }else  if (id == R.id.nav_forgetpassword) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("type" , 1);
+                    Intent intent = ResetPasswordActivity.getIntent(getContext(),bundle);
+
+                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+                    intent.putExtra(AuthenticatorActivity.PARAM_USER_CODE, "110015" );
+                    intent.putExtra(AuthenticatorActivity.PARAM_MOBILE, "09123678522");
+
+                    bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                    getActivity().startActivityForResult(intent, CHANGE_PASSWORD_REQUEST_CODE);
 
                 } else if (id == R.id.nav_contact_us) {
 

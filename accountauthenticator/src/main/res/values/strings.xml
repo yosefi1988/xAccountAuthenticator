@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AccountAuthenticator</string>
     <string name="label">Tubeless</string>
 
     <string name="signup_title">Create new account</string>
@@ -21,5 +20,38 @@
     <string name="error_message_500">مشکلی در سرور به وجود آمد. کمی بعد تلاش کنید.</string>
     <string name="server_not_response">متاسفانه سرور پاسخی نداد</string>
     <string name="loginbySaman">ورود با سامان</string>
+    <string name="codeMelli">کد ملی</string>
+    <string name="comming_soon">به زودی...</string>
+    <string name="phoneNumber">شماره تلفن</string>
+    <string name="Discription">توضیحات (اختیاری)</string>
+    <string name="back">بازگشت</string>
+    <string name="new_yafte_new_yafte_inserted">با موفقیت انجام شد</string>
+    <string name="tray_again">دوباره تلاش کنید</string>
+    <string name="chargeWallet">شارژ حساب</string>
+
+
+
+    <string name="zarinpalpayment">zarinpalpayment10</string>
+    <string name="schemezarinpalpayment">return10</string>
+    <string name="text_for_login_by_mobile_number_1">برای تایید شماره موبایل یک پیامک به مرکز تماس ما ارسال خواهد شد. برای این کار شما باید دسترسی لازم را به اپلیکیشن بدهید.</string>
+    <string name="text_for_login_by_mobile_number_2">توجه کنید (اگر چند سیم کارت دارید): از سیمکارت پیشفرض استفاده خواهد شد و باید شماره موبایل وارد شده همان سیم کارت پیشفرض شما باشد.</string>
+    <string name="text_for_login_by_mobile_number_3">نکته:متن پیامک ارسالی را در قسمت پیام ها خواهید دید.</string>
+    <string name="accept_and_countiue">تایید و ادامه</string>
+    <string name="cancel">انصراف</string>
+    <string name="changePassword">تغییر رمزعبور</string>
+    <string name="help">راهنما:</string>
+    <string name="helpText">اگر رمز خود را فراموش کرده اید این صفحه رمز شما را به رمز پیشفرض تغییر خواهد داد.</string>
+    <string name="helpText2">با فشار دادن دکمه زیر یک پیامک به مرکز تماس ما ارسال خواهد شد ,در صورتی که شماره شما (شماره ای که با آن پیام ارسال می شود) در سیستم ما ثبت شده باشد, ما رمز شما را به رمز پیشفرض تغییر خواهیم داد.</string>
+    <string name="helpText3">با این کار ، رمز شما به چهار رقم آخر شماره موبایلتان تغییر خواهد کرد. پیشنهاد می گردد بعد از ورود به حساب کاربری رمز خود را تغییر دهید.</string>
+    <string name="old_pass">رمزعبور جاری</string>
+    <string name="new_pass">رمزعبور جدید</string>
+    <string name="new_pass_2">تکرار رمزعبور جدید</string>
+    <string name="text_for_login_by_mobile_number_4">ارسال پیامک کاملا به سرعت شبکه مخابرات وابسته است ؛ همین که به دست ما برسد ، موبایل شما تایید خواهد شد.</string>
+    <string name="forgetPassword">فراموشی رمزعبور</string>
+    <string name="text_for_reset_password_1">برای حفظ امنیت یک پیامک به مرکز تماس ما ارسال خواهد شد.</string>
+    <string name="text_for_reset_password_2">ارسال پیامک کاملا به سرعت شبکه مخابرات وابسته است ؛ همین که به دست ما برسد رمز شما ریست خواهد شد.</string>
+    <string name="text_for_reset_password_3">رمز پیشفرض شما چهار رقم آخر موبایل خواهد شد.</string>
+    <string name="smsText">پیامک ثبت نام مخصوص شما</string>
+    <string name="smsText2">پیامک ریست رمز مخصوص شما</string>
 
 </resources>

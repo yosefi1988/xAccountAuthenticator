@@ -10,10 +10,10 @@ public class Validation {
 
 
     public static void main(String[] args) {
-        System.out.println(validatePhoneNumber("09123678522"));
-        System.out.println(validatePhoneNumber("09999816652"));
-        System.out.println(validatePhoneNumber("09354226320"));
-        System.out.println(validatePhoneNumber("09198166520"));
+//        System.out.println(validatePhoneNumber("09123678522"));
+//        System.out.println(validatePhoneNumber("09999816652"));
+//        System.out.println(validatePhoneNumber("09354226320"));
+//        System.out.println(validatePhoneNumber("09198166520"));
     }
 
     public static boolean validatePhoneNumber(String phoneNo) {
