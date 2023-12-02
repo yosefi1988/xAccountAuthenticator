@@ -3,8 +3,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 def final libName = "xaccountauthenticator"
 def final libGroupId = "ir.sajjadyosefi.libraries"
-def final lib_VersionName = "8.0.2"
-def final libversionCode = 5
+def final lib_VersionName = "8.0.1"
+def final libversionCode = 4
+
 
 //def githubProperties = new Properties()
 //githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
@@ -56,7 +57,9 @@ dependencies {
 
 //    implementation files('D:\\Projects\\Android repositories\\purchase-0.0.8-beta.aar')
 //    implementation files('D:\\Projects\\Android repositories\\purchase-0.0.10.aar')
-    implementation 'com.zarinpal:purchase:0.0.10'
+//    implementation 'com.zarinpal:purchase:0.0.10'
+
+
 
 
 //    implementation 'androidx.appcompat:appcompat:1.1.0'

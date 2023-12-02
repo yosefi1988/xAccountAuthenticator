@@ -157,9 +157,11 @@ public class SplashScreen extends AppCompatActivity  {
                 flag[0] = isSuccess;
 
                 Bundle bundle = intent.getExtras();
-                String config = bundle.getString(PARAM_CONFIG);
-                String error = bundle.getString(KEY_ERROR_MESSAGE);
-                AConfigResponse responseX2 = new Gson().fromJson(config, AConfigResponse.class);
+                if(bundle != null) {
+                    String config = bundle.getString(PARAM_CONFIG);
+                    String error = bundle.getString(KEY_ERROR_MESSAGE);
+                    AConfigResponse responseX2 = new Gson().fromJson(config, AConfigResponse.class);
+                }
             }
         });
 

@@ -15,10 +15,11 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
-import com.zarinpal.ewallets.purchase.OnCallbackRequestPaymentListener;
-import com.zarinpal.ewallets.purchase.OnCallbackVerificationPaymentListener;
-import com.zarinpal.ewallets.purchase.PaymentRequest;
-import com.zarinpal.ewallets.purchase.ZarinPal;
+//import com.zarinpal.ewallets.purchase.OnCallbackRequestPaymentListener;
+//import com.zarinpal.ewallets.purchase.OnCallbackVerificationPaymentListener;
+//import com.zarinpal.ewallets.purchase.PaymentRequest;
+//import com.zarinpal.ewallets.purchase.ZarinPal;
+
 
 import ir.sajjadyosefi.accountauthenticator.R;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
@@ -93,36 +94,36 @@ public class PaymentActivity extends Activity {
         //
         context = this;
         Uri data2 = getIntent().getData();
-        ZarinPal.getPurchase(context).verificationPayment(data2, new OnCallbackVerificationPaymentListener() {
-            @Override
-            public void onCallbackResultVerificationPayment(boolean isPaymentSuccess, String refID, PaymentRequest paymentRequest) {
-
-                if(isPaymentSuccess){
-                    Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
-                    paySuccess = true;
-//                    AWalletChargeRequest req = new AWalletChargeRequest(usercode, amount, refID, phone+ "|" + discription);
-                    AWalletChargeRequest req = new AWalletChargeRequest(amount + "0"); // تبدیل به ریال
-                    req.setMetaData(discription);
-                    chargeAccount(req);
-                }else {
-                    //not ok
-//                    show message refID
-                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
-                    paySuccess = false;
-
-                    if (paymentIntent.hasExtra("type")){
-//                        if (paymentIntent.getIntExtra("type",1) == 2){
-                            setResult(Activity.RESULT_CANCELED);
-                            finish();
-//                        }
-                    }
-
-
-                    //
-
-                }
-            }
-        });
+//        ZarinPal.getPurchase(context).verificationPayment(data2, new OnCallbackVerificationPaymentListener() {
+//            @Override
+//            public void onCallbackResultVerificationPayment(boolean isPaymentSuccess, String refID, PaymentRequest paymentRequest) {
+//
+//                if(isPaymentSuccess){
+//                    Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
+//                    paySuccess = true;
+////                    AWalletChargeRequest req = new AWalletChargeRequest(usercode, amount, refID, phone+ "|" + discription);
+//                    AWalletChargeRequest req = new AWalletChargeRequest(amount + "0"); // تبدیل به ریال
+//                    req.setMetaData(discription);
+//                    chargeAccount(req);
+//                }else {
+//                    //not ok
+////                    show message refID
+//                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
+//                    paySuccess = false;
+//
+//                    if (paymentIntent.hasExtra("type")){
+////                        if (paymentIntent.getIntExtra("type",1) == 2){
+//                            setResult(Activity.RESULT_CANCELED);
+//                            finish();
+////                        }
+//                    }
+//
+//
+//                    //
+//
+//                }
+//            }
+//        });
 
 
         if (paymentIntent != null) {
@@ -203,29 +204,29 @@ public class PaymentActivity extends Activity {
     }
 
     private void payment(long amount,Context context) {
-        ZarinPal purches = ZarinPal.getPurchase(context);
-        PaymentRequest payment = ZarinPal.getPaymentRequest();
-
-        payment.setMerchantID("e8a913e8-f089-11e6-8dec-005056a205be");
-        payment.setAmount(amount);
-        payment.setDescription(AccountGeneral.getAppName());
-        payment.setCallbackURL(String.format("%s://%s",AccountGeneral.getSchemezarinpalpayment(),AccountGeneral.getZarinpalpayment()));
-//        MainActivity.payType = 100 ;
-
-        purches.startPayment(payment, new OnCallbackRequestPaymentListener() {
-            @Override
-            public void onCallbackResultPaymentRequest(int status, String authority, Uri paymentGatewayUri, Intent intent) {
-
-                if (status == 100){
-                    //ok
-                    startActivity(intent);
-                }else {
-//                    error in payment
-//                    ((TubelessActivity)context).progressDialog.hide();
-                }
-
-            }
-        });
+//        ZarinPal purches = ZarinPal.getPurchase(context);
+//        PaymentRequest payment = ZarinPal.getPaymentRequest();
+//
+//        payment.setMerchantID("e8a913e8-f089-11e6-8dec-005056a205be");
+//        payment.setAmount(amount);
+//        payment.setDescription(AccountGeneral.getAppName());
+//        payment.setCallbackURL(String.format("%s://%s",AccountGeneral.getSchemezarinpalpayment(),AccountGeneral.getZarinpalpayment()));
+////        MainActivity.payType = 100 ;
+//
+//        purches.startPayment(payment, new OnCallbackRequestPaymentListener() {
+//            @Override
+//            public void onCallbackResultPaymentRequest(int status, String authority, Uri paymentGatewayUri, Intent intent) {
+//
+//                if (status == 100){
+//                    //ok
+//                    startActivity(intent);
+//                }else {
+////                    error in payment
+////                    ((TubelessActivity)context).progressDialog.hide();
+//                }
+//
+//            }
+//        });
     }
 
     @Override
