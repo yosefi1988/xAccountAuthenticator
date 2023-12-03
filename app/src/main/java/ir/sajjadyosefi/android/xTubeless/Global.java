@@ -21,7 +21,6 @@ public class Global extends MultiDexApplication {
     public static User user = null;
     //_________________________________
 
-
     public static RetrofitHelperTubeless apiManagerTubeless;
 
 
