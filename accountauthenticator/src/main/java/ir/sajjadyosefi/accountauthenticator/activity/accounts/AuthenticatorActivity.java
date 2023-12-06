@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.accountauthenticator.activity;
+package ir.sajjadyosefi.accountauthenticator.activity.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 import ir.sajjadyosefi.accountauthenticator.R;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignUpActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.util;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;

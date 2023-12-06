@@ -1,24 +1,15 @@
-package ir.sajjadyosefi.accountauthenticator.activity;
+package ir.sajjadyosefi.accountauthenticator.activity.accounts;
 
-import android.accounts.AccountManager;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
-import android.provider.Telephony;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -30,19 +21,13 @@ import com.google.gson.Gson;
 import ir.sajjadyosefi.accountauthenticator.R;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.Config;
-import ir.sajjadyosefi.accountauthenticator.classes.SAccounts;
-import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
-import ir.sajjadyosefi.accountauthenticator.classes.util;
 import ir.sajjadyosefi.accountauthenticator.model.ASMS;
-import ir.sajjadyosefi.accountauthenticator.model.request.AChangePasswordRequest;
-import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.SEND_SMS;
-import static android.provider.Telephony.Sms.getDefaultSmsPackage;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_AUTH_TYPE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_MOBILE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_CODE;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.ARG_AUTH_TYPE;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_MOBILE;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_CODE;
 
 public class ResetPasswordActivity extends Activity {
 

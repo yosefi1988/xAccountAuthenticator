@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.accountauthenticator.activity;
+package ir.sajjadyosefi.accountauthenticator.activity.accounts;
 
 import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
@@ -24,15 +24,15 @@ import ir.sajjadyosefi.accountauthenticator.model.request.AChangePasswordRequest
 import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 
 import static android.Manifest.permission.READ_PHONE_STATE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_ACCOUNT_NAME;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_AUTH_TYPE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_CODE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_NAME;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_OBJECT;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_PASS;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_TYPE;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.ARG_ACCOUNT_NAME;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.ARG_AUTH_TYPE;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.KEY_ERROR_MESSAGE;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_CODE;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_NAME;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_OBJECT;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_PASS;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_TYPE;
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 import static ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException.TUBELESS_PASSWORD_IS_EMPTY;
 

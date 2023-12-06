@@ -11,8 +11,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.classes.util;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;

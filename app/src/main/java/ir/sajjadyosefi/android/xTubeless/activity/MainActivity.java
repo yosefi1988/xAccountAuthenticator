@@ -30,10 +30,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.ChangePasswordActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.ResetPasswordActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.ChangePasswordActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.ResetPasswordActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.Global;
@@ -48,7 +48,7 @@ import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
 import static android.util.Log.VERBOSE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_OBJECT;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_OBJECT;
 import static ir.sajjadyosefi.android.xTubeless.networkLayout.networkLayout.Url.Telegram;
 
 @TargetApi (Build.VERSION_CODES.KITKAT_WATCH)

@@ -5,10 +5,10 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.os.Bundle;
 
-import ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_PASS;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_PASS;
 
 public class SAccounts {
 

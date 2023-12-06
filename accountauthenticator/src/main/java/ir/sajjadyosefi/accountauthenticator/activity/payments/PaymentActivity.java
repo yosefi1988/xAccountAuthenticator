@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.accountauthenticator.activity;
+package ir.sajjadyosefi.accountauthenticator.activity.payments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
@@ -22,7 +21,6 @@ import com.google.gson.Gson;
 
 
 import ir.sajjadyosefi.accountauthenticator.R;
-import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;

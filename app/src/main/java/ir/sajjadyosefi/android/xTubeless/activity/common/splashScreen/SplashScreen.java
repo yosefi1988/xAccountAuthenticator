@@ -1,11 +1,9 @@
 package ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,29 +12,21 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.common.internal.GmsLogger;
 import com.google.gson.Gson;
 
-import ir.sajjadyosefi.accountauthenticator.activity.PaymentActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.SignInActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.payments.PaymentActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignInActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegisterRequest;
-import ir.sajjadyosefi.accountauthenticator.classes.ITransactionsListRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
-import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionListRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
-import ir.sajjadyosefi.accountauthenticator.model.response.ATransactionListResponse;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.accountauthenticator.classes.SAccounts;
 import ir.sajjadyosefi.android.xTubeless.activity.MainActivity;
-import ir.sajjadyosefi.android.xTubeless.activity.MainTestActivity;
-import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.KEY_ERROR_MESSAGE;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_CONFIG;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_TRANSACTION_LIST;
-import static ir.sajjadyosefi.accountauthenticator.activity.AuthenticatorActivity.PARAM_USER_OBJECT;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.KEY_ERROR_MESSAGE;
+import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_CONFIG;
 
 //mvp
 public class SplashScreen extends AppCompatActivity  {
