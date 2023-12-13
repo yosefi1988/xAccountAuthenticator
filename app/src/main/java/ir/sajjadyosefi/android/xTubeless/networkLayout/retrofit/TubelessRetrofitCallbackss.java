@@ -1,11 +1,7 @@
 package ir.sajjadyosefi.android.xTubeless.networkLayout.retrofit;
 
 import android.content.Context;
-import android.os.Handler;
-import android.view.View;
-import android.widget.ProgressBar;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.internal.Primitives;
@@ -13,7 +9,7 @@ import com.google.gson.internal.Primitives;
 import java.lang.reflect.Type;
 
 import ir.sajjadyosefi.android.xTubeless.classes.model.exception.TubelessException;
-import ir.sajjadyosefi.android.xTubeless.classes.model.response.ServerResponseBase;
+import ir.sajjadyosefi.android.xTubeless.classes.model.network.response.ServerResponseBase;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

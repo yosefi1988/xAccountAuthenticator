@@ -113,11 +113,11 @@
         <Button
             android:id="@+id/btnPay"
             android:text="پــــــــــــــــــــرداخت"
-            style="@style/AppTheme.DayButton"
+            style="@style/Style.Button.AAASDK"
             android:layout_width="0dp"
             android:layout_weight="1"  />
         <Button
-            style="@style/AppTheme.DayButton"
+            style="@style/Style.Button.AAASDK"
             android:id="@+id/buttonBack"
             android:layout_width="0dp"
             android:layout_weight="1"

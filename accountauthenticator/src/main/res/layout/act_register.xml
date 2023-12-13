@@ -51,7 +51,7 @@
         <Button
             android:id="@+id/submit"
             android:text="@string/login"
-            style="@style/AppTheme.DayButton" />
+            style="@style/Style.Button.AAASDK" />
 
         <TextView
             style="@style/AppTheme.DayTextView"
@@ -64,14 +64,14 @@
         <Button
             android:id="@+id/submitBySimCard"
             android:text="@string/simcart"
-            style="@style/AppTheme.DayButton" />
+            style="@style/Style.Button.AAASDK" />
 
         <TextView android:id="@+id/alreadyMember"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:gravity="center"
-            style="@style/AppTheme.DayButton"
+            style="@style/Style.Button.AAASDK"
             android:text="Already a member?"/>
 
     </LinearLayout>

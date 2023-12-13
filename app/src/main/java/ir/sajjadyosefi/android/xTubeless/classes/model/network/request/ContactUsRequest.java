@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.android.xTubeless.classes.model.request;
+package ir.sajjadyosefi.android.xTubeless.classes.model.network.request;
 
 
 import ir.sajjadyosefi.android.xTubeless.classes.StaticValue;

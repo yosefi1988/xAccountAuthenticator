@@ -41,7 +41,7 @@ import ir.sajjadyosefi.android.xTubeless.activity.TubelessTransparentStatusBarAc
 import ir.sajjadyosefi.accountauthenticator.classes.SAccounts;
 import ir.sajjadyosefi.android.xTubeless.classes.model.exception.TubelessException;
 import ir.sajjadyosefi.android.xTubeless.classes.model.network.request.accounting.LoginRequest;
-import ir.sajjadyosefi.android.xTubeless.classes.model.response.ServerResponseBase;
+import ir.sajjadyosefi.android.xTubeless.classes.model.network.response.ServerResponseBase;
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 
 import ir.sajjadyosefi.android.xTubeless.utility.DeviceUtil;

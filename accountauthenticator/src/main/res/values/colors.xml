@@ -9,4 +9,17 @@
     <color name="day_white_text">#fff</color>
     <color name="fb_foreground_color">#4267b2</color>
     <color name="fb_background_color">#e9ebee</color>
+
+
+
+
+<!--    sdk-->
+    <color name="button_textColor">#575757</color>
+
+    <color name="button_disable">#5B5D5E</color>
+    <color name="button_disable_border">#2E2F30</color>
+    <color name="button">#035B83</color>
+    <color name="button_border">#1D8DBF</color>
+    <color name="button_pressed">#104D68</color>
+    <color name="button_pressed_border">#135573</color>
 </resources>

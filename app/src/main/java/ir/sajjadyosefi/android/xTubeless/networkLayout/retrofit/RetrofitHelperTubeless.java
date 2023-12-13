@@ -1,25 +1,16 @@
 package ir.sajjadyosefi.android.xTubeless.networkLayout.retrofit;
 
 
-import android.content.Context;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
-import ir.sajjadyosefi.android.xTubeless.R;
-import ir.sajjadyosefi.android.xTubeless.classes.StaticValue;
 
-
-import ir.sajjadyosefi.android.xTubeless.networkLayout.retrofit.DownloadUploadPicture.ImageRequest;
-import ir.sajjadyosefi.android.xTubeless.networkLayout.retrofit.DownloadUploadPicture.RemoteApi;
-
-import ir.sajjadyosefi.android.xTubeless.classes.model.request.ContactUsRequest;
+import ir.sajjadyosefi.android.xTubeless.classes.model.network.request.ContactUsRequest;
 
 
 import ir.sajjadyosefi.android.xTubeless.classes.model.network.request.accounting.LoginRequest;
-import ir.sajjadyosefi.android.xTubeless.utility.DeviceUtil;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -28,9 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Query;
 
-import static ir.sajjadyosefi.android.xTubeless.classes.StaticValue.IDApplication;
 import static ir.sajjadyosefi.android.xTubeless.networkLayout.networkLayout.Url.REST_API_IP_ADDRESS_MAIN;
 
 public class RetrofitHelperTubeless {

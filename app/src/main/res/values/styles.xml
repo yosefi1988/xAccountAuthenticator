@@ -1,14 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Theme-->
-    <style name="AppDayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AAASDKTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/tubelessColor_blue_01</item>
         <item name="colorPrimaryDark">@color/tubelessColor_blue_01</item>
         <item name="colorAccent">@color/tubelessColor_blue_01</item>
 
-        <item name="buttonStyle">@style/AppTheme.DayButton</item>
-        <item name="android:buttonStyle">@style/AppTheme.DayButton</item>
+        <item name="buttonStyle">@style/Style.Button.AAASDK</item>
+        <item name="android:buttonStyle">@style/Style.Button.AAASDK</item>
 
         <item name="android:editTextStyle">@style/AppTheme.DayEditText</item>
         <item name="editTextStyle">@style/AppTheme.DayEditText</item>
@@ -30,13 +30,13 @@
     </style>
 
 
-    <style name="TubelessDayTheme" parent="AppDayTheme">
+    <style name="Theme.Tubeless" parent="AAASDKTheme">
         <item name="android:textViewStyle">@style/AppTheme.DayTextView</item>
     </style>
 
 
 
-    <style name="AppTheme.AllActivities"  parent="AppDayTheme">
+    <style name="AppTheme.AllActivities"  parent="AAASDKTheme">
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
     </style>
 
@@ -149,7 +149,7 @@
         <item name="android:textSize">18dp</item>
     </style>
 
-    <style name="AppTheme.DayButton" parent="Base.Widget.AppCompat.Button">
+    <style name="Style.Button.AAASDK" parent="Base.Widget.AppCompat.Button">
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -219,7 +219,7 @@
 
 
 
-    <style name="TubelessDayTheme.NoActionBar"  parent="AppDayTheme">
+    <style name="TubelessDayTheme.NoActionBar"  parent="AAASDKTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -242,7 +242,7 @@
     </style>
 
 
-    <style name="ThemeFullSCreenX" parent="TubelessDayTheme">
+    <style name="ThemeFullSCreenX" parent="Theme.Tubeless">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>

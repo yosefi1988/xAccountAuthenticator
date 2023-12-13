@@ -3,7 +3,6 @@ package ir.sajjadyosefi.android.xTubeless.classes.model.exception;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.snackbar.Snackbar;
 
 import ir.sajjadyosefi.android.xTubeless.R;
-import ir.sajjadyosefi.android.xTubeless.classes.model.response.ServerResponseBase;
-import ir.sajjadyosefi.android.xTubeless.classes.model.response.ServerResponseBase;
+import ir.sajjadyosefi.android.xTubeless.classes.model.network.response.ServerResponseBase;
 
 
 public class TubelessException extends Exception{

@@ -57,7 +57,7 @@
         <Button
             android:id="@+id/submit"
             android:text="@string/login"
-            style="@style/AppTheme.DayButton" />
+            style="@style/Style.Button.AAASDK" />
 
         <TextView
             style="@style/AppTheme.DayTextView"
@@ -66,19 +66,19 @@
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/submitByGoogle"
-            style="@style/AppTheme.DayButton"  />
+            style="@style/Style.Button.AAASDK"  />
 
         <Button
             android:id="@+id/submitBySimCard"
             android:text="@string/simcart"
             android:visibility="gone"
-            style="@style/AppTheme.DayButton" />
+            style="@style/Style.Button.AAASDK" />
 
         <Button
             android:id="@+id/submitByCodeMelli"
             android:text="@string/codeMelli"
             android:visibility="gone"
-            style="@style/AppTheme.DayButton" />
+            style="@style/Style.Button.AAASDK" />
 
         <TextView
             android:id="@+id/signUp"
@@ -87,7 +87,7 @@
             android:gravity="center"
             android:visibility="gone"
             android:text="New user?"
-            style="@style/AppTheme.DayButton"
+            style="@style/Style.Button.AAASDK"
             android:padding="10dp"/>
 
 

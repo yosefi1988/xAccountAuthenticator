@@ -21,7 +21,7 @@
 
 
     <application
-        android:theme="@style/TubelessDayTheme"
+        android:theme="@style/Theme.Tubeless"
         android:icon="@drawable/png_icon1"
 
 

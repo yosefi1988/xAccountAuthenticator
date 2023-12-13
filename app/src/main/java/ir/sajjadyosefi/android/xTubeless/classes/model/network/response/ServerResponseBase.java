@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.android.xTubeless.classes.model.response;
+package ir.sajjadyosefi.android.xTubeless.classes.model.network.response;
 
 import ir.sajjadyosefi.android.xTubeless.classes.model.ServerStatus;
 import ir.sajjadyosefi.android.xTubeless.classes.model.exception.TubelessException;

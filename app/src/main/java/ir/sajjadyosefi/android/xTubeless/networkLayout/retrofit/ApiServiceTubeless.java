@@ -1,10 +1,8 @@
 package ir.sajjadyosefi.android.xTubeless.networkLayout.retrofit;
 
-import android.graphics.Movie;
-
 import ir.sajjadyosefi.android.xTubeless.classes.model.network.request.accounting.LoginRequest;
 //import ir.sajjadyosefi.android.xTubeless.classes.modelY.request.common.ContactUsRequest;
-import ir.sajjadyosefi.android.xTubeless.classes.model.request.ContactUsRequest;
+import ir.sajjadyosefi.android.xTubeless.classes.model.network.request.ContactUsRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;

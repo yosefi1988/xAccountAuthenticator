@@ -1,0 +1,54 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.SamanBankSDK" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+<!--        <item name="colorPrimary">@color/purple_500</item>-->
+        <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+        <!--        <item name="colorOnPrimary">@color/white</item>-->
+        <!-- Secondary brand color. -->
+<!--        <item name="colorSecondary">@color/teal_200</item>-->
+        <!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
+        <!--        <item name="colorOnSecondary">@color/black</item>-->
+        <!-- Status bar color. -->
+        <!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
+        <!-- Customize your theme here. -->
+
+        <item name="buttonStyle">@style/Style.Button.SB24</item>
+        <item name="android:buttonStyle">@style/Style.Button.SB24</item>
+    </style>
+
+    <style name="Theme.Mobilet" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+<!--        <item name="colorPrimary">@color/purple_500</item>-->
+        <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+        <!--        <item name="colorOnPrimary">@color/white</item>-->
+        <!-- Secondary brand color. -->
+<!--        <item name="colorSecondary">@color/teal_200</item>-->
+        <!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
+        <!--        <item name="colorOnSecondary">@color/black</item>-->
+        <!-- Status bar color. -->
+        <!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
+        <!-- Customize your theme here. -->
+
+        <item name="buttonStyle">@style/Style.Button.SB24</item>
+        <item name="android:buttonStyle">@style/Style.Button.SB24</item>
+    </style>
+
+    <style name="AAASDKTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/tubelessColor_blue_01</item>
+        <item name="colorPrimaryDark">@color/tubelessColor_blue_01</item>
+        <item name="colorAccent">@color/tubelessColor_blue_01</item>
+
+        <item name="buttonStyle">@style/Style.Button.AAASDK</item>
+        <item name="android:buttonStyle">@style/Style.Button.AAASDK</item>
+
+        <item name="android:editTextStyle">@style/AppTheme.DayEditText</item>
+        <item name="editTextStyle">@style/AppTheme.DayEditText</item>
+    </style>
+
+    <style name="Theme.Tubeless" parent="AAASDKTheme">
+        <item name="android:textViewStyle">@style/AppTheme.DayTextView</item>
+    </style>
+
+</resources>
