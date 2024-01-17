@@ -196,7 +196,7 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     @Override
     public AConfigResponse deviceRegister(ADeviceRegisterRequest request) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = Config.MAINHOST + "/Api/Device/RegDevice";
+        String url = Config.MAINHOST + "Api/Device/RegDevice";
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -213,6 +213,8 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
         params.add(new BasicNameValuePair("Model", request.getModel() + ""));
         params.add(new BasicNameValuePair("Serial", request.getSerial() + ""));
         params.add(new BasicNameValuePair("Store", request.getStore() + ""));
+
+        httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
         httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 
