@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-
     <color name="night_white_hint_text">#d65c5c5c</color>
-    <color name="day_white_hint_text">#cabcbcbc</color>
 
     <color name="night_white_text">#b3aeae</color>
-    <color name="day_white_text">#fff</color>
     <color name="day_white">#fff</color>
     <color name="day_contact_us_back">#cabcbcbc</color>
     <color name="day_contact_us_border">#0e0e0e</color>
@@ -37,15 +32,7 @@
     <color name="tubelessColor_yellow_01">#FFDA10</color>
     <color name="tubelessColor_yellow_02">#FFB60F</color>
     <color name="tubelessColor_yellow_03">#FDA116</color>
-
-    <color name="tubelessColor_blue_01">#1c326b</color>
-    <color name="tubelessColor_blue_02">#111f43</color>
-
-
-
-
     <color name="colorBlack">#000000</color>
-
     <color name="colorButton">#991041</color>
 
 
@@ -55,17 +42,57 @@
     <color name="colorTextGry">#5A5A5A</color>
     <color name="colorPrimaryDark">#4267b2</color>
     <color name="colorPrimary">#FFC107</color>
-
     <color name="colorAccent">#4267b2</color>
-
     <color name="colorProgress">@color/colorWhite</color>
-    <color name="fb_background_color">#e9ebee</color>
-    <color name="fb_foreground_color">#4267b2</color>
-
-
-
     <color name="colorHorizontalLineGry">#B3E0E0E0</color>
     <color name="colorBorderGry">#B3CCCCCC</color>
-
     <color name="colorWhite">#ffffff</color>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--    sdk -->
+    <color name="tubelessColor_blue_01">#FF00FC</color>
+    <color name="tubelessColor_blue_02">#CC1ACA</color>
+    <color name="tubelessColor_blue_03">#F470F3</color>
+    <color name="black">#8C2E8B</color>
+    <color name="day_white_hint_text">#8E048C</color>
+    <color name="day_white_text">#D618D4</color>
+    <color name="fb_foreground_color">#7E1F7B</color>
+    <color name="fb_background_color">#9E3D9C</color>
+
+
+    <!--    sdk theme -->
+<!--    <color name="button_textColor">#CA6FC9</color>-->
+<!--    <color name="button_disable">#CD24CB</color>-->
+<!--    <color name="button_disable_border">#6A0C69</color>-->
+<!--    <color name="button">#A612A5</color>-->
+<!--    <color name="button_border">#BC03BA</color>-->
+<!--    <color name="button_pressed">#D335D1</color>-->
+<!--    <color name="button_pressed_border">#780677</color>-->
 </resources>
