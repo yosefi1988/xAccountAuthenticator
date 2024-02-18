@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -174,9 +175,14 @@ public class SignInActivity extends Activity {
             try {
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                //UserName = account.getEmail();
-                tryToLoginByMail(intentxxxxxxx, account.getEmail(), account.getPhotoUrl() == null ? null : account.getPhotoUrl().toString());
+                String name = account.getDisplayName();
+                String email = account.getEmail();
+                Uri photoUrl = account.getPhotoUrl();
 
+                tryToLoginByMail(
+                        intentxxxxxxx,
+                        email,
+                        photoUrl == null ? "" : photoUrl.toString());
             } catch (Exception ex) {
 
             }
@@ -560,15 +566,15 @@ public class SignInActivity extends Activity {
     public void tryToLoginByMail(final Intent intent, final String email, final String photoUrl) {
         showProgressBar();
 
-        final String userName = email;//((TextView) findViewById(R.id.userName)).getText().toString();
-        final String accountName = "";//((TextView) findViewById(R.id.accountName)).getText().toString().trim();
-        final String accountPassword = "";//((TextView) findViewById(R.id.accountPassword)).getText().toString();
+        final String userName = email;          //((TextView) findViewById(R.id.userName)).getText().toString();
+        final String accountName = "";          //((TextView) findViewById(R.id.accountName)).getText().toString().trim();
+        final String accountPassword = "";      //((TextView) findViewById(R.id.accountPassword)).getText().toString();
 
         new AsyncTask<String, Void, Intent>() {
             @SuppressLint("StaticFieldLeak")
             @Override
             protected Intent doInBackground(String... params) {
-                ALoginRequest aLoginRequest = new ALoginRequest(userName, (photoUrl == null ? "" : photoUrl));
+                ALoginRequest aLoginRequest = new ALoginRequest(userName, photoUrl);
                 return loginProcess(aLoginRequest, accountPassword, accountName, intent);
             }
 
