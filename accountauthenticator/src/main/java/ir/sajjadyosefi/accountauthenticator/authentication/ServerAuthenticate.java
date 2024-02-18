@@ -11,11 +11,24 @@ import ir.sajjadyosefi.accountauthenticator.model.response.ATransactionListRespo
 import ir.sajjadyosefi.accountauthenticator.model.response.AWalletChargeResponse;
 
 public interface ServerAuthenticate {
-    public ALoginResponse userSignUp(final ALoginRequest ALoginRequest) throws Exception;
 
-    public ALoginResponse userSignIn(final ALoginRequest ALoginRequest) throws Exception;
-    public ALoginResponse changePassword(final AChangePasswordRequest aChangePasswordRequest) throws Exception;
-    public AConfigResponse deviceRegister(final ADeviceRegisterRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
-    public ATransactionListResponse transactionList(final ATransactionListRequest aTransactionListRequest) throws Exception;
-    public AWalletChargeResponse chargeWallet(final AWalletChargeRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
+    //1 loginProcess    in SignInActivity
+    //2 submit          in AuthenticatorActivity    -- not used
+    //3 getAuthToken    in Authenticator class      -- not used
+    ALoginResponse userSignIn(final ALoginRequest ALoginRequest) throws Exception;
+
+    //SignUpActivity    in SignUpActivity           -- not used
+    ALoginResponse userSignUp(final ALoginRequest ALoginRequest) throws Exception;
+
+    //ChangePasswordActivity
+    ALoginResponse changePassword(final AChangePasswordRequest aChangePasswordRequest) throws Exception;
+
+    //tryDeviceRegister     in SplashScreen
+    AConfigResponse deviceRegister(final ADeviceRegisterRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
+
+    //                                              -- not used
+    ATransactionListResponse transactionList(final ATransactionListRequest aTransactionListRequest) throws Exception;
+
+    //                                              -- not used
+    AWalletChargeResponse chargeWallet(final AWalletChargeRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
 }

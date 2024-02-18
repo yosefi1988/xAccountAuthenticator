@@ -31,19 +31,24 @@ import ir.sajjadyosefi.accountauthenticator.model.response.ATransactionListRespo
 import ir.sajjadyosefi.accountauthenticator.model.response.AWalletChargeResponse;
 
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_NORMAL_USER;
+import static ir.sajjadyosefi.accountauthenticator.classes.Config.RegDeviceAddress;
+import static ir.sajjadyosefi.accountauthenticator.classes.Config.WalletChargeTransactionAddress;
+import static ir.sajjadyosefi.accountauthenticator.classes.Config.WalletTransactionListAddress;
+import static ir.sajjadyosefi.accountauthenticator.classes.Config.changepasswordAddress;
+import static ir.sajjadyosefi.accountauthenticator.classes.Config.loginAddress;
 
 
 public class ParseComServerAuthenticate implements ServerAuthenticate {
-    @Override
+
+    @Override   //not used
     public ALoginResponse userSignUp(ALoginRequest ALoginRequest) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = "http://test.sajjadyosefi.ir/Api/User/Login";
+        String url = Config.MAINHOST + loginAddress;
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("AndroidID", ALoginRequest.getAndroidID()));
         params.add(new BasicNameValuePair("IDApplicationVersion", ALoginRequest.getIDApplicationVersion() + ""));
-
         params.add(new BasicNameValuePair("UserName", ALoginRequest.getUserName()));
         params.add(new BasicNameValuePair("Password", ALoginRequest.getPassword()));
 //        params.add(new BasicNameValuePair("Email", loginRequest.getEmail()));
@@ -119,20 +124,18 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
 //
 //        return authtoken;
 //    }
+
     @Override
     public ALoginResponse userSignIn(ALoginRequest ALoginRequest) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = Config.MAINHOST + "/Api/User/Login";
-//        String url = "http://192.168.1.5:80/Api/User/Login";
+        String url = Config.MAINHOST + loginAddress;
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("AndroidID", ALoginRequest.getAndroidID()));
         params.add(new BasicNameValuePair("IDApplicationVersion", ALoginRequest.getIDApplicationVersion() + ""));
         params.add(new BasicNameValuePair("IP", ALoginRequest.getIP()));
-
         params.add(new BasicNameValuePair("UserCode", ALoginRequest.getUserCode()));
-
         if (ALoginRequest.getUserCode() != null && ALoginRequest.getUserCode().length() > 3) {
             params.add(new BasicNameValuePair("Password", "x"));
         } else {
@@ -165,7 +168,7 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     @Override
     public ALoginResponse changePassword(AChangePasswordRequest aChangePasswordRequest) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = Config.MAINHOST + "/Api/User/changepassword";
+        String url = Config.MAINHOST + changepasswordAddress;
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -196,7 +199,7 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     @Override
     public AConfigResponse deviceRegister(ADeviceRegisterRequest request) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = Config.MAINHOST + "Api/Device/RegDevice";
+        String url = Config.MAINHOST + RegDeviceAddress;
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -249,7 +252,7 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     @Override
     public ATransactionListResponse transactionList(ATransactionListRequest request) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = Config.MAINHOST + "/Api/Wallet/WalletTransactionList";
+        String url = Config.MAINHOST + WalletTransactionListAddress;
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -301,13 +304,12 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
         }else {
             throw new TubelessException(httpResponse.getStatusLine().getStatusCode());
         }
-
     }
 
     @Override
     public AWalletChargeResponse chargeWallet(AWalletChargeRequest request) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = Config.MAINHOST + "/Api/Wallet/WalletChargeTransaction";
+        String url = Config.MAINHOST + WalletChargeTransactionAddress;
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -393,7 +395,6 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
 //
 //        return authtoken;
 //    }
-
 
     private class ParseComError implements Serializable {
         int code;

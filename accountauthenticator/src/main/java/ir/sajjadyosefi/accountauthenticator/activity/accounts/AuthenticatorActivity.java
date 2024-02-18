@@ -113,57 +113,57 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity  {
 
     @SuppressLint("StaticFieldLeak")
     public void submit() {
-
-        final String userName = ((TextView) findViewById(R.id.userName)).getText().toString();
-        final String accountName = ((TextView) findViewById(R.id.accountName)).getText().toString().trim();
-        final String accountPassword = ((TextView) findViewById(R.id.accountPassword)).getText().toString();
-
-        final String accountType = getIntent().getStringExtra(AccountGeneral.ACCOUNT_TYPE);
-
-        new AsyncTask<String, Void, Intent>() {
-
-            @Override
-            protected Intent doInBackground(String... params) {
-                Log.d("TubelessSajjad", TAG + "> Started authenticating");
-
-
-                final Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-
-                ALoginResponse signInUser = null;
-                try {
-                    ALoginRequest ALoginRequest = new ALoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
-
-                    signInUser = sServerAuthenticate.userSignIn(ALoginRequest);
-
-
-//                    if (accountName != null && accountName.length() > 2)
-//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
-//                    else
-//                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
 //
-//                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
-//                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
-//                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
-//                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
-//                    bundle.putString(PARAM_USER_PASS, accountPassword);
-                } catch (Exception e) {
-                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
-                }
-
-                intent.putExtras(bundle);
-                return intent;
-            }
-
-            @Override
-            protected void onPostExecute(Intent intent) {
-                if (intent.hasExtra(KEY_ERROR_MESSAGE)) {
-                    Toast.makeText(getBaseContext(), intent.getStringExtra(KEY_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
-                } else {
-                    finishLogin(intent);
-                }
-            }
-        }.execute();
+//        final String userName = ((TextView) findViewById(R.id.userName)).getText().toString();
+//        final String accountName = ((TextView) findViewById(R.id.accountName)).getText().toString().trim();
+//        final String accountPassword = ((TextView) findViewById(R.id.accountPassword)).getText().toString();
+//
+//        final String accountType = getIntent().getStringExtra(AccountGeneral.ACCOUNT_TYPE);
+//
+//        new AsyncTask<String, Void, Intent>() {
+//
+//            @Override
+//            protected Intent doInBackground(String... params) {
+//                Log.d("TubelessSajjad", TAG + "> Started authenticating");
+//
+//
+//                final Intent intent = new Intent();
+//                Bundle bundle = new Bundle();
+//
+//                ALoginResponse signInUser = null;
+//                try {
+//                    ALoginRequest ALoginRequest = new ALoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
+//
+//                    signInUser = sServerAuthenticate.userSignIn(ALoginRequest);
+//
+//
+////                    if (accountName != null && accountName.length() > 2)
+////                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, accountName + "(" + signInUser.getUserName() + ")");
+////                    else
+////                        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, signInUser.getUserName());
+////
+////                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+////                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
+////                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
+////                    bundle.putString(PARAM_USER_NAME, signInUser.getUserName());
+////                    bundle.putString(PARAM_USER_PASS, accountPassword);
+//                } catch (Exception e) {
+//                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
+//                }
+//
+//                intent.putExtras(bundle);
+//                return intent;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Intent intent) {
+//                if (intent.hasExtra(KEY_ERROR_MESSAGE)) {
+//                    Toast.makeText(getBaseContext(), intent.getStringExtra(KEY_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
+//                } else {
+//                    finishLogin(intent);
+//                }
+//            }
+//        }.execute();
     }
 
 

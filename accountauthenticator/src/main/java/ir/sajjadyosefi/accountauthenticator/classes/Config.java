@@ -5,4 +5,14 @@ public class Config {
     public static String MAINHOST = "http://test.sajjadyosefi.ir/";
     public static String SMSHOST = "09999816652";
 
+
+    //used
+    public static String loginAddress = "Api/User/Login";
+    public static String changepasswordAddress = "/Api/User/changepassword";
+    public static String RegDeviceAddress = "Api/Device/RegDevice";
+
+    public static String WalletChargeTransactionAddress = "/Api/Wallet/WalletChargeTransaction";
+    public static String WalletTransactionListAddress = "/Api/Wallet/WalletTransactionList";
+
+
 }

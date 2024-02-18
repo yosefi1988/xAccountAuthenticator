@@ -8,8 +8,9 @@ public class AuthenticatorService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
 
-        Authenticator authenticator = new Authenticator(this);
-        return authenticator.getIBinder();
+//        Authenticator authenticator = new Authenticator(this);
+//        return authenticator.getIBinder();
+        return null;
     }
 
     @Override

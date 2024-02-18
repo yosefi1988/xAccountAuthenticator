@@ -48,15 +48,15 @@
         <activity android:name="ir.moslem_deris.apps.zarinpal.PaymentActivity"  />
 
 
-        <service
-            android:name=".authentication.AuthenticatorService"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="android.accounts.AccountAuthenticator" />
-            </intent-filter>
-            <meta-data android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/authenticatorxxx" />
-        </service>
+<!--        <service-->
+<!--            android:name=".authentication.AuthenticatorService"-->
+<!--            android:enabled="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.accounts.AccountAuthenticator" />-->
+<!--            </intent-filter>-->
+<!--            <meta-data android:name="android.accounts.AccountAuthenticator"-->
+<!--                android:resource="@xml/authenticatorxxx" />-->
+<!--        </service>-->
 
 
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
