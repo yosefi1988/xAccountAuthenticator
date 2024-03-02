@@ -338,6 +338,7 @@ public class SignInActivity extends Activity {
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                //.setAccountName(YOUR_CLIENT_ID)
                 .build();
         final GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 

@@ -91,7 +91,7 @@ android {
         aaa {
             dimension "version_name"
             resValue "string", "app_name", appNameAAA
-            applicationIdSuffix ".xAAA"
+            applicationIdSuffix ".xAAAx"
             versionName "${AAA_VersionName}"
             versionCode AAA_VersionCode
             manifestPlaceholders = [

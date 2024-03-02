@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:436191597727:android:b318763a39acc4f9f3beaa",
         "android_client_info": {
-          "package_name": "ir.sajjadyosefi.android.xAAA"
+          "package_name": "ir.sajjadyosefi.android.xAAAx"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "436191597727-9iq69lnere65gf9gvvi00ss9v7qdii64.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ir.sajjadyosefi.android.xAAA",
+            "package_name": "ir.sajjadyosefi.android.xAAAx",
             "certificate_hash": "9229055957ad6713d5b56619497e56cf1b7ec592"
           }
         },
@@ -26,7 +26,7 @@
           "client_id": "436191597727-in205esg0rd8tcef1id56foht7nkkpuc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ir.sajjadyosefi.android.xAAA",
+            "package_name": "ir.sajjadyosefi.android.xAAAx",
             "certificate_hash": "78f7daa098a35dba87a53664257bdbe644809e3f"
           }
         },
