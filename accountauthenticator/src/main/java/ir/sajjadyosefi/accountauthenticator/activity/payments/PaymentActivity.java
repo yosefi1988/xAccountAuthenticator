@@ -7,13 +7,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
+import com.zarinpal.ZarinPalBillingClient;
+import com.zarinpal.billing.purchase.Purchase;
+import com.zarinpal.client.BillingClientStateListener;
+import com.zarinpal.client.ClientState;
+import com.zarinpal.provider.core.future.FutureCompletionListener;
+import com.zarinpal.provider.core.future.TaskResult;
+import com.zarinpal.provider.model.response.Receipt;
 //import com.zarinpal.ewallets.purchase.OnCallbackRequestPaymentListener;
 //import com.zarinpal.ewallets.purchase.OnCallbackVerificationPaymentListener;
 //import com.zarinpal.ewallets.purchase.PaymentRequest;
@@ -21,6 +31,7 @@ import com.google.gson.Gson;
 
 
 import ir.sajjadyosefi.accountauthenticator.R;
+import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
@@ -32,16 +43,20 @@ public class PaymentActivity extends Activity {
 
     public static final int GO_TO_LOGIN = 20;
 
-    private static boolean noUi = false;
+    private static boolean withoutUi = false;
     private static boolean paySuccess = false;
+    private static boolean isCharge = false;
     private static Intent paymentIntent;
     private static Bundle bundle;
 
     private ViewGroup rootActivity;
     public Button btnPay , buttonBack ;
     EditText editTextPhone, editTextAmount,editTextDiscription;
+    TextView textViewPrice1,textViewPrice2,textViewPrice3,textViewPrice4;
     Context context;
-    private static String phone ,amount,discription ;
+
+    private int tax , portService;
+    private static String phone ,amountX,discription ;
 
     public synchronized static Intent getIntent(Context context) {
         return getIntent(context,null);
@@ -53,10 +68,11 @@ public class PaymentActivity extends Activity {
 
     public static void PaymentDone() {
         try {
-            noUi = false;
+            withoutUi = false;
             paySuccess = false;
             paymentIntent = null;
             bundle = null;
+            isCharge = false;
         }catch (Exception e){
         }
     }
@@ -92,42 +108,11 @@ public class PaymentActivity extends Activity {
         //
         context = this;
         Uri data2 = getIntent().getData();
-//        ZarinPal.getPurchase(context).verificationPayment(data2, new OnCallbackVerificationPaymentListener() {
-//            @Override
-//            public void onCallbackResultVerificationPayment(boolean isPaymentSuccess, String refID, PaymentRequest paymentRequest) {
-//
-//                if(isPaymentSuccess){
-//                    Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
-//                    paySuccess = true;
-////                    AWalletChargeRequest req = new AWalletChargeRequest(usercode, amount, refID, phone+ "|" + discription);
-//                    AWalletChargeRequest req = new AWalletChargeRequest(amount + "0"); // تبدیل به ریال
-//                    req.setMetaData(discription);
-//                    chargeAccount(req);
-//                }else {
-//                    //not ok
-////                    show message refID
-//                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
-//                    paySuccess = false;
-//
-//                    if (paymentIntent.hasExtra("type")){
-////                        if (paymentIntent.getIntExtra("type",1) == 2){
-//                            setResult(Activity.RESULT_CANCELED);
-//                            finish();
-////                        }
-//                    }
-//
-//
-//                    //
-//
-//                }
-//            }
-//        });
-
 
         if (paymentIntent != null) {
             if (paymentIntent.hasExtra("type")) {
                 if (paymentIntent.getIntExtra("type", 1) == 2) {
-//                    noUi = true;
+//                    withoutUi = true;
 //                    AWalletChargeRequest request = new AWalletChargeRequest("1000");
 //                    request.setMetaData(discription);
 //                    amount = request.getAmount();
@@ -135,23 +120,24 @@ public class PaymentActivity extends Activity {
                 } else {
                     setContentView(R.layout.activity_payment);
                 }
-//                paymentIntent = getIntent();
-//                bundle = paymentIntent.getExtras();
+                paymentIntent = getIntent();
+                bundle = paymentIntent.getExtras();
             } else {
                 setContentView(R.layout.activity_payment);
             }
         }else {
+            //first loading +   intent == nul
             if (getIntent().hasExtra("type")) {
                 paymentIntent = getIntent();
                 bundle = paymentIntent.getExtras();
                 if (paymentIntent.getIntExtra("type", 1) == 2) {
-                    noUi = true;
-                    amount = paymentIntent.getIntExtra("amount", 1000) + "";
+                    withoutUi = true;
+                    amountX = paymentIntent.getIntExtra("amount", 1000) + "";
                     discription = paymentIntent.getStringExtra("metaData");
-
-                    AWalletChargeRequest request = new AWalletChargeRequest(amount);
-                    request.setMetaData(discription);
-                    payment(Integer.parseInt(amount), this);
+                    tax = Integer.parseInt(paymentIntent.getStringExtra("tax"));
+                    isCharge = paymentIntent.getBooleanExtra("isCharge",false);
+                    portService = Integer.parseInt(paymentIntent.getStringExtra("portService"));
+                    zarrinPayment(calcBillHide(),Long.parseLong(amountX), this);
                 }else {
                     setContentView(R.layout.activity_payment);
                 }
@@ -160,28 +146,54 @@ public class PaymentActivity extends Activity {
             }
         }
 
-            rootActivity = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-            btnPay = findViewById(R.id.btnPay);
-            buttonBack = findViewById(R.id.buttonBack);
-            editTextPhone = findViewById(R.id.editTextPhone);
-            editTextAmount = findViewById(R.id.editTextAmount);
-            editTextDiscription = findViewById(R.id.editTextDiscription);
+        rootActivity = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+        btnPay = findViewById(R.id.btnPay);
+        buttonBack = findViewById(R.id.buttonBack);
+        editTextPhone = findViewById(R.id.editTextPhone);
+        editTextAmount = findViewById(R.id.editTextAmount);
+        editTextDiscription = findViewById(R.id.editTextDiscription);
+
+        textViewPrice1 = findViewById(R.id.textViewPrice1);
+        textViewPrice2 = findViewById(R.id.textViewPrice2);
+        textViewPrice3 = findViewById(R.id.textViewPrice3);
+        textViewPrice4 = findViewById(R.id.textViewPrice4);
+
+        if (paymentIntent.hasExtra("tax"))
+            tax = Integer.parseInt(paymentIntent.getStringExtra("tax"));
+        if (paymentIntent.hasExtra("portService"))
+            portService = Integer.parseInt(paymentIntent.getStringExtra("portService"));
+        if (paymentIntent.hasExtra("isCharge"))
+            isCharge = paymentIntent.getBooleanExtra("isCharge",false);
 
 
-            if (btnPay != null) {
-                btnPay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        phone = editTextPhone.getText().toString();
-                        amount = editTextAmount.getText().toString();
-                        discription = editTextDiscription.getText().toString();
-                        payment(Integer.parseInt(editTextAmount.getText().toString()), context);
+        if (btnPay != null) {
+            editTextAmount.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                }
 
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    }
-                });
-            }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    amountX = s.toString();
+                    calcBill();
+                }
+            });
+            btnPay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    phone = editTextPhone.getText().toString();
+                    amountX = editTextAmount.getText().toString();
+                    discription = editTextDiscription.getText().toString();
+                    zarrinPayment(Integer.parseInt(textViewPrice4.getText().toString()),Long.parseLong(amountX), context);
+                }
+            });
+        }
 
 //        if (Global.IDUser == NOT_LOGN_USER ){
 //        if (Global.user == null || Global.user.getUserId() == NOT_LOGN_USER ){
@@ -199,32 +211,104 @@ public class PaymentActivity extends Activity {
 //            setResult(Activity.RESULT_OK, intent);
 //
 //            finish();
+
+
+
     }
 
-    private void payment(long amount,Context context) {
-//        ZarinPal purches = ZarinPal.getPurchase(context);
-//        PaymentRequest payment = ZarinPal.getPaymentRequest();
-//
-//        payment.setMerchantID("e8a913e8-f089-11e6-8dec-005056a205be");
-//        payment.setAmount(amount);
-//        payment.setDescription(AccountGeneral.getAppName());
-//        payment.setCallbackURL(String.format("%s://%s",AccountGeneral.getSchemezarinpalpayment(),AccountGeneral.getZarinpalpayment()));
-////        MainActivity.payType = 100 ;
-//
-//        purches.startPayment(payment, new OnCallbackRequestPaymentListener() {
-//            @Override
-//            public void onCallbackResultPaymentRequest(int status, String authority, Uri paymentGatewayUri, Intent intent) {
-//
-//                if (status == 100){
-//                    //ok
-//                    startActivity(intent);
-//                }else {
-////                    error in payment
-////                    ((TubelessActivity)context).progressDialog.hide();
-//                }
-//
-//            }
-//        });
+    @SuppressLint("SetTextI18n")
+    private void calcBill() {
+        textViewPrice1.setText(amountX);
+        textViewPrice2.setText((((Integer.parseInt(amountX) * tax) / 100)) + "");
+        textViewPrice3.setText((((Integer.parseInt(amountX) * portService) / 100)) + "");
+        textViewPrice4.setText((
+                (Integer.parseInt(textViewPrice1.getText().toString())) +
+                (Integer.parseInt(textViewPrice2.getText().toString())) +
+                (Integer.parseInt(textViewPrice3.getText().toString()))
+        ) + "");
+    }
+    private long calcBillHide() {
+        long sumVal = 0;
+        int a = (((Integer.parseInt(amountX) * tax) / 100));
+        int b = (((Integer.parseInt(amountX) * portService) / 100));
+        sumVal = a + b + Integer.parseInt(amountX);
+        return sumVal;
+    }
+
+    private void zarrinPayment(long amountZarrin,long amountTubeless, Context context) {
+        //new
+        BillingClientStateListener stateListener = new BillingClientStateListener() {
+            @Override
+            public void onClientSetupFinished(ClientState clientState) {
+
+                int a = 5;
+                a++;
+            }
+            @Override
+            public void onClientServiceDisconnected() {
+
+                int b = 6;
+                b++;
+            }
+        };
+        ZarinPalBillingClient client = ZarinPalBillingClient.newBuilder(this)
+                .enableShowInvoice()
+                .setListener(stateListener)
+                .build();
+
+        Purchase purchase = Purchase.newBuilder()
+                .asPaymentRequest(
+                        "e8a913e8-f089-11e6-8dec-005056a205be",
+                        amountZarrin,
+                        String.format("%s://%s", AccountGeneral.getSchemezarinpalpayment(), AccountGeneral.getZarinpalpayment()),
+                        discription,
+                        phone,
+                        "yosefi1988@gmail.com"
+                ).build();
+
+        FutureCompletionListener<Receipt> receiptFutureCompletionListener = new FutureCompletionListener<Receipt>() {
+            @Override
+            public void onComplete(TaskResult<Receipt> task) {
+
+                //sdk
+//                Toast.makeText(getBaseContext(),"pay Complete" , Toast.LENGTH_LONG).show();
+                if (task.isSuccess()) {
+//                    Toast.makeText(getBaseContext(),"pay success" , Toast.LENGTH_LONG).show();
+                    boolean receipt = task.isSuccess();
+
+//                    Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
+                    paySuccess = true;
+                    Intent x = PaymentActivity.getPaymentIntent();
+                    AWalletChargeRequest aWalletChargeRequest = null; // تبدیل به ریال
+                    try {
+                        aWalletChargeRequest = new AWalletChargeRequest(amountTubeless + "0");
+                    } catch (Exception exception) {
+
+                        //todo remove
+                        aWalletChargeRequest = new AWalletChargeRequest("110015", amountTubeless + "0");
+                        exception.printStackTrace();
+                    }
+                    aWalletChargeRequest.setMetaData(discription);
+
+                    if (isCharge)
+                        chargeAccount(aWalletChargeRequest);
+                } else {
+//                    Toast.makeText(getBaseContext(),"pay not success" , Toast.LENGTH_LONG).show();
+//                    show message refID
+//                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
+                    paySuccess = false;
+
+                    if (paymentIntent.hasExtra("type")){
+//                        if (paymentIntent.getIntExtra("type",1) == 2){
+                        setResult(Activity.RESULT_CANCELED);
+                        finish();
+//                        }
+                    }
+                }
+                //PaymentActivity.PaymentDone();
+            }
+        };
+        client.launchBillingFlow(purchase,receiptFutureCompletionListener);
     }
 
     @Override
@@ -237,7 +321,6 @@ public class PaymentActivity extends Activity {
                 finish();
             }
         }
-
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -256,7 +339,7 @@ public class PaymentActivity extends Activity {
             @Override
             protected void onPostExecute(final AWalletChargeResponse response) {
                 final BottomSheetDialog dialog = new BottomSheetDialog(context);
-                if (noUi) {
+                if (withoutUi) {
                     if (response == null){
                         TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.tray_again), context.getString(R.string.tray_again), new View.OnClickListener() {
                             @Override
@@ -275,7 +358,7 @@ public class PaymentActivity extends Activity {
                         ((Activity)context).finish();
                     }
                 } else {
-                    if (response.getTubelessException().getCode() == 200) {
+                    if (response != null && response.getTubelessException().getCode() == 200) {
                         TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

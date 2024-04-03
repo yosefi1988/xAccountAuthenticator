@@ -34,6 +34,7 @@ import ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActiv
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.ChangePasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.ResetPasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignInActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.payments.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.Global;
@@ -49,6 +50,7 @@ import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
 import static android.util.Log.VERBOSE;
 import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_USER_OBJECT;
+import static ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen.SplashScreen.WALLETCHARGE_REQUEST_CODE;
 import static ir.sajjadyosefi.android.xTubeless.networkLayout.networkLayout.Url.Telegram;
 
 @TargetApi (Build.VERSION_CODES.KITKAT_WATCH)
@@ -85,7 +87,7 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
                     Toast.makeText(getContext(),getContext().getString(R.string.welcome) ,Toast.LENGTH_LONG).show();
                 }
             }
-            if (requestCode == CHANGE_PASSWORD_REQUEST_CODE){
+            if (requestCode == WALLETCHARGE_REQUEST_CODE){
                 if (data.hasExtra(PARAM_USER_OBJECT)){
                     Gson gson = new Gson();
                     User user = gson.fromJson(data.getExtras().getString(PARAM_USER_OBJECT),User.class);
@@ -153,8 +155,6 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
         initializeBottomNavigation(savedInstanceState);
         initializeUI(savedInstanceState);
 
-
-
     }
 
     @Override
@@ -165,11 +165,41 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
             setFirstRunIsDone();
         }
 
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("type" , 1);
+//        bundle.putInt("amount", 1000);
+//        bundle.putString("metaData", "meta Data 1000");
+//        bundle.putString("tax", "90");
+//        bundle.putB("isCharge", t);
+//        bundle.putString("portService", "50");
+//        Intent intent = PaymentActivity.getIntent(getContext(),bundle);
+//        //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
+//        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+//        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
 
+//        AccountGeneral.getAndroidID();
+//        AccountGeneral.getAppName();
+//        AccountGeneral.getUserCode();
+//        AccountGeneral.getZarinpalpayment();
 
 
-
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("type", 2);
+//        bundle.putInt("amount", 1000);
+//        bundle.putString("metaData", "meta Data 1000");
+//        bundle.putString("tax", "1");
+        //        bundle.putB("isCharge", t);
+//        bundle.putString("portService", "2");
+//        Intent intent = PaymentActivity.getIntent(this, bundle);
+//        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+//        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
     }
     private void drawableMenu(Toolbar toolbar) {

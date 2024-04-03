@@ -40,7 +40,7 @@ android {
     }
     defaultConfig {
         applicationId "${appId}"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 28
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -51,13 +51,10 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             useProguard true
             debuggable true
 
-//            minifyEnabled true
-//            useProguard false
-//            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //manifestPlaceholders = [pn: "com.hamsa"]
             //manifestPlaceholders = [pn: "com.hamsa.debug"]
@@ -67,22 +64,18 @@ android {
             buildConfigField 'String', 'URL_PREFIX', "\"api\""
             signingConfig signingConfigs.TubelessSajjadSigning
             buildConfigField("String", "BASE_URLX", "\"http://test.sajjadyosefi.ir/api/Upload/\"")
-
         }
         debug {
             minifyEnabled false
-            //useProguard false
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             versionNameSuffix "-dev"
             manifestPlaceholders = [pn: "ir.sajjadyosefi.android.xTubeless"]
-
-
 
             buildConfigField 'String', 'HOST', "\"http://www.example.com\""
             buildConfigField 'String', 'URL_PREFIX', "\"devapi\""
             //resValue "string", "app_name", appName + "-debug"
             buildConfigField("String", "BASE_URLX", "\"http://test.sajjadyosefi.ir/api/Upload/\"")
-
         }
     }
 
@@ -91,7 +84,7 @@ android {
         aaa {
             dimension "version_name"
             resValue "string", "app_name", appNameAAA
-            applicationIdSuffix ".xAAAx"
+            applicationIdSuffix ".xAAA"
             versionName "${AAA_VersionName}"
             versionCode AAA_VersionCode
             manifestPlaceholders = [

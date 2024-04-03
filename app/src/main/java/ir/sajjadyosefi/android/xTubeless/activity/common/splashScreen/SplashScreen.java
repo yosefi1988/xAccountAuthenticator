@@ -4,6 +4,7 @@ import android.accounts.Account;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,7 @@ import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.accountauthenticator.classes.SAccounts;
 import ir.sajjadyosefi.android.xTubeless.activity.MainActivity;
+import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 
 import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.KEY_ERROR_MESSAGE;
 import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_CONFIG;
@@ -71,10 +73,10 @@ public class SplashScreen extends AppCompatActivity  {
 
         if (user != null) {
 //            //load
-//            Gson gson = new Gson();
-//            SharedPreferences prefs = null;
-//            prefs =  this.getSharedPreferences("ir.sajjadyosefi.android.tubeless", MODE_PRIVATE);
-//            Global.user = gson.fromJson(prefs.getString("USER","") , User.class)  ;
+            Gson gson = new Gson();
+            SharedPreferences prefs = null;
+            prefs =  this.getSharedPreferences("ir.sajjadyosefi.android.tubeless", MODE_PRIVATE);
+            Global.user = gson.fromJson(prefs.getString("USER","") , User.class);
 
 
         }else

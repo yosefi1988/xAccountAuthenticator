@@ -2,6 +2,7 @@ package ir.sajjadyosefi.accountauthenticator.model.request;
 
 
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
+import kotlin.jvm.Throws;
 
 public class AWalletChargeRequest {
 
@@ -21,8 +22,14 @@ public class AWalletChargeRequest {
         this.metaData = metaData;
     }
 
-    public AWalletChargeRequest(String amount) {
+    public AWalletChargeRequest(String amount) throws Exception {
+        if (AccountGeneral.getUserCode() == null)
+            throw new Exception("UserCode == null");
         UserCode = AccountGeneral.getUserCode();
+        Amount = amount;
+    }
+    public AWalletChargeRequest(String userCode , String amount) {
+        UserCode = userCode;
         Amount = amount;
     }
 

@@ -22,8 +22,6 @@
     <application
         android:theme="@style/Theme.Tubeless"
         android:icon="@drawable/png_icon1"
-
-
         android:label="@string/app_name">
 
             <!-- *** Not really needed here, but convenient for copying to other apps that will use this module *** -->
@@ -44,8 +42,6 @@
                     android:scheme="@string/schemezarinpalpayment" />
             </intent-filter>
         </activity>
-        <activity android:name="ir.moslem_deris.apps.zarinpal.PaymentActivity"  />
-
 
         <service
             android:name=".authentication.AuthenticatorService"

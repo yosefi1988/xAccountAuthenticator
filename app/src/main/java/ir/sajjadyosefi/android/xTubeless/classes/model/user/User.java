@@ -12,14 +12,28 @@ public class User {
 	private String mobileNumber;
 	private String userImage;
 	private String profileImage;
-	public long balanse;
+	public long balance;
 
 	private String Password;
 	private String loginPhone = null;
 	private String loginPassword = null;
 	private boolean isAdmin = false;
 
-	//_________________________________
+	public int UserCode;
+
+	public int getUserCode() {
+		return UserCode;
+	}
+
+	public String getUserCodeAsString() {
+		return UserCode + "";
+	}
+
+	public void setUserCode(int userCode) {
+		UserCode = userCode;
+	}
+
+//_________________________________
 
 //	@Column(ignore = true)
 //	private String city_location = null;
@@ -35,14 +49,8 @@ public class User {
 //
 //	@Column(ignore = true)
 //	private String _cookie = "";
-
-
 //	private Device device = null;
-
 //	private int	ApplicationID;
-//
-
-
 //	private Boolean canSendPicture;
 
 	public User(Context context) {
@@ -57,7 +65,7 @@ public class User {
 		setUserImage(source.getUserImage());
 		setProfileImage(source.getProfileImage());
 
-		setBalanse(source.getBalanse());
+		setBalance(source.getBalance());
 		setPassword(source.getPassword());
 		setLoginPassword(getLoginPassword());
 		setLoginPhone(source.getLoginPhone());
@@ -123,12 +131,12 @@ public class User {
 		this.profileImage = profileImage;
 	}
 
-	public long getBalanse() {
-		return balanse;
+	public long getBalance() {
+		return balance;
 	}
 
-	public void setBalanse(long balanse) {
-		this.balanse = balanse;
+	public void setBalance(long balance) {
+		this.balance = balance;
 	}
 
 	public String getPassword() {

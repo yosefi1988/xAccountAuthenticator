@@ -31,8 +31,8 @@
 
 
 
-    <string name="zarinpalpayment">zarinpalpayment10</string>
-    <string name="schemezarinpalpayment">return10</string>
+    <string name="zarinpalpayment">zarinpalpayment5</string>
+    <string name="schemezarinpalpayment">return5</string>
     <string name="text_for_login_by_mobile_number_1">برای تایید شماره موبایل یک پیامک به مرکز تماس ما ارسال خواهد شد. برای این کار شما باید دسترسی لازم را به اپلیکیشن بدهید.</string>
     <string name="text_for_login_by_mobile_number_2">توجه کنید (اگر چند سیم کارت دارید): از سیمکارت پیشفرض استفاده خواهد شد و باید شماره موبایل وارد شده همان سیم کارت پیشفرض شما باشد.</string>
     <string name="text_for_login_by_mobile_number_3">نکته:متن پیامک ارسالی را در قسمت پیام ها خواهید دید.</string>

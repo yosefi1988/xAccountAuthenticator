@@ -43,3 +43,5 @@
 
 # without this line, I was having ClassCastException
 #-keepattributes Signature, *Annotation*
+
+-keep class com.zarinpal.*

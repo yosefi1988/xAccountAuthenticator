@@ -63,7 +63,7 @@
                 android:paddingRight="5dp"
                 android:layout_marginLeft="10dp"
                 android:paddingLeft="5dp"
-                android:text="مبلغ"/>
+                android:text="مبلغ به تومان"/>
 
 
             <EditText
@@ -73,6 +73,7 @@
                 android:layout_gravity="right"
                 android:inputType="number"
                 android:ems="10"
+                android:maxLength="10"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp" />
 
@@ -97,6 +98,108 @@
                 android:layout_marginRight="10dp" />
 
 
+
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="صورتحساب"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="خدمات درخواستی" />
+                    <TextView
+                        android:id="@+id/textViewPrice1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="0" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="مالیات" />
+                    <TextView
+                        android:id="@+id/textViewPrice2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="0" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/portName"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="خدمات درگاه پرداخت" />
+                    <TextView
+                        android:id="@+id/textViewPrice3"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="0" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="جمع به تومان" />
+                    <TextView
+                        android:id="@+id/textViewPrice4"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="0" />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
@@ -112,7 +215,7 @@
 
         <Button
             android:id="@+id/btnPay"
-            android:text="پــــــــــــــــــــرداخت"
+            android:text="پـــــــــرداخت"
             style="@style/Style.Button.AAASDK"
             android:layout_width="0dp"
             android:layout_weight="1"  />
