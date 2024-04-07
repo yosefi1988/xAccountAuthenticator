@@ -4,7 +4,7 @@ import ir.sajjadyosefi.accountauthenticator.model.request.AChangePasswordRequest
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionListRequest;
-import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
+import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.accountauthenticator.model.response.ATransactionListResponse;
@@ -30,5 +30,5 @@ public interface ServerAuthenticate {
     ATransactionListResponse transactionList(final ATransactionListRequest aTransactionListRequest) throws Exception;
 
     //                                              -- not used
-    AWalletChargeResponse chargeWallet(final AWalletChargeRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
+    AWalletChargeResponse chargeWallet(final ATransactionRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
 }

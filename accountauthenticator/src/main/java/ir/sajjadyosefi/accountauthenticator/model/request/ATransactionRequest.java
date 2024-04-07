@@ -4,7 +4,7 @@ package ir.sajjadyosefi.accountauthenticator.model.request;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import kotlin.jvm.Throws;
 
-public class AWalletChargeRequest {
+public class ATransactionRequest {
 
     private int IDApplicationVersion = AccountGeneral.getIDApplicationVersion();
     private String IP = AccountGeneral.getIP();
@@ -12,7 +12,16 @@ public class AWalletChargeRequest {
 
     private String UserCode = null;
     private String Amount;
+    private boolean DirectPay;
     private String metaData;
+
+    public void setDirectPay(boolean directPay) {
+        DirectPay = directPay;
+    }
+
+    public boolean isDirectPay() {
+        return DirectPay;
+    }
 
     public String getMetaData() {
         return metaData;
@@ -22,13 +31,13 @@ public class AWalletChargeRequest {
         this.metaData = metaData;
     }
 
-    public AWalletChargeRequest(String amount) throws Exception {
+    public ATransactionRequest(String amount) throws Exception {
         if (AccountGeneral.getUserCode() == null)
             throw new Exception("UserCode == null");
         UserCode = AccountGeneral.getUserCode();
         Amount = amount;
     }
-    public AWalletChargeRequest(String userCode , String amount) {
+    public ATransactionRequest(String userCode , String amount) {
         UserCode = userCode;
         Amount = amount;
     }

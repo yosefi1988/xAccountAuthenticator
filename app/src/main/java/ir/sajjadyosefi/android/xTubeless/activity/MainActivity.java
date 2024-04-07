@@ -171,6 +171,8 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
 //        bundle.putString("metaData", "meta Data 1000");
 //        bundle.putString("tax", "90");
 //        bundle.putB("isCharge", t);
+        //        bundle.putB("isDirectPayment", t);
+
 //        bundle.putString("portService", "50");
 //        Intent intent = PaymentActivity.getIntent(getContext(),bundle);
 //        //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
@@ -193,6 +195,7 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
 //        bundle.putString("metaData", "meta Data 1000");
 //        bundle.putString("tax", "1");
         //        bundle.putB("isCharge", t);
+        //        bundle.putB("isDirectPayment", t);
 //        bundle.putString("portService", "2");
 //        Intent intent = PaymentActivity.getIntent(this, bundle);
 //        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);

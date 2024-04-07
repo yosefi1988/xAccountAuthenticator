@@ -24,7 +24,7 @@ import ir.sajjadyosefi.accountauthenticator.model.request.AChangePasswordRequest
 import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ALoginRequest;
 import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionListRequest;
-import ir.sajjadyosefi.accountauthenticator.model.request.AWalletChargeRequest;
+import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.ALoginResponse;
 import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.accountauthenticator.model.response.ATransactionListResponse;
@@ -307,7 +307,7 @@ public class ParseComServerAuthenticate implements ServerAuthenticate {
     }
 
     @Override
-    public AWalletChargeResponse chargeWallet(AWalletChargeRequest request) throws Exception {
+    public AWalletChargeResponse chargeWallet(ATransactionRequest request) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
         String url = Config.MAINHOST + WalletChargeTransactionAddress;
         HttpPost httpPost = new HttpPost(url);
