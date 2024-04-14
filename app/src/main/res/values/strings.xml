@@ -436,7 +436,7 @@
     <string name="userIsNull">"user null "</string>
 
 
-    <string name="zarinpalpayment">zarinpalpayment5</string>
-    <string name="schemezarinpalpayment">return5</string>
+    <string name="zarinpalpayment">zarinpalpayment</string>
+    <string name="schemezarinpalpayment">return</string>
 
 </resources>
