@@ -265,8 +265,9 @@ public class PaymentActivity extends Activity {
                 .asPaymentRequest(
                         "e8a913e8-f089-11e6-8dec-005056a205be",
                         amountZarrin,
+//                        String.format("%s://%s","return5", "zarinpalpayment5" ),
                         String.format("%s://%s", AccountGeneral.getSchemezarinpalpayment(), AccountGeneral.getZarinpalpayment()),
-                        discription,
+                        (discription.length() == 0 ? "" : discription),
                         phone,
                         "yosefi1988@gmail.com"
                 ).build();
