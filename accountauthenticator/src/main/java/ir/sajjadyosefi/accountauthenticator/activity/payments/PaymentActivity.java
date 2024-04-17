@@ -22,7 +22,6 @@ import com.zarinpal.billing.purchase.Purchase;
 import com.zarinpal.client.BillingClientStateListener;
 import com.zarinpal.client.ClientState;
 import com.zarinpal.provider.core.future.FutureCompletionListener;
-import com.zarinpal.provider.core.future.TaskResult;
 import com.zarinpal.provider.model.response.Receipt;
 //import com.zarinpal.ewallets.purchase.OnCallbackRequestPaymentListener;
 //import com.zarinpal.ewallets.purchase.OnCallbackVerificationPaymentListener;
@@ -31,7 +30,6 @@ import com.zarinpal.provider.model.response.Receipt;
 
 
 import ir.sajjadyosefi.accountauthenticator.R;
-import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionRequest;
@@ -45,7 +43,7 @@ public class PaymentActivity extends Activity {
 
     private static boolean withoutUi = false;
     private static boolean paySuccess = false;
-    private static boolean isCharge = false;
+    private static boolean _isCharge = false;
     private static boolean isDirectPayment = false;
     private static Intent paymentIntent;
     private static Bundle bundle;
@@ -73,7 +71,7 @@ public class PaymentActivity extends Activity {
             paySuccess = false;
             paymentIntent = null;
             bundle = null;
-            isCharge = false;
+            _isCharge = false;
             isDirectPayment = false;
         }catch (Exception e){
         }
@@ -137,7 +135,7 @@ public class PaymentActivity extends Activity {
                     amountX = paymentIntent.getIntExtra("amount", 10000) + "";
                     phone = paymentIntent.getStringExtra("phone");
                     tax = Integer.parseInt(paymentIntent.getStringExtra("tax"));
-                    isCharge = paymentIntent.getBooleanExtra("isCharge",false);
+                    _isCharge = paymentIntent.getBooleanExtra("isCharge",false);
                     isDirectPayment = paymentIntent.getBooleanExtra("isDirectPayment",false);
                     portService = Integer.parseInt(paymentIntent.getStringExtra("portService"));
 
@@ -209,7 +207,7 @@ public class PaymentActivity extends Activity {
         if (paymentIntent.hasExtra("portService"))
             portService = Integer.parseInt(paymentIntent.getStringExtra("portService"));
         if (paymentIntent.hasExtra("isCharge"))
-            isCharge = paymentIntent.getBooleanExtra("isCharge",false);
+            _isCharge = paymentIntent.getBooleanExtra("isCharge",false);
         if (paymentIntent.hasExtra("isDirectPayment"))
             isDirectPayment = paymentIntent.getBooleanExtra("isDirectPayment",false);
 
@@ -391,7 +389,7 @@ public class PaymentActivity extends Activity {
                 }
                 aTransactionRequest.setMetaData(discription);
 
-                if (isCharge)
+                if (_isCharge)
                     aTransactionRequest.setDirectPay(false);
                 else {
                     if (isDirectPayment) {
@@ -401,7 +399,7 @@ public class PaymentActivity extends Activity {
                     }
                 }
 
-                if (isCharge)
+                if (_isCharge)
                     chargeAccount(aTransactionRequest);
                 else {
                     if (withoutUi) {
