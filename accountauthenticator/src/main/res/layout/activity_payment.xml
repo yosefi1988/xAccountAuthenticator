@@ -63,13 +63,13 @@
                 android:paddingRight="5dp"
                 android:layout_marginLeft="10dp"
                 android:paddingLeft="5dp"
-                android:text="مبلغ به تومان"/>
+                android:text="مبلغ (ريال) "/>
 
 
             <EditText
+                android:id="@+id/editTextAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTextAmount"
                 android:layout_gravity="right"
                 android:inputType="number"
                 android:ems="10"
@@ -111,7 +111,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="صورتحساب"
+                    android:text="صورتحساب (مبالغ به ريال)"
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textSize="18sp" />
@@ -185,16 +185,13 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="جمع به تومان" />
+                        android:text="جمع" />
                     <TextView
                         android:id="@+id/textViewPrice4"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="0" />
-
-
-
                 </LinearLayout>
 
             </LinearLayout>
