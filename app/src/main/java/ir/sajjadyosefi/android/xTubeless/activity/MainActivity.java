@@ -196,29 +196,29 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
 //        AccountGeneral.setAndroidID("15df3b3a90dc5688");
 //
 //        //zarinpal
-//        AccountGeneral.setAppName(getString(R.string.app_name));
-//        AccountGeneral.setZarinpalpayment(getContext().getString(R.string.zarinpalpayment));
-//        AccountGeneral.setSchemezarinpalpayment(getContext().getString(R.string.schemezarinpalpayment));
-//
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("type", 2);
-//        bundle.putInt("amount", 11000);//ريال
-//        bundle.putString("phone", "0912333");
-//        bundle.putString("metaData", "meta Data 1000");
-//
-//        bundle.putString("tax", "9");
-//        bundle.putString("portService", "5");
-//        bundle.putBoolean("isCharge", false);//   <==== //use true for charge wallet
-//        bundle.putBoolean("isDirectPayment", true);     //valid when isCharge = false
-//
-//
-//
-//        Intent intent = PaymentActivity.getIntent(this, bundle);
-//        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-//        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-//        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+        AccountGeneral.setAppName(getString(R.string.app_name));
+        AccountGeneral.setZarinpalpayment(getContext().getString(R.string.zarinpalpayment));
+        AccountGeneral.setSchemezarinpalpayment(getContext().getString(R.string.schemezarinpalpayment));
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 2);
+        bundle.putInt("amount", 11000);//ريال
+        bundle.putString("phone", "0912333");
+        bundle.putString("metaData", "meta Data 1000");
+
+        bundle.putString("tax", "9");
+        bundle.putString("portService", "5");
+        bundle.putBoolean("isCharge", false);//   <==== //use true for charge wallet
+        bundle.putBoolean("isDirectPayment", true);     //valid when isCharge = false
+
+
+
+        Intent intent = PaymentActivity.getIntent(this, bundle);
+        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
     }
     private void drawableMenu(Toolbar toolbar) {
