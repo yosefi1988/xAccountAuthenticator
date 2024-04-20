@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.zarinpal.billing.purchase.Purchase;
 import com.zarinpal.client.BillingClientStateListener;
 import com.zarinpal.client.ClientState;
 import com.zarinpal.provider.core.future.FutureCompletionListener;
+import com.zarinpal.provider.core.future.TaskResult;
 import com.zarinpal.provider.model.response.Receipt;
 //import com.zarinpal.ewallets.purchase.OnCallbackRequestPaymentListener;
 //import com.zarinpal.ewallets.purchase.OnCallbackVerificationPaymentListener;
@@ -102,10 +104,6 @@ public class PaymentActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
-
-
-        //
         context = this;
         Uri data2 = getIntent().getData();
 
@@ -211,7 +209,6 @@ public class PaymentActivity extends Activity {
         if (paymentIntent.hasExtra("isDirectPayment"))
             isDirectPayment = paymentIntent.getBooleanExtra("isDirectPayment",false);
 
-
         if (btnPay != null) {
             editTextAmount.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -287,26 +284,6 @@ public class PaymentActivity extends Activity {
                 }
             });
         }
-
-//        if (Global.IDUser == NOT_LOGN_USER ){
-//        if (Global.user == null || Global.user.getUserId() == NOT_LOGN_USER ){
-//            Bundle bundle = new Bundle();
-//            Intent intent = SignInActivity.getIntent(context,bundle);
-//            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-//            startActivityForResult(intent, GO_TO_LOGIN);
-//        }
-
-
-//            Bundle bundle = new Bundle();
-//            Gson gson = new Gson();
-//            bundle.putString("ReturnData", gson.toJson("response"));
-//            intent.putExtras(bundle);
-//            setResult(Activity.RESULT_OK, intent);
-//
-//            finish();
-
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -372,6 +349,7 @@ public class PaymentActivity extends Activity {
                         "yosefi1988@gmail.com"
                 ).build();
 
+
         FutureCompletionListener<Receipt> receiptFutureCompletionListener = task -> {
             //sdk
             if (task.isSuccess()) {
@@ -387,11 +365,12 @@ public class PaymentActivity extends Activity {
                     aTransactionRequest = new ATransactionRequest("110015", amountTubelessToman + "0");
                     exception.printStackTrace();
                 }
-                aTransactionRequest.setMetaData(discription);
 
-                if (_isCharge)
+                aTransactionRequest.setMetaData(discription + "\nTransactionID:" + task.getSuccess().getTransactionID());
+
+                if (_isCharge) {
                     aTransactionRequest.setDirectPay(false);
-                else {
+                }else {
                     if (isDirectPayment) {
                         aTransactionRequest.setDirectPay(true);
                     } else {
@@ -438,7 +417,6 @@ public class PaymentActivity extends Activity {
 //                        }
                 }
             }
-            //PaymentActivity.PaymentDone();
         };
         client.launchBillingFlow(purchase,receiptFutureCompletionListener);
     }
@@ -457,7 +435,6 @@ public class PaymentActivity extends Activity {
 
     @SuppressLint("StaticFieldLeak")
     private void chargeAccount(final ATransactionRequest chargeRequest) {
-
         new AsyncTask<String, Void, AWalletChargeResponse>() {
             @Override
             protected AWalletChargeResponse doInBackground(String... params) {
@@ -521,75 +498,4 @@ public class PaymentActivity extends Activity {
         paymentIntent = null;
         paySuccess = false;
     }
-
-    @SuppressLint("StaticFieldLeak")
-    public void chargeAcountWithoutUi(final ATransactionRequest request, Context context, final IDeviceRegisterRequest<Boolean,Intent> callback){
-        //showProgressBar();
-
-//        new AsyncTask<String, Void, Intent>() {
-//            @Override
-//            protected Intent doInBackground(String... params) {
-//                Intent intent = new Intent();
-//                Bundle bundle = new Bundle();
-//                AConfigResponse aConfig = null;
-//
-//                try {
-////                    aConfig = sServerAuthenticate.deviceRegister(aDeviceRegisterRequest);
-//
-////                    bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
-////                    bundle.putString(AccountManager.KEY_AUTHTOKEN, signInUser.getAuthtoken());
-////                    bundle.putString(PARAM_USER_ID, signInUser.getUserId().toString());
-//
-//                    Gson gson = new Gson();
-//                    bundle.putString(PARAM_CONFIG, gson.toJson(aConfig));
-//                    bundle.remove(KEY_ERROR_MESSAGE);
-//                    intent.putExtras(bundle);
-//                } catch (Exception e) {
-//                    bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
-//                }
-//                return intent;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Intent intent) {
-//
-//                if (intent.hasExtra(PARAM_CONFIG))
-//                    callback.onResponse(true,intent);
-//                else
-//                    callback.onResponse(false,intent);
-//
-//                //start activity for result
-//                //retData(intent);
-//            }
-//        }.execute();
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-
-    //    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//
-//        final BottomSheetDialog dialog = new BottomSheetDialog(context);
-//
-//        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Bundle bundle = new Bundle();
-//                Gson gson = new Gson();
-//                bundle.putString("ReturnData",gson.toJson("response"));
-//                intent.putExtras(bundle);
-//                setResult(Activity.RESULT_OK, intent);
-//
-//                finish();
-//            }
-//        });
-//    }
 }
