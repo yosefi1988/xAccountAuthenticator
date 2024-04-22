@@ -25,7 +25,16 @@ public class AStore {
         IsFree = free;
     }
 
+    public AStorePermissions getPermissions() {
+        return Permissions;
+    }
+
+    public void setPermissions(AStorePermissions permissions) {
+        Permissions = permissions;
+    }
+
     private int Id;
     private String Name;
     private boolean IsFree;
+    private AStorePermissions Permissions;
 }
