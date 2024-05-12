@@ -28,9 +28,18 @@ public class AStorePermissions {
         SendImageInPost = sendImageInPost;
     }
 
+    public int getPostAmount() {
+        return PostAmount;
+    }
+
+    public void setPostAmount(int postAmount) {
+        PostAmount = postAmount;
+    }
+
     private boolean IsPostFree;
     private boolean IsViewFree;
     private boolean SendImageInPost;
+    private int PostAmount;
 
 
 }
