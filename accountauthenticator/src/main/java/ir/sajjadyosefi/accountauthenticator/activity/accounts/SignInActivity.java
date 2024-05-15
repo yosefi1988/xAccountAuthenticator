@@ -855,6 +855,7 @@ public class SignInActivity extends Activity {
                     intent.putExtras(bundle);
                 } catch (Exception e) {
                     bundle.putString(KEY_ERROR_MESSAGE, e.getMessage());
+                    intent.putExtras(bundle);
                 }
                 return intent;
             }
