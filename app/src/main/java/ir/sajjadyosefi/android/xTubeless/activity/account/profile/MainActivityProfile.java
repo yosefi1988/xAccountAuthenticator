@@ -1,5 +1,6 @@
 package ir.sajjadyosefi.android.xTubeless.activity.account.profile;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
@@ -207,6 +209,7 @@ public class MainActivityProfile extends TubelessTransparentStatusBarActivity im
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @OnClick({R.id.user_profile_photo,R.id.buttonSignOut,R.id.buttonBack,R.id.header_cover_image, R.id.upload_file_progress, R.id.btn_upload_file_without_progress})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -216,6 +219,11 @@ public class MainActivityProfile extends TubelessTransparentStatusBarActivity im
             case R.id.buttonSignOut:
                 SAccounts sAccounts = new SAccounts(getContext());
                 Account user = sAccounts.getUserAccount();
+
+                //int sdkVersion = android.os.Build.VERSION.SDK_INT;
+                //System.out.println("نسخه API: " + sdkVersion);
+
+
                 if (sAccounts.removeAccount(user)){
                     Global.user = null;
                 }

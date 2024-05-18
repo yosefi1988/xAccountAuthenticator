@@ -24,11 +24,11 @@ import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.AUTHTOKEN_TYPE_NORMAL_USER_LABEL;
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 
-public class Authenticator extends AbstractAccountAuthenticator {
+public class CustomAuthenticator extends AbstractAccountAuthenticator {
     private String TAG = "TubelessAuthenticator";
     private final Context mContext;
 
-    public Authenticator(Context context) {
+    public CustomAuthenticator(Context context) {
         super(context);
         this.mContext = context;
     }

@@ -2,8 +2,14 @@ package ir.sajjadyosefi.accountauthenticator.classes;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+
+import androidx.annotation.RequiresApi;
 
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
@@ -100,8 +106,27 @@ public class SAccounts {
 
     public boolean removeAccount(Account account) {
         try {
-            mAccountManager.removeAccount(account, null, null);
-            return true;
+            AccountManagerCallback<Boolean> callback = new AccountManagerCallback<Boolean>() {
+                @Override
+                public void run(AccountManagerFuture<Boolean> future) {
+                    int a = 5 ;
+                    a++;
+                }
+            };
+            Handler handler = new Handler();
+
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) {
+                AccountManagerFuture<Boolean> result = mAccountManager.removeAccount(account, callback, handler);
+                return result.isDone();
+            } else {
+                try {
+                    mAccountManager.removeAccountExplicitly(account);
+                    return true;
+                }catch (Exception ex){
+                    return false;
+                }
+            }
         }catch (Exception ex){
             return false;
         }
@@ -112,6 +137,4 @@ public class SAccounts {
         this.getAccountManager().addAccountExplicitly(account,data.getString(PARAM_USER_PASS), data);
         this.getAccountManager().setAuthToken(account, data.getString("authtokenType"), data.getString("authtoken"));
     }
-
-
 }
