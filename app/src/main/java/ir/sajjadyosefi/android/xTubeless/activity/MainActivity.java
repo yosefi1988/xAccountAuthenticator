@@ -165,26 +165,26 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
             setFirstRunIsDone();
         }
 
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("type" , 1);                //  1 = withUi / 2 = withoutUi
-//        //bundle.putInt("amount", 10000);         //ريال
-//        //bundle.putString("metaData", "meta Data 10000");
-//        bundle.putString("tax", "9");             //tax   %
-//        bundle.putString("portService", "5");     //portService %
-//        bundle.putBoolean("isCharge", true);      //نوع واریز     شارژ کیف پول یا واریز مستقیم
+        Bundle bundle = new Bundle();
+        bundle.putInt("type" , 1);                //  1 = withUi / 2 = withoutUi
+        //bundle.putInt("amount", 10000);         //ريال
+        //bundle.putString("metaData", "meta Data 10000");
+        bundle.putString("tax", "9");             //tax   %
+        bundle.putString("portService", "5");     //portService %
+        bundle.putBoolean("isCharge", true);      //نوع واریز     شارژ کیف پول یا واریز مستقیم
 
-//        bundle.putBoolean("isDirectPayment", false);      //valid when isCharge = false
+        bundle.putBoolean("isDirectPayment", false);      //valid when isCharge = false
 //          db =[isWalletTransaction]
 //         isDirect = true  or db 0 =تراکنش (پرداخت مستقیم) است و نباید در کیف محاسبه شود
 //         isDirect = false or db 1 =تراکنش مربوط به کیف پول است و باید محاسبه شود
 
-//        Intent intent = PaymentActivity.getIntent(getContext(),bundle);
-//        //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
-//        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-//        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-//        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-//        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+        Intent intent = PaymentActivity.getIntent(getContext(),bundle);
+        //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
+        //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
+        //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+        //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
 
 //        AccountGeneral.getAndroidID();
