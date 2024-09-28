@@ -342,7 +342,7 @@ public class PaymentActivity extends Activity {
                 .asPaymentRequest(
                         "e8a913e8-f089-11e6-8dec-005056a205be",
                         amountZarrinToman,
-                        String.format("%s://%s", "return2", "zarinpalpayment2"),
+                        String.format("%s://%s", "https", "zarinpalpayment2"),
 //                        String.format("%s://%s", AccountGeneral.getSchemezarinpalpayment(), AccountGeneral.getZarinpalpayment()),
                         (discription.length() == 0 ? "" : discription),
                         phone,

@@ -41,25 +41,29 @@ public class CustomEditText extends AppCompatEditText {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String regex = "\\s*\\bریال\\b\\s*";
-            String cleanStr = "";
-            if (!s.toString().equals(current)) {
-                removeTextChangedListener(this);
+            try {
+                String regex = "\\s*\\bریال\\b\\s*";
+                String cleanStr = "";
+                if (!s.toString().equals(current)) {
+                    removeTextChangedListener(this);
 
-                cleanStr = s.toString().replaceAll(regex, "");
-                cleanStr = cleanStr.replaceAll("[,]", "");
-                StringBuilder stringBuilder = new StringBuilder(cleanStr);
-                int strLenght = cleanStr.length();
-                for (int i = 1; i <= strLenght / 3; i++) {
-                    if (strLenght - (i * 3) > 0) {
-                        stringBuilder = stringBuilder.insert(strLenght - (i * 3), ',');
+                    cleanStr = s.toString().replaceAll(regex, "");
+                    cleanStr = cleanStr.replaceAll("[,]", "");
+                    StringBuilder stringBuilder = new StringBuilder(cleanStr);
+                    int strLenght = cleanStr.length();
+                    for (int i = 1; i <= strLenght / 3; i++) {
+                        if (strLenght - (i * 3) > 0) {
+                            stringBuilder = stringBuilder.insert(strLenght - (i * 3), ',');
+                        }
                     }
+                    cleanStr = stringBuilder.toString();
+                    setText(cleanStr + " ریال ");
+                    setSelection(cleanStr.length());
                 }
-                cleanStr = stringBuilder.toString();
-                setText(cleanStr + " ریال ");
-                setSelection(cleanStr.length());
+                addTextChangedListener(this);
+            }catch (Exception ex){
+                setText("");
             }
-            addTextChangedListener(this);
         }
 
 

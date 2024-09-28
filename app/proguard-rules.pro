@@ -45,3 +45,13 @@
 #-keepattributes Signature, *Annotation*
 
 -keep class com.zarinpal.*
+
+
+
+
+
+##3
+-keep class ir.sb24.android.samanbanksdkmodule.model.** { *; }
+-dontwarn ir.sb24.android.samanbanksdkmodule.model.**
+
+

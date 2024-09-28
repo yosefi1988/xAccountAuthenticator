@@ -43,7 +43,7 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.Tubeless"
-        tools:replace="android:theme ,android:icon"
+        tools:replace="android:theme ,android:icon ,android:allowBackup ,android:name"
         tools:ignore="GoogleAppIndexingWarning">
 
 
@@ -80,7 +80,7 @@
                 <action android:name="android.intent.action.VIEW" ></action>
                 <category android:name="android.intent.category.DEFAULT"></category>
                 <category android:name="android.intent.category.BROWSABLE"></category>
-                <data android:scheme="return2" android:host="zarinpalpayment"></data>
+                <data android:scheme="https" android:host="zarinpalpayment"></data>
             </intent-filter>
         </activity>
 
@@ -129,10 +129,10 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"  >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider_paths" />
+                android:resource="@xml/file_provider_paths"  />
         </provider>
 
 
@@ -147,10 +147,12 @@
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
 
+
     </application>
 
     <!--for JobIntentService-->
     <!--fileupload service-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

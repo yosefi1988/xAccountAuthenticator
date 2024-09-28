@@ -1,3 +1,4 @@
 include ':app'
 include ':accountauthenticator'
 //include ':accountauthenticator2'
+include ':zarinpalsdk'

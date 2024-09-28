@@ -5,7 +5,7 @@ apply plugin: 'com.android.application'
 //todo change version code before publish
 def final appNameAAA = 'authenticator'
 def final AAA_VersionName = "2.0.1"     //4 shahrivar
-def final AAA_VersionCode = 4
+def final AAA_VersionCode = 8
 
 
 android {
@@ -51,9 +51,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            useProguard true
-            debuggable true
+            minifyEnabled true
+            useProguard false
+            debuggable false
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //manifestPlaceholders = [pn: "com.hamsa"]
@@ -67,7 +67,7 @@ android {
         }
         debug {
             minifyEnabled false
-            useProguard true
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             versionNameSuffix "-dev"
             manifestPlaceholders = [pn: "ir.sajjadyosefi.android.xTubeless"]
@@ -190,11 +190,19 @@ dependencies {
 
 //    implementation 'com.zarinpal:purchase:0.0.8-beta'
 //    implementation ('com.zarinpal:purchase:0.0.8-beta'){ exclude group: 'com.mcxiaoke.volley', module: 'library' }
+    implementation files('D:\\android\\AndroidStudioProjects\\SamanBankSDKApplication\\samanbanksdkmodule\\build\\outputs\\aar\\samanbanksdkmodule-development-releasex32.aar')
+//    implementation files('D:\\android\\AndroidStudioProjects\\SamanBankSDKApplication\\samanbanksdkmodule\\build\\outputs\\aar\\samanbanksdkmodule-development-debug4.aar')
 
+
+    implementation('commons-codec:commons-codec:1.15') {
+        exclude group: 'org.apache.http', module: 'samanbanksdkmodule'
+    }
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.4'
+    implementation ('com.googlecode.mp4parser:isoparser:1.0.6') {
+        exclude group: 'org.aspectj', module: 'aspectjrt'
+    }
+    implementation project(':zarinpalsdk')
 
 }
 
 apply plugin: 'com.google.gms.google-services'
-
-
-
