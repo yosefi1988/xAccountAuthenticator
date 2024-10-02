@@ -19,8 +19,6 @@ def getArtificatId = { ->
 
 android {
     compileSdk 29
-    buildToolsVersion '28.0.3'
-
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
@@ -56,13 +54,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    compileSdkVersion 29
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 
-//    implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -79,7 +77,6 @@ dependencies {
 
     //new getSchemezarinpalpaymentinpal
 //    implementation 'androidx.core:core-ktx:1.7.0'
-//    implementation 'androidx.appcompat:appcompat:1.4.1'
 //    implementation 'com.google.android.material:material:1.5.0'
     implementation "com.zarinpal:payment-provider:0.6.3"
 

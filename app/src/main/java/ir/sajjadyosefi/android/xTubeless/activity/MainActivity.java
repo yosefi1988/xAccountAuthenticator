@@ -49,6 +49,7 @@ import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 import ir.sb24.android.samanbanksdkmodule.activities.AboutActivity;
 import ir.sb24.android.samanbanksdkmodule.activities.banner.WelcomeActivity_1;
 import ir.sb24.android.samanbanksdkmodule.model.user.UserBasicInfo;
+import ir.sb24.android.sdkpayzarin.PaymentActivity2;
 import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
@@ -237,6 +238,8 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
 //        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 //        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
+        Intent intent = new Intent(this, ir.sb24.android.sdkpayzarin.MainActivity.class);
+        startActivity(intent);
     }
     private void drawableMenu(Toolbar toolbar) {
 
@@ -528,8 +531,7 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
 
 
     private void callSdkZ() {
-        Intent intent = new Intent(this, ir.sajjadyosefi.android.zarinpalsdk.PaymentActivity2.class);
-        startActivity(intent);
+
     }
 
     public void callSdk(){
