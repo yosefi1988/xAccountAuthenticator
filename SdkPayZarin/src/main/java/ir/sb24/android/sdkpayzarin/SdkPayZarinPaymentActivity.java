@@ -1,10 +1,9 @@
 package ir.sb24.android.sdkpayzarin;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Xml;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -23,12 +22,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PaymentActivity2 extends AppCompatActivity {
+public class SdkPayZarinPaymentActivity extends AppCompatActivity {
 
     private String merchant = "e8a913e8-f089-11e6-8dec-005056a205be";
     private String description = "خرید تستی ";
     private String callbackurl = "http://localhost:2812/Home/VerifyByHttpClient";
-    private String amount = "10000"; // مبلغ به ریال
+    private String amount = "100000"; // مبلغ به ریال
     private String mobile = "09123678522";
     private String email = "yosefi1988@gmail.com";
 
@@ -42,16 +41,46 @@ public class PaymentActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zarrin_sdk_activity_payment);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey("merchant")) {
+                merchant = extras.getString("merchant");
+            }
+            if (extras.containsKey("description")) {
+                description = extras.getString("description");
+            }
+            if (extras.containsKey("callbackurl")) {
+                callbackurl = extras.getString("callbackurl");
+            }
+            if (extras.containsKey("amount")) {
+                amount = extras.getString("amount");
+            }
+            if (extras.containsKey("mobile")) {
+                mobile = extras.getString("mobile");
+            }
+            if (extras.containsKey("email")) {
+                email = extras.getString("email");
+            }
+        }
         paymentWebView = findViewById(R.id.paymentWebView);
         paymentWebView.getSettings().setJavaScriptEnabled(true);
         paymentWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.contains(callbackurl)) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                    return true;
+                    if (url.contains("Status") && url.contains("NOK")) {
+                        setResult(Activity.RESULT_CANCELED);
+                        finish();
+                        return true;
+                    }else if (url.contains("Status") && url.contains("OK")){
+                        Intent returnIntent = getIntent();
+                        Bundle bundle = new Bundle();
+                        returnIntent.putExtras(bundle);
+                        setResult(Activity.RESULT_OK, getIntent());
+                        finish();
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -115,16 +144,16 @@ public class PaymentActivity2 extends AppCompatActivity {
                         String paymentUrl = gateWayUrl + authority ;
                         paymentWebView.postUrl(paymentUrl,null);
                     } else {
-                        Toast.makeText(PaymentActivity2.this, "Payment Failed: " + paymentResponse.getData().getCode(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SdkPayZarinPaymentActivity.this, "Payment Failed: " + paymentResponse.getData().getCode(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(PaymentActivity2.this, "Payment Request Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SdkPayZarinPaymentActivity.this, "Payment Request Failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<PaymentResponse> call, Throwable t) {
-                Toast.makeText(PaymentActivity2.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SdkPayZarinPaymentActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

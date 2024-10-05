@@ -10,12 +10,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +38,6 @@ import ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActiv
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.ChangePasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.ResetPasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignInActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.payments.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.android.xTubeless.BuildConfig;
 import ir.sajjadyosefi.android.xTubeless.R;
@@ -49,7 +52,6 @@ import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 import ir.sb24.android.samanbanksdkmodule.activities.AboutActivity;
 import ir.sb24.android.samanbanksdkmodule.activities.banner.WelcomeActivity_1;
 import ir.sb24.android.samanbanksdkmodule.model.user.UserBasicInfo;
-import ir.sb24.android.sdkpayzarin.PaymentActivity2;
 import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
@@ -166,6 +168,7 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
         callSdkZ();
     }
 
+    ActivityResultLauncher launcher;
 
     @Override
     protected void onStart() {
@@ -239,7 +242,26 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
 //        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
         Intent intent = new Intent(this, ir.sb24.android.sdkpayzarin.MainActivity.class);
-        startActivity(intent);
+        intent.putExtra("direct",true);
+        intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
+            intent.putExtra("description","تست");
+            intent.putExtra("callbackurl","https://sajjadyosefi.ir");
+            intent.putExtra("amount", "15000");
+            intent.putExtra("mobile", "09123678522");
+            intent.putExtra("email", "yosefi1988@gmail.com");
+
+        launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Toast.makeText(getContext(), getContext().getString(R.string.ok),Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getContext(), getContext().getString(R.string.notok),Toast.LENGTH_LONG).show();
+                }
+                finish();
+        });
+        launcher.launch(intent);
+
     }
     private void drawableMenu(Toolbar toolbar) {
 

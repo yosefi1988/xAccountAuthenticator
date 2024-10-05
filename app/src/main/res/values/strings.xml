@@ -438,5 +438,6 @@
 
     <string name="zarinpalpayment">zarinpalpayment</string>
     <string name="schemezarinpalpayment">return</string>
+    <string name="notok">not Ok</string>
 
 </resources>
