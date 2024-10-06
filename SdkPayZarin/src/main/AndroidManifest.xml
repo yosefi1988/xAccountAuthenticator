@@ -3,7 +3,7 @@
     package="ir.sb24.android.sdkpayzarin">
     <application >
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".SdkPayZarinMainActivity" />
         <activity android:name=".SdkPayZarinPaymentActivity" />
 
     </application>

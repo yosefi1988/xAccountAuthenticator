@@ -5,14 +5,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class SdkPayZarinMainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent data) {
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void startZarinPaymentActivity(Bundle extras) {
-        Intent intent = new Intent(MainActivity.this, SdkPayZarinPaymentActivity.class);
+        Intent intent = new Intent(SdkPayZarinMainActivity.this, SdkPayZarinPaymentActivity.class);
 
         if (extras.containsKey("merchant")) {
             intent.putExtra("merchant", extras.getString("merchant"));

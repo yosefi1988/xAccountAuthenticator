@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.IdRes;
@@ -52,6 +50,7 @@ import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
 import ir.sb24.android.samanbanksdkmodule.activities.AboutActivity;
 import ir.sb24.android.samanbanksdkmodule.activities.banner.WelcomeActivity_1;
 import ir.sb24.android.samanbanksdkmodule.model.user.UserBasicInfo;
+import ir.sb24.android.sdkpayzarin.SdkPayZarinMainActivity;
 import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
@@ -241,14 +240,19 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
 //        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 //        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
-        Intent intent = new Intent(this, ir.sb24.android.sdkpayzarin.MainActivity.class);
+        SDKZarin();
+
+    }
+
+    private void SDKZarin() {
+        Intent intent = new Intent(this, SdkPayZarinMainActivity.class);
         intent.putExtra("direct",true);
         intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
-            intent.putExtra("description","تست");
-            intent.putExtra("callbackurl","https://sajjadyosefi.ir");
-            intent.putExtra("amount", "15000");
-            intent.putExtra("mobile", "09123678522");
-            intent.putExtra("email", "yosefi1988@gmail.com");
+        intent.putExtra("description","تست");
+        intent.putExtra("callbackurl","https://sajjadyosefi.ir");
+        intent.putExtra("amount", "15000");
+        intent.putExtra("mobile", "09123678522");
+        intent.putExtra("email", "yosefi1988@gmail.com");
 
         launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -261,8 +265,8 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
                 finish();
         });
         launcher.launch(intent);
-
     }
+
     private void drawableMenu(Toolbar toolbar) {
 
         //add humberger

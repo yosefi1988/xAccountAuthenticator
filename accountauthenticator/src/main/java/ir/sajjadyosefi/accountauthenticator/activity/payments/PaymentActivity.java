@@ -9,12 +9,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
@@ -23,7 +26,6 @@ import com.zarinpal.billing.purchase.Purchase;
 import com.zarinpal.client.BillingClientStateListener;
 import com.zarinpal.client.ClientState;
 import com.zarinpal.provider.core.future.FutureCompletionListener;
-import com.zarinpal.provider.core.future.TaskResult;
 import com.zarinpal.provider.model.response.Receipt;
 //import com.zarinpal.ewallets.purchase.OnCallbackRequestPaymentListener;
 //import com.zarinpal.ewallets.purchase.OnCallbackVerificationPaymentListener;
@@ -32,14 +34,14 @@ import com.zarinpal.provider.model.response.Receipt;
 
 
 import ir.sajjadyosefi.accountauthenticator.R;
-import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegisterRequest;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.AWalletChargeResponse;
+import ir.sb24.android.sdkpayzarin.SdkPayZarinMainActivity;
 
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 
-public class PaymentActivity extends Activity {
+public class PaymentActivity extends AppCompatActivity {
 
     public static final int GO_TO_LOGIN = 20;
 
@@ -99,6 +101,7 @@ public class PaymentActivity extends Activity {
         intent.putExtras(bundle);
         return intent;
     }
+    ActivityResultLauncher launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +109,73 @@ public class PaymentActivity extends Activity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         context = this;
         Uri data2 = getIntent().getData();
+        launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        paySuccess = true;
+                        Intent x = PaymentActivity.getPaymentIntent();
+                        ATransactionRequest aTransactionRequest = null; // تبدیل به ریال
+                        try {
+                            aTransactionRequest = new ATransactionRequest(calcBillHide() + "");
+                        } catch (Exception exception) {
+
+                            //todo remove
+                            aTransactionRequest = new ATransactionRequest("110015", calcBillHide() + "");
+                            exception.printStackTrace();
+                        }
+                        aTransactionRequest.setMetaData(discription + "\nTransactionID:" + "authority");
+
+                        if (_isCharge) {
+                            aTransactionRequest.setDirectPay(false);
+                        }else {
+                            if (isDirectPayment) {
+                                aTransactionRequest.setDirectPay(true);
+                            } else {
+                                aTransactionRequest.setDirectPay(false);
+                            }
+                        }
+
+                        if (_isCharge)
+                            chargeAccount(aTransactionRequest);
+                        else {
+                            if (withoutUi) {
+                                Bundle bundle = new Bundle();
+                                Gson gson = new Gson();
+                                bundle.putString("ReturnData","direct Payment");
+                                paymentIntent.putExtras(bundle);
+                                ((Activity)context).setResult(Activity.RESULT_OK, paymentIntent);
+                                ((Activity)context).finish();
+                            } else {
+                                final BottomSheetDialog dialog = new BottomSheetDialog(context);
+                                TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                        Gson gson = new Gson();
+                                        bundle.putString("ReturnData","direct Payment");
+                                        paymentIntent.putExtras(bundle);
+                                        setResult(Activity.RESULT_OK, paymentIntent);
+                                        finish();
+                                    }
+                                });
+                            }
+                        }
+                    }else {
+                        //                    Toast.makeText(getBaseContext(),"pay not success" , Toast.LENGTH_LONG).show();
+//                    show message refID
+//                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
+                        paySuccess = false;
+
+                        if (paymentIntent.hasExtra("type")){
+//                        if (paymentIntent.getIntExtra("type",1) == 2){
+                            setResult(Activity.RESULT_CANCELED);
+                            finish();
+//                        }
+                        }
+                    }
+                    finish();
+                });
 
         if (paymentIntent != null) {
             if (paymentIntent.hasExtra("type")) {
@@ -318,6 +388,21 @@ public class PaymentActivity extends Activity {
     }
 
     private void zarrinPayment(long amountZarrinToman,long amountTubelessToman, Context context) {
+        Intent intent = new Intent(this, SdkPayZarinMainActivity.class);
+        intent.putExtra("direct",true);
+        intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
+        intent.putExtra("description",(discription.length() == 0 ? "" : discription));
+        //intent.putExtra("callbackurl",String.format("%s://%s", "https", "zarinpalpayment2"));
+        intent.putExtra("callbackurl","https://sajjadyosefi.ir");
+        intent.putExtra("amount", Long.toString(amountZarrinToman * 10));
+        intent.putExtra("mobile", phone);
+        intent.putExtra("email", "yosefi1988@gmail.com");
+
+
+        launcher.launch(intent);
+
+    }
+    private void zarrinPayment0(long amountZarrinToman,long amountTubelessToman, Context context) {
         //new
         BillingClientStateListener stateListener = new BillingClientStateListener() {
             @Override
@@ -358,11 +443,11 @@ public class PaymentActivity extends Activity {
                 Intent x = PaymentActivity.getPaymentIntent();
                 ATransactionRequest aTransactionRequest = null; // تبدیل به ریال
                 try {
-                    aTransactionRequest = new ATransactionRequest(amountTubelessToman + "0");
+                    aTransactionRequest = new ATransactionRequest(amountTubelessToman + "");
                 } catch (Exception exception) {
 
                     //todo remove
-                    aTransactionRequest = new ATransactionRequest("110015", amountTubelessToman + "0");
+                    aTransactionRequest = new ATransactionRequest("110015", amountTubelessToman + "");
                     exception.printStackTrace();
                 }
 

@@ -3,8 +3,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 def final libName = "xaccountauthenticator"
 def final libGroupId = "ir.sajjadyosefi.libraries"
-def final lib_VersionName = "8.0.1"
-def final libversionCode = 4
+def final lib_VersionName = "9.0.0"
+def final libversionCode = 5
 
 
 //def githubProperties = new Properties()
@@ -59,6 +59,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':SdkPayZarin')
 
 
     testImplementation 'junit:junit:4.12'
