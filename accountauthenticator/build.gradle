@@ -4,7 +4,7 @@ apply plugin: 'maven-publish'
 def final libName = "xaccountauthenticator"
 def final libGroupId = "ir.sajjadyosefi.libraries"
 def final lib_VersionName = "9.0.0"
-def final libversionCode = 5
+def final libversionCode = 6
 
 
 //def githubProperties = new Properties()
