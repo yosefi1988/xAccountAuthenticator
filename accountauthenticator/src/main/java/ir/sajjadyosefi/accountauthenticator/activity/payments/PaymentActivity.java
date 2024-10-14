@@ -21,12 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
-import com.zarinpal.ZarinPalBillingClient;
-import com.zarinpal.billing.purchase.Purchase;
-import com.zarinpal.client.BillingClientStateListener;
-import com.zarinpal.client.ClientState;
-import com.zarinpal.provider.core.future.FutureCompletionListener;
-import com.zarinpal.provider.model.response.Receipt;
 //import com.zarinpal.ewallets.purchase.OnCallbackRequestPaymentListener;
 //import com.zarinpal.ewallets.purchase.OnCallbackVerificationPaymentListener;
 //import com.zarinpal.ewallets.purchase.PaymentRequest;
@@ -137,7 +131,7 @@ public class PaymentActivity extends AppCompatActivity {
                         }
 
                         if (_isCharge)
-                            chargeAccount(aTransactionRequest);
+                            createTransaction(aTransactionRequest);
                         else {
                             if (withoutUi) {
                                 Bundle bundle = new Bundle();
@@ -402,109 +396,109 @@ public class PaymentActivity extends AppCompatActivity {
         launcher.launch(intent);
 
     }
-    private void zarrinPayment0(long amountZarrinToman,long amountTubelessToman, Context context) {
-        //new
-        BillingClientStateListener stateListener = new BillingClientStateListener() {
-            @Override
-            public void onClientSetupFinished(ClientState clientState) {
-
-                int a = 5;
-                a++;
-            }
-            @Override
-            public void onClientServiceDisconnected() {
-
-                int b = 6;
-                b++;
-            }
-        };
-        ZarinPalBillingClient client = ZarinPalBillingClient.newBuilder(this)
-                .enableShowInvoice()
-                .setListener(stateListener)
-                .build();
-
-        Purchase purchase = Purchase.newBuilder()
-                .asPaymentRequest(
-                        "e8a913e8-f089-11e6-8dec-005056a205be",
-                        amountZarrinToman,
-                        String.format("%s://%s", "https", "zarinpalpayment2"),
-//                        String.format("%s://%s", AccountGeneral.getSchemezarinpalpayment(), AccountGeneral.getZarinpalpayment()),
-                        (discription.length() == 0 ? "" : discription),
-                        phone,
-                        "yosefi1988@gmail.com"
-                ).build();
-
-
-        FutureCompletionListener<Receipt> receiptFutureCompletionListener = task -> {
-            //sdk
-            if (task.isSuccess()) {
-                boolean receipt = task.isSuccess();
-                paySuccess = true;
-                Intent x = PaymentActivity.getPaymentIntent();
-                ATransactionRequest aTransactionRequest = null; // تبدیل به ریال
-                try {
-                    aTransactionRequest = new ATransactionRequest(amountTubelessToman + "");
-                } catch (Exception exception) {
-
-                    //todo remove
-                    aTransactionRequest = new ATransactionRequest("110015", amountTubelessToman + "");
-                    exception.printStackTrace();
-                }
-
-                aTransactionRequest.setMetaData(discription + "\nTransactionID:" + task.getSuccess().getTransactionID());
-
-                if (_isCharge) {
-                    aTransactionRequest.setDirectPay(false);
-                }else {
-                    if (isDirectPayment) {
-                        aTransactionRequest.setDirectPay(true);
-                    } else {
-                        aTransactionRequest.setDirectPay(false);
-                    }
-                }
-
-                if (_isCharge)
-                    chargeAccount(aTransactionRequest);
-                else {
-                    if (withoutUi) {
-                        Bundle bundle = new Bundle();
-                        Gson gson = new Gson();
-                        bundle.putString("ReturnData","direct Payment");
-                        paymentIntent.putExtras(bundle);
-                        ((Activity)context).setResult(Activity.RESULT_OK, paymentIntent);
-                        ((Activity)context).finish();
-                    } else {
-                        final BottomSheetDialog dialog = new BottomSheetDialog(context);
-                        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                                Gson gson = new Gson();
-                                bundle.putString("ReturnData","direct Payment");
-                                paymentIntent.putExtras(bundle);
-                                setResult(Activity.RESULT_OK, paymentIntent);
-                                finish();
-                            }
-                        });
-
-                    }
-                }
-            } else {
-//                    Toast.makeText(getBaseContext(),"pay not success" , Toast.LENGTH_LONG).show();
-//                    show message refID
-//                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
-                paySuccess = false;
-
-                if (paymentIntent.hasExtra("type")){
-//                        if (paymentIntent.getIntExtra("type",1) == 2){
-                    setResult(Activity.RESULT_CANCELED);
-                    finish();
-//                        }
-                }
-            }
-        };
-        client.launchBillingFlow(purchase,receiptFutureCompletionListener);
-    }
+//    private void zarrinPayment0(long amountZarrinToman,long amountTubelessToman, Context context) {
+//        //new
+//        BillingClientStateListener stateListener = new BillingClientStateListener() {
+//            @Override
+//            public void onClientSetupFinished(ClientState clientState) {
+//
+//                int a = 5;
+//                a++;
+//            }
+//            @Override
+//            public void onClientServiceDisconnected() {
+//
+//                int b = 6;
+//                b++;
+//            }
+//        };
+//        ZarinPalBillingClient client = ZarinPalBillingClient.newBuilder(this)
+//                .enableShowInvoice()
+//                .setListener(stateListener)
+//                .build();
+//
+//        Purchase purchase = Purchase.newBuilder()
+//                .asPaymentRequest(
+//                        "e8a913e8-f089-11e6-8dec-005056a205be",
+//                        amountZarrinToman,
+//                        String.format("%s://%s", "https", "zarinpalpayment2"),
+////                        String.format("%s://%s", AccountGeneral.getSchemezarinpalpayment(), AccountGeneral.getZarinpalpayment()),
+//                        (discription.length() == 0 ? "" : discription),
+//                        phone,
+//                        "yosefi1988@gmail.com"
+//                ).build();
+//
+//
+//        FutureCompletionListener<Receipt> receiptFutureCompletionListener = task -> {
+//            //sdk
+//            if (task.isSuccess()) {
+//                boolean receipt = task.isSuccess();
+//                paySuccess = true;
+//                Intent x = PaymentActivity.getPaymentIntent();
+//                ATransactionRequest aTransactionRequest = null; // تبدیل به ریال
+//                try {
+//                    aTransactionRequest = new ATransactionRequest(amountTubelessToman + "");
+//                } catch (Exception exception) {
+//
+//                    //todo remove
+//                    aTransactionRequest = new ATransactionRequest("110015", amountTubelessToman + "");
+//                    exception.printStackTrace();
+//                }
+//
+//                aTransactionRequest.setMetaData(discription + "\nTransactionID:" + task.getSuccess().getTransactionID());
+//
+//                if (_isCharge) {
+//                    aTransactionRequest.setDirectPay(false);
+//                }else {
+//                    if (isDirectPayment) {
+//                        aTransactionRequest.setDirectPay(true);
+//                    } else {
+//                        aTransactionRequest.setDirectPay(false);
+//                    }
+//                }
+//
+//                if (_isCharge)
+//                    chargeAccount(aTransactionRequest);
+//                else {
+//                    if (withoutUi) {
+//                        Bundle bundle = new Bundle();
+//                        Gson gson = new Gson();
+//                        bundle.putString("ReturnData","direct Payment");
+//                        paymentIntent.putExtras(bundle);
+//                        ((Activity)context).setResult(Activity.RESULT_OK, paymentIntent);
+//                        ((Activity)context).finish();
+//                    } else {
+//                        final BottomSheetDialog dialog = new BottomSheetDialog(context);
+//                        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//
+//                                Gson gson = new Gson();
+//                                bundle.putString("ReturnData","direct Payment");
+//                                paymentIntent.putExtras(bundle);
+//                                setResult(Activity.RESULT_OK, paymentIntent);
+//                                finish();
+//                            }
+//                        });
+//
+//                    }
+//                }
+//            } else {
+////                    Toast.makeText(getBaseContext(),"pay not success" , Toast.LENGTH_LONG).show();
+////                    show message refID
+////                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
+//                paySuccess = false;
+//
+//                if (paymentIntent.hasExtra("type")){
+////                        if (paymentIntent.getIntExtra("type",1) == 2){
+//                    setResult(Activity.RESULT_CANCELED);
+//                    finish();
+////                        }
+//                }
+//            }
+//        };
+//        client.launchBillingFlow(purchase,receiptFutureCompletionListener);
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -519,13 +513,13 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private void chargeAccount(final ATransactionRequest chargeRequest) {
+    private void createTransaction(final ATransactionRequest chargeRequest) {
         new AsyncTask<String, Void, AWalletChargeResponse>() {
             @Override
             protected AWalletChargeResponse doInBackground(String... params) {
                 AWalletChargeResponse response = null;
                 try {
-                    response = sServerAuthenticate.chargeWallet(chargeRequest);
+                    response = sServerAuthenticate.createWalletTransaction(chargeRequest);
                 } catch (Exception e) {  }
                 return response;
             }

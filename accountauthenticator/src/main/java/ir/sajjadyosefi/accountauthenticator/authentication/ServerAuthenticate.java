@@ -30,5 +30,5 @@ public interface ServerAuthenticate {
     ATransactionListResponse transactionList(final ATransactionListRequest aTransactionListRequest) throws Exception;
 
     //                                              -- not used
-    AWalletChargeResponse chargeWallet(final ATransactionRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
+    AWalletChargeResponse createWalletTransaction(final ATransactionRequest aDeviceRequestRegisterRegisterRequest) throws Exception;
 }

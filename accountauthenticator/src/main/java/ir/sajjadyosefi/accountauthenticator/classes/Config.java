@@ -11,7 +11,7 @@ public class Config {
     public static String changepasswordAddress = "/Api/User/changepassword";
     public static String RegDeviceAddress = "Api/Device/RegDevice";
 
-    public static String WalletChargeTransactionAddress = "/Api/Wallet/WalletChargeTransaction";
+    public static String WalletTransaction = "/Api/Wallet/TCreateTransaction";
     public static String WalletTransactionListAddress = "/Api/Wallet/WalletTransactionList";
 
 
