@@ -11,16 +11,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SdkPayZarinMainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK) {
-
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+////        if (requestCode == 1) {
+////            if (resultCode == Activity.RESULT_OK) {
+////                Intent returnIntent = getIntent();
+////                Bundle bundle = new Bundle();
+////                returnIntent.putExtras(bundle);
+////                setResult(Activity.RESULT_OK, getIntent());
+////                finish();
+////            }else {
+////                setResult(Activity.RESULT_CANCELED);
+////                finish();
+////            }
+////        }
+//    }
 
     private ActivityResultLauncher<Intent> paymentLauncher;
     @Override

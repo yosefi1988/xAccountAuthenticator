@@ -168,7 +168,7 @@ public class PaymentActivity extends AppCompatActivity {
 //                        }
                         }
                     }
-                    finish();
+                    //finish();
                 });
 
         if (paymentIntent != null) {
