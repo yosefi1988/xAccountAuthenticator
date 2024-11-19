@@ -9,20 +9,23 @@ def final AAA_VersionCode = 8
 
 
 android {
+    namespace "ir.sajjadyosefi.android.xTubeless"
     def final appId = 'ir.sajjadyosefi.android'
 
 //    flavorDimensions "default"
-    flavorDimensions("version_name", "market")
-    compileSdkVersion 29
-    buildToolsVersion '28.0.3'
+    flavorDimensions("version_name")
+    compileSdkVersion 34
 
-    configurations {
-//        all*.exclude module: 'okhttp'
-        all*.exclude module: 'okio'
-    }
 
+//    kotlinOptions {
+//        jvmTarget = "11"
+//    }
 
 //            storeFile file("D:\\Documents\\sajjad\\Key\\xTubeless\\xTubeless98")
+
+    buildFeatures {
+        buildConfig true
+    }
 
     signingConfigs {
         TubelessSajjadSigning {
@@ -41,7 +44,7 @@ android {
     defaultConfig {
         applicationId "${appId}"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -50,9 +53,23 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            //useProguard false
+            debuggable true
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            versionNameSuffix "-dev"
+            manifestPlaceholders = [pn: "ir.sajjadyosefi.android.xTubeless"]
+
+            buildConfigField 'String', 'HOST', "\"http://www.example.com\""
+            buildConfigField 'String', 'URL_PREFIX', "\"devapi\""
+            //resValue "string", "app_name", appName + "-debug"
+            buildConfigField("String", "BASE_URLX", "\"http://test.sajjadyosefi.ir/api/Upload/\"")
+        }
         release {
             minifyEnabled true
-            useProguard false
+            //useProguard false
             debuggable false
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -64,19 +81,9 @@ android {
             buildConfigField 'String', 'URL_PREFIX', "\"api\""
             signingConfig signingConfigs.TubelessSajjadSigning
             buildConfigField("String", "BASE_URLX", "\"http://test.sajjadyosefi.ir/api/Upload/\"")
+            signingConfig signingConfigs.debug
         }
-        debug {
-            minifyEnabled false
-            useProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            versionNameSuffix "-dev"
-            manifestPlaceholders = [pn: "ir.sajjadyosefi.android.xTubeless"]
 
-            buildConfigField 'String', 'HOST', "\"http://www.example.com\""
-            buildConfigField 'String', 'URL_PREFIX', "\"devapi\""
-            //resValue "string", "app_name", appName + "-debug"
-            buildConfigField("String", "BASE_URLX", "\"http://test.sajjadyosefi.ir/api/Upload/\"")
-        }
     }
 
 
@@ -91,12 +98,6 @@ android {
                     appIcon: "@drawable/png_icon"
             ]
         }
-
-        socialNetwork {
-            dimension "market"
-            versionNameSuffix "-s"
-        }
-
     }
 
     applicationVariants.all { variant ->
@@ -109,16 +110,12 @@ android {
             def date = new Date();
             def formattedDate = date.format('yyMMdd_HHmm')
 
-            def newApkName = project + SEP + flavor + SEP + buildType + SEP + version + SEP + formattedDate + ".apk"
+            def newApkName = project + SEP + flavor + SEP + version + SEP + formattedDate + ".apk"
 
             outputFileName = new File(newApkName)
         }
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
     sourceSets {
         main {
@@ -133,12 +130,11 @@ android {
         }
 
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
 }
-
-ext {
-    daggerVersion = '2.15'
-}
-
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -147,7 +143,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
 
 
     implementation 'com.google.android.material:material:1.0.0'
@@ -158,19 +154,29 @@ dependencies {
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.okhttp:okhttp:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+
+
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+//    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+//    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+//    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+
+
+
+
     implementation 'com.tuyenmonkey:mkloader:1.4.0'
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+//    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
 
 //    implementation "me.henrytao:smooth-app-bar-layout:25.3.1.0"
     implementation 'com.github.andremion:counterfab:1.2.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 //    implementation 'org.litepal.android:java:3.0.0'
 //    implementation 'com.bowyer.app:fabtransitionlayout:0.4.0@aar'
-    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+//    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
 //    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation "androidx.drawerlayout:drawerlayout:1.0.0"
@@ -183,15 +189,12 @@ dependencies {
     implementation 'com.goebl:david-webb:1.3.0'
     implementation project(path: ':accountauthenticator')
     implementation project(path: ':SdkPayZarin')
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
 
 
 //    implementation 'com.zarinpal:purchase:0.0.8-beta'
 //    implementation ('com.zarinpal:purchase:0.0.8-beta'){ exclude group: 'com.mcxiaoke.volley', module: 'library' }
-    implementation files('D:\\android\\AndroidStudioProjects\\SamanBankSDKApplication\\samanbanksdkmodule\\build\\outputs\\aar\\samanbanksdkmodule-development-releasex32.aar')
+//    implementation files('D:\\android\\AndroidStudioProjects\\SamanBankSDKApplication\\samanbanksdkmodule\\build\\outputs\\aar\\samanbanksdkmodule-development-releasex32.aar')
 //    implementation files('D:\\android\\AndroidStudioProjects\\SamanBankSDKApplication\\samanbanksdkmodule\\build\\outputs\\aar\\samanbanksdkmodule-development-debug4.aar')
 
 
@@ -202,7 +205,8 @@ dependencies {
     implementation ('com.googlecode.mp4parser:isoparser:1.0.6') {
         exclude group: 'org.aspectj', module: 'aspectjrt'
     }
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0"
 }
 
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'

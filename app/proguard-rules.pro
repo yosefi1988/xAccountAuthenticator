@@ -55,3 +55,4 @@
 -dontwarn ir.sb24.android.samanbanksdkmodule.model.**
 
 
+-keep class com.squareup.okio.** { *; }

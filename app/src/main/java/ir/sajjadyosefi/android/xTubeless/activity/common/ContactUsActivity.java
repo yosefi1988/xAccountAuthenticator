@@ -132,28 +132,28 @@ public class ContactUsActivity extends TubelessTransparentStatusBarActivity {
         ((RadioGroup)findViewById(R.id.rgRadios)).setOnCheckedChangeListener( new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        switch (checkedId) {
-                            case R.id.radioButton1:
-                                radioButton1.setChecked(true);
-                                radioButton2.setChecked(false);
-                                radioButton3.setChecked(false);
-                                messageType = SUGGESTION;
-                                break;
-                            case R.id.radioButton2:
-                                radioButton1.setChecked(false);
-                                radioButton2.setChecked(true);
-                                radioButton3.setChecked(false);
-                                messageType = ORDER_APP;
-                                break;
-                            case R.id.radioButton3:
-                                radioButton1.setChecked(false);
-                                radioButton2.setChecked(false);
-                                radioButton3.setChecked(true);
-                                messageType = CONTACT_US;
-                                break;
-
-
-                        }
+//                        switch (checkedId) {
+//                            case R.id.radioButton1:
+//                                radioButton1.setChecked(true);
+//                                radioButton2.setChecked(false);
+//                                radioButton3.setChecked(false);
+//                                messageType = SUGGESTION;
+//                                break;
+//                            case R.id.radioButton2:
+//                                radioButton1.setChecked(false);
+//                                radioButton2.setChecked(true);
+//                                radioButton3.setChecked(false);
+//                                messageType = ORDER_APP;
+//                                break;
+//                            case R.id.radioButton3:
+//                                radioButton1.setChecked(false);
+//                                radioButton2.setChecked(false);
+//                                radioButton3.setChecked(true);
+//                                messageType = CONTACT_US;
+//                                break;
+//
+//
+//                        }
                     }
                 });
 

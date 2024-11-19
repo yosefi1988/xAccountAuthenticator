@@ -119,18 +119,18 @@ public class ImageUtil {
         return inSampleSize;
     }
 
-    private okhttp3.Call.Factory createPicassoCallFactory(String jsonBody) {
-        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .build();
-        final RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonBody);
-        return new okhttp3.Call.Factory() {
-            @Override
-            public okhttp3.Call newCall(Request request) {
-                Request.Builder builder = request.newBuilder();
-                builder.post(requestBody);
-                builder.addHeader("Content-Type", "application/json");
-                return okHttpClient.newCall(builder.build());
-            }
-        };
-    }
+//    private okhttp3.Call.Factory createPicassoCallFactory(String jsonBody) {
+//        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                .build();
+//        final RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonBody);
+//        return new okhttp3.Call.Factory() {
+//            @Override
+//            public okhttp3.Call newCall(Request request) {
+//                Request.Builder builder = request.newBuilder();
+//                builder.post(requestBody);
+//                builder.addHeader("Content-Type", "application/json");
+//                return okHttpClient.newCall(builder.build());
+//            }
+//        };
+//    }
 }

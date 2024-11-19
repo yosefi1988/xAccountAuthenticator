@@ -34,9 +34,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import java.io.File;
 import java.lang.reflect.Type;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.activity.TubelessTransparentStatusBarActivity;
@@ -71,28 +69,16 @@ public class MainActivityProfile extends TubelessTransparentStatusBarActivity im
     Context context;
     Activity activity;
 
-
-    @BindView(R.id.margin)
     Button marginx;
-
-    @BindView(R.id.ueditTextNameUserId)
     EditText ueditTextNameUserId;
-    @BindView(R.id.editTextName)
     EditText editTextName;
-    @BindView(R.id.editTextEmail)
     EditText editTextEmail;
 
-    @BindView(R.id.header_cover_image)
     ImageView headerProfileImage;
-    @BindView(R.id.user_profile_photo)
-    ImageButton userAvatarPhoto;
-    @BindView(R.id.user_profile_name)
+    ImageButton userAvatarPhoto ;
     TextView userProfileShortBio;
-    @BindView(R.id.textViewProgress)
     TextView txtProgress;
-    @BindView(R.id.upload_file_progress)
     Button uploadFileProgress;
-    @BindView(R.id.btn_upload_file_without_progress)
     Button btnUploadFileWithoutProgress;
 
     private ImagePresenter mImagePresenter;
@@ -111,7 +97,16 @@ public class MainActivityProfile extends TubelessTransparentStatusBarActivity im
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_main);
-        ButterKnife.bind(this);
+        marginx = findViewById(R.id.margin);
+        ueditTextNameUserId = findViewById(R.id.ueditTextNameUserId);
+        editTextName = findViewById(R.id.editTextName);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        headerProfileImage = findViewById(R.id.header_cover_image);
+        userAvatarPhoto = findViewById(R.id.user_profile_photo);
+        userProfileShortBio = findViewById(R.id.user_profile_name);
+        txtProgress = findViewById(R.id.textViewProgress);
+        uploadFileProgress = findViewById(R.id.upload_file_progress);
+        btnUploadFileWithoutProgress = findViewById(R.id.btn_upload_file_without_progress);
 
         boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
         boolean hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);
@@ -181,6 +176,7 @@ public class MainActivityProfile extends TubelessTransparentStatusBarActivity im
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults.length > 0){
             switch (requestCode) {
                 case PERMISSION_REQUEST_GALLERY_PHOTO:
@@ -210,36 +206,36 @@ public class MainActivityProfile extends TubelessTransparentStatusBarActivity im
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    @OnClick({R.id.user_profile_photo,R.id.buttonSignOut,R.id.buttonBack,R.id.header_cover_image, R.id.upload_file_progress, R.id.btn_upload_file_without_progress})
+    //@OnClick({R.id.user_profile_photo,R.id.buttonSignOut,R.id.buttonBack,R.id.header_cover_image, R.id.upload_file_progress, R.id.btn_upload_file_without_progress})
     public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.buttonBack:
-                finish();
-                break;
-            case R.id.buttonSignOut:
-                SAccounts sAccounts = new SAccounts(getContext());
-                Account user = sAccounts.getUserAccount();
-
-                //int sdkVersion = android.os.Build.VERSION.SDK_INT;
-                //System.out.println("نسخه API: " + sdkVersion);
-
-
-                if (sAccounts.removeAccount(user)){
-                    Global.user = null;
-                }
-
-                setResult(Activity.RESULT_OK, getIntent());
-                finish();
-                break;
-            case R.id.user_profile_photo:
-                selectImage(this);
-                SELECTED_IMAGE = AVATAR_SELECTED;
-                break;
-            case R.id.header_cover_image:
-                selectImage(this);
-                SELECTED_IMAGE = PROFILE_SELECTED;
-                break;
-        }
+//        switch (view.getId()) {
+//            case R.id.buttonBack:
+//                finish();
+//                break;
+//            case R.id.buttonSignOut:
+//                SAccounts sAccounts = new SAccounts(getContext());
+//                Account user = sAccounts.getUserAccount();
+//
+//                //int sdkVersion = android.os.Build.VERSION.SDK_INT;
+//                //System.out.println("نسخه API: " + sdkVersion);
+//
+//
+//                if (sAccounts.removeAccount(user)){
+//                    Global.user = null;
+//                }
+//
+//                setResult(Activity.RESULT_OK, getIntent());
+//                finish();
+//                break;
+//            case R.id.user_profile_photo:
+//                selectImage(this);
+//                SELECTED_IMAGE = AVATAR_SELECTED;
+//                break;
+//            case R.id.header_cover_image:
+//                selectImage(this);
+//                SELECTED_IMAGE = PROFILE_SELECTED;
+//                break;
+//        }
     }
 
 

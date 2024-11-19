@@ -1,60 +1,38 @@
 buildscript {
     ext {
-        kotlin_version = '1.3.61'
+        kotlin_version = '1.8.10'
+        rxjava2Version = '2.1.9'
+        rxandroidVersion = '2.0.1'
+        accountauthenticatorVersion = '1.3.0'
     }
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://plugins.gradle.org/m2/") }
     }
+
     dependencies {
-//        classpath 'com.android.tools.build:gradle:3.2.1'
-//        classpath 'com.android.tools.build:gradle:3.4.1'
-
-        classpath 'com.google.gms:google-services:4.3.2'
-//        classpath 'io.fabric.tools:gradle:1.31.1'  // Crashlytics plugin
-
-//        classpath 'com.android.tools.build:gradle:3.5.3'
-//        classpath 'com.android.tools.build:gradle:4.2.1'
-        classpath 'com.android.tools.build:gradle:4.2.2'
-
-//        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        //classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.android.tools.build:gradle:8.7.1'
+        // در صورت نیاز به کامنت‌شده‌ها، می‌توانید آن‌ها را فعال کنید
+        // classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.realm:realm-gradle-plugin:10.15.1" // نسخه آخر Realm
 
     }
 }
-//apply plugin: 'com.jfrog.bintray'
+
 
 allprojects {
     repositories {
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-        maven {
-            url 'https://maven.google.com/'
-        }
-        google()
-        maven { url '../sdk724-repo' }
-//        maven { url 'sdk724-repo' }
-
-        maven { url "https://repo.spring.io/release" }
+        google() // مخزن اصلی برای وابستگی‌های اندروید و Google
+        mavenCentral() // مخزن اصلی Maven برای کتابخانه‌های عمومی
+        maven { url = uri("https://plugins.gradle.org/m2/") } // مخزن Gradle Plugin برای افزونه‌های خاص
+        maven { url "https://maven.google.com" } // پشتیبان اضافی برای مخزن گوگل
+        maven { url "https://jitpack.io" } // مخزن JitPack برای کتابخانه‌های متن‌باز در GitHub
     }
 
     tasks.withType(JavaCompile) {
         options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
     }
-}
-
-ext {
-    // App dependencies
-    rxjava2Version = '2.1.9'
-    rxandroidVersion = '2.0.1'
-    butterKnifeVersion = '10.1.0'
-    rxjava2Version = '2.1.9'
-    rxandroidVersion = '2.0.1'
-    accountauthenticatorVersion = '1.3.0'
 }
 
 task clean(type: Delete) {

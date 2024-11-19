@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
+//apply plugin: 'maven-publish'
+apply plugin: 'realm-android'
 
-apply plugin: 'maven-publish'
 def final libName = "xaccountauthenticator"
 def final libGroupId = "ir.sajjadyosefi.libraries"
 def final lib_VersionName = "9.0.0"
@@ -19,7 +20,8 @@ def getArtificatId = { ->
 
 android {
     compileSdk 34
-    compileSdkVersion 34
+    namespace "ir.sajjadyosefi.accountauthenticator"
+
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
@@ -35,7 +37,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            useProguard false
+            //useProguard false
             debuggable true
 
 //            minifyEnabled false
@@ -43,7 +45,7 @@ android {
         }
         debug {
             minifyEnabled false
-            useProguard false
+            //useProguard false
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -52,8 +54,8 @@ android {
         abortOnError false
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
@@ -66,7 +68,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.google.code.gson:gson:2.10'
 
     implementation 'com.google.firebase:firebase-auth:19.3.0'
@@ -89,28 +91,30 @@ dependencies {
 //    implementation files('D:\\Projects\\Android repositories\\purchase-0.0.10.aar')
 //    implementation 'com.zarinpal:purchase:0.0.10'
 
+    implementation 'io.realm:realm-gradle-plugin:10.15.1'
+
 }
 
 //https://proandroiddev.com/publishing-android-libraries-to-the-github-package-registry-part-1-7997be54ea5a
-publishing {
-    publications {
-        bar(MavenPublication) {
-            groupId libGroupId
-            artifactId getArtificatId()
-            version getVersionName()
-//            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
-            artifact("$buildDir/outputs/aar/accountauthenticator-release.aar")
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/yosefi1988/xaccountauthenticator")
-            credentials {
-//                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-//                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
-}
+//publishing {
+//    publications {
+//        bar(MavenPublication) {
+//            groupId libGroupId
+//            artifactId getArtificatId()
+//            version getVersionName()
+////            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+//            artifact("$buildDir/outputs/aar/accountauthenticator-release.aar")
+//        }
+//    }
+//
+//    repositories {
+//        maven {
+//            name = "GitHubPackages"
+//            url = uri("https://maven.pkg.github.com/yosefi1988/xaccountauthenticator")
+//            credentials {
+////                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+////                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+//            }
+//        }
+//    }
+//}

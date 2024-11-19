@@ -53,5 +53,6 @@
     <string name="text_for_reset_password_3">رمز پیشفرض شما چهار رقم آخر موبایل خواهد شد.</string>
     <string name="smsText">پیامک ثبت نام مخصوص شما</string>
     <string name="smsText2">پیامک ریست رمز مخصوص شما</string>
+    <string name="app_name">کافه بازار</string>
 
 </resources>

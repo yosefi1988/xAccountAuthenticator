@@ -36,6 +36,7 @@ import ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActiv
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.ChangePasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.ResetPasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignInActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.payments.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
 import ir.sajjadyosefi.android.xTubeless.BuildConfig;
 import ir.sajjadyosefi.android.xTubeless.R;
@@ -47,9 +48,9 @@ import ir.sajjadyosefi.android.xTubeless.activity.common.WebViewActivity;
 import ir.sajjadyosefi.android.xTubeless.classes.Validator;
 
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
-import ir.sb24.android.samanbanksdkmodule.activities.AboutActivity;
-import ir.sb24.android.samanbanksdkmodule.activities.banner.WelcomeActivity_1;
-import ir.sb24.android.samanbanksdkmodule.model.user.UserBasicInfo;
+//import ir.sb24.android.samanbanksdkmodule.activities.AboutActivity;
+//import ir.sb24.android.samanbanksdkmodule.activities.banner.WelcomeActivity_1;
+//import ir.sb24.android.samanbanksdkmodule.model.user.UserBasicInfo;
 import ir.sb24.android.sdkpayzarin.SdkPayZarinMainActivity;
 import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
@@ -245,26 +246,26 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
     }
 
     private void SDKZarin() {
-        Intent intent = new Intent(this, SdkPayZarinMainActivity.class);
-        intent.putExtra("direct",true);
-        intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
-        intent.putExtra("description","تست");
-        intent.putExtra("callbackurl","https://sajjadyosefi.ir");
-        intent.putExtra("amount", "15000");
-        intent.putExtra("mobile", "09123678522");
-        intent.putExtra("email", "yosefi1988@gmail.com");
-
-        launcher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Toast.makeText(getContext(), getContext().getString(R.string.ok),Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(getContext(), getContext().getString(R.string.notok),Toast.LENGTH_LONG).show();
-                }
-                finish();
-        });
-        launcher.launch(intent);
+//        Intent intent = new Intent(this, SdkPayZarinMainActivity.class);
+//        intent.putExtra("direct",true);
+//        intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
+//        intent.putExtra("description","تست");
+//        intent.putExtra("callbackurl","https://sajjadyosefi.ir");
+//        intent.putExtra("amount", "15000");
+//        intent.putExtra("mobile", "09123678522");
+//        intent.putExtra("email", "yosefi1988@gmail.com");
+//
+//        launcher = registerForActivityResult(
+//            new ActivityResultContracts.StartActivityForResult(),
+//            result -> {
+//                if (result.getResultCode() == Activity.RESULT_OK) {
+//                    Toast.makeText(getContext(), getContext().getString(R.string.ok),Toast.LENGTH_LONG).show();
+//                }else {
+//                    Toast.makeText(getContext(), getContext().getString(R.string.notok),Toast.LENGTH_LONG).show();
+//                }
+//                finish();
+//        });
+//        launcher.launch(intent);
     }
 
     private void drawableMenu(Toolbar toolbar) {
@@ -561,69 +562,69 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
     }
 
     public void callSdk(){
-        UserBasicInfo newCustomer = new UserBasicInfo();
-//                try {
-//                    newCustomer.setBrithDate("1368/04/12");
-//                    newCustomer.setNameEn("behrouz");
-//                    newCustomer.setFamilyEn("bohloli");
-//                    newCustomer.setMobile("09126627433");
-//                    newCustomer.setNationalCode("0010504389");
-//                    newCustomer.setPostalCode("3751888593");
-//                    newCustomer.setNationalCardTrackingNumber("888888");
-//                    newCustomer.setNationalCardSerialNumber("1234567890");
-//                    newCustomer.setNationalCardSerialNumber("99999999999999");
-//                } catch (Exception exception) {
-//                    exception.printStackTrace();
-//                }
-
-        //WelcomeActivity_1
-        Bundle bundle = new Bundle();
-        bundle.putInt("x" , 11);
-        bundle.putBoolean("DEBUG" , BuildConfig.DEBUG);
-        bundle.putString("APPLICATION_ID" ,BuildConfig.APPLICATION_ID);
-        bundle.putString("BUILD_TYPE" , BuildConfig.BUILD_TYPE);
-        bundle.putString("FLAVOR" , BuildConfig.FLAVOR);
-        bundle.putInt("VERSION_CODE" , BuildConfig.VERSION_CODE);
-        bundle.putString("VERSION_NAME" , BuildConfig.VERSION_NAME);
-        bundle.putSerializable("USER_BASIC_INFO", newCustomer);
-
-
-        //OLD
-        //Intent intent = WelcomeActivity_1.getIntent(getApplicationContext(), bundle);
-        //NEW
-        Intent intent = null;
-        try {
-            intent = WelcomeActivity_1.getIntent(getContext(), bundle);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-
-        intent.putExtra("x2", 22);
-        intent.putExtra("x3", 33);
-        bundle.putString("x4" , "x4");
-
-        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-        startActivityForResult(intent, WelcomeActivity_1.REQUEST_DEFINE_DEPOSIT);
+//        UserBasicInfo newCustomer = new UserBasicInfo();
+////                try {
+////                    newCustomer.setBrithDate("1368/04/12");
+////                    newCustomer.setNameEn("behrouz");
+////                    newCustomer.setFamilyEn("bohloli");
+////                    newCustomer.setMobile("09126627433");
+////                    newCustomer.setNationalCode("0010504389");
+////                    newCustomer.setPostalCode("3751888593");
+////                    newCustomer.setNationalCardTrackingNumber("888888");
+////                    newCustomer.setNationalCardSerialNumber("1234567890");
+////                    newCustomer.setNationalCardSerialNumber("99999999999999");
+////                } catch (Exception exception) {
+////                    exception.printStackTrace();
+////                }
+//
+//        //WelcomeActivity_1
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("x" , 11);
+//        bundle.putBoolean("DEBUG" , BuildConfig.DEBUG);
+//        bundle.putString("APPLICATION_ID" ,BuildConfig.APPLICATION_ID);
+//        bundle.putString("BUILD_TYPE" , BuildConfig.BUILD_TYPE);
+//        bundle.putString("FLAVOR" , BuildConfig.FLAVOR);
+//        bundle.putInt("VERSION_CODE" , BuildConfig.VERSION_CODE);
+//        bundle.putString("VERSION_NAME" , BuildConfig.VERSION_NAME);
+//        bundle.putSerializable("USER_BASIC_INFO", newCustomer);
+//
+//
+//        //OLD
+//        //Intent intent = WelcomeActivity_1.getIntent(getApplicationContext(), bundle);
+//        //NEW
+//        Intent intent = null;
+//        try {
+//            intent = WelcomeActivity_1.getIntent(getContext(), bundle);
+//        } catch (Exception exception) {
+//            exception.printStackTrace();
+//        }
+//
+//        intent.putExtra("x2", 22);
+//        intent.putExtra("x3", 33);
+//        bundle.putString("x4" , "x4");
+//
+//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//        startActivityForResult(intent, WelcomeActivity_1.REQUEST_DEFINE_DEPOSIT);
     }
     public void callAboute(){
         //AboutActivity
-        Bundle bundle = new Bundle();
-        bundle.putInt("x" , 11);
-        bundle.putBoolean("DEBUG" , false);
-        bundle.putString("APPLICATION_ID" ,BuildConfig.APPLICATION_ID);
-        bundle.putString("BUILD_TYPE" , BuildConfig.BUILD_TYPE);
-        bundle.putString("FLAVOR" , BuildConfig.FLAVOR);
-        bundle.putInt("VERSION_CODE" , BuildConfig.VERSION_CODE);
-        bundle.putString("VERSION_NAME" , BuildConfig.VERSION_NAME);
-
-        Intent intent = AboutActivity.getIntent(getApplicationContext(), bundle);
-
-        intent.putExtra("x2", 22);
-        intent.putExtra("x3", 33);
-        bundle.putString("x4" , "x4");
-
-        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-        startActivityForResult(intent, AboutActivity.REQUEST_CODE);
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("x" , 11);
+//        bundle.putBoolean("DEBUG" , false);
+//        bundle.putString("APPLICATION_ID" ,BuildConfig.APPLICATION_ID);
+//        bundle.putString("BUILD_TYPE" , BuildConfig.BUILD_TYPE);
+//        bundle.putString("FLAVOR" , BuildConfig.FLAVOR);
+//        bundle.putInt("VERSION_CODE" , BuildConfig.VERSION_CODE);
+//        bundle.putString("VERSION_NAME" , BuildConfig.VERSION_NAME);
+//
+//        Intent intent = AboutActivity.getIntent(getApplicationContext(), bundle);
+//
+//        intent.putExtra("x2", 22);
+//        intent.putExtra("x3", 33);
+//        bundle.putString("x4" , "x4");
+//
+//        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+//        startActivityForResult(intent, AboutActivity.REQUEST_CODE);
 
     }
 }

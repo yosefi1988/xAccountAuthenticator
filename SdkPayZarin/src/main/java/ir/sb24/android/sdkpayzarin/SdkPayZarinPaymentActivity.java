@@ -102,29 +102,29 @@ public class SdkPayZarinPaymentActivity extends AppCompatActivity {
                     ResponseBody errorBody = response.errorBody();
                     String errorBodyString = null;
 
-                    if(BuildConfig.DEBUG)
+//                    if(BuildConfig.DEBUG)
                     {
-                        Log.i( "ZSDK" + "RESPONSE Code", String.valueOf(response.code()));
-                        Buffer buffer = new Buffer();
-                        if (response.raw().request().body() != null) {
-                            response.raw().request().body().writeTo(buffer);
-                            request = response.raw().request().body();
-                        }
-                        Log.i( "ZSDK" + "SNO", response.raw().request().url().toString());
-                        Log.i( "ZSDK" + "REQUEST", buffer.readUtf8());
-                        Log.i( "ZSDK" + "RESPONSE", String.valueOf(jsonElement));
-
-                        if (response.code() == 400) {
-                            // خواندن errorBody
-                            try {
-                                errorBodyString = errorBody.string();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            stringError = (errorBodyString);
-                            Log.i( "ZSDK" + "RESPONSE", stringError);
-                        }
-                    }else {
+//                        Log.i( "ZSDK" + "RESPONSE Code", String.valueOf(response.code()));
+//                        Buffer buffer = new Buffer();
+//                        if (response.raw().request().body() != null) {
+//                            response.raw().request().body().writeTo(buffer);
+//                            request = response.raw().request().body();
+//                        }
+//                        Log.i( "ZSDK" + "SNO", response.raw().request().url().toString());
+//                        Log.i( "ZSDK" + "REQUEST", buffer.readUtf8());
+//                        Log.i( "ZSDK" + "RESPONSE", String.valueOf(jsonElement));
+//
+//                        if (response.code() == 400) {
+//                            // خواندن errorBody
+//                            try {
+//                                errorBodyString = errorBody.string();
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                            stringError = (errorBodyString);
+//                            Log.i( "ZSDK" + "RESPONSE", stringError);
+//                        }
+//                    }else {
                         try {
                             errorBodyString = errorBody.string();
                         } catch (Exception e) {

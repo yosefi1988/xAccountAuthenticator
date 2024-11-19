@@ -8,7 +8,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import ir.sajjadyosefi.android.xTubeless.networkLayout.retrofit.RetrofitHelperTubeless;
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+//import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import static ir.sajjadyosefi.android.xTubeless.widget.CustomEditText.FONT_IRANSANS_MOBILE_NORMAL_TTF;
 
 
@@ -30,10 +30,10 @@ public class Global extends MultiDexApplication {
         MultiDex.install(this);
 
         //font 6 ok
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath(FONT_IRANSANS_MOBILE_NORMAL_TTF)
-                .setFontAttrId(R.attr.fontPath)
-                .build());
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath(FONT_IRANSANS_MOBILE_NORMAL_TTF)
+//                .setFontAttrId(R.string.font_secondary_bold)
+//                .build());
 
 
         apiManagerTubeless = RetrofitHelperTubeless.getInstance();
