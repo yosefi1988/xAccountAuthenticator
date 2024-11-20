@@ -103,7 +103,7 @@ public class SAccounts {
     }
 
 
-    private boolean hasUserAccount() {
+    public boolean hasUserAccount() {
         if (getUserAccount() == null) {
             return false;
         } else {
