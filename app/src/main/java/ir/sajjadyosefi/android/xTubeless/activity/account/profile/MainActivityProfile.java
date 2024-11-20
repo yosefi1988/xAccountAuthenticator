@@ -356,7 +356,7 @@ public class MainActivityProfile extends TubelessTransparentStatusBarActivity im
                 call.clone().enqueue(this);
             }
         };
-        Global.apiManagerTubeless.getProfileImages(request, callback);
+        //Global.apiManagerTubeless.getProfileImages(request, callback);
     }
 
     @Override

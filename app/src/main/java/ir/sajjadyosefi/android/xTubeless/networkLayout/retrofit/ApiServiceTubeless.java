@@ -26,5 +26,4 @@ public interface ApiServiceTubeless {
     Call<Object> profileImages(@Body LoginRequest request);
 
 
-
 }

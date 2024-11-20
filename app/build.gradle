@@ -70,7 +70,7 @@ android {
         release {
             minifyEnabled true
             //useProguard false
-            debuggable false
+            debuggable true
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //manifestPlaceholders = [pn: "com.hamsa"]
@@ -142,7 +142,7 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.0.0'
-    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.7.0'
 
 

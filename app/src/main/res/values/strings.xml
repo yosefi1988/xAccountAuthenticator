@@ -186,7 +186,6 @@
     <string name="regit">ثبت می کنم</string>
     <string name="addCar">افزودن اتوموبیل</string>
 
-<!--    <string name="app_name">authenticator-X</string>-->
     <string name="app_name_tablet">Bottom Navigation (Tablet)</string>
     <string name="app_name_custom_badges">Custom Badges</string>
     <string name="app_name_no_coordinator">No Coordinator</string>

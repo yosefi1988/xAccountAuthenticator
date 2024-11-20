@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -47,6 +48,12 @@ public class SAccounts {
         }
     }
     public Account getUserAccount() {
+
+//        Account[] allAccounts = mAccountManager.getAccounts();
+//        for (Account account : allAccounts) {
+//            Log.d("Account", "Type: " + account.type + ", Name: " + account.name);
+//        }
+
         Account availableAccounts[] = mAccountManager.getAccountsByType(AccountGeneral.ACCOUNT_TYPE);
 
         if (availableAccounts.length != 0)
@@ -96,7 +103,7 @@ public class SAccounts {
     }
 
 
-    public boolean hasUserAccount() {
+    private boolean hasUserAccount() {
         if (getUserAccount() == null) {
             return false;
         } else {
