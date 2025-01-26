@@ -38,6 +38,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
+import java.security.cert.X509Certificate;
 import java.util.List;
 
 import ir.sajjadyosefi.accountauthenticator.R;
@@ -85,6 +86,11 @@ import static ir.sajjadyosefi.accountauthenticator.activity.accounts.Authenticat
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 import static ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException.TUBELESS_PASSWORD_IS_EMPTY;
 import static ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException.TUBELESS_USERNAME_IS_EMPTY;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 public class SignInActivity extends Activity {
 
@@ -497,6 +503,7 @@ public class SignInActivity extends Activity {
         new AsyncTask<String, Void, Intent>() {
             @Override
             protected Intent doInBackground(String... params) {
+                trustAllCertificates();
                 ALoginRequest aLoginRequest = new ALoginRequest(userName);
                 return loginProcess(aLoginRequest, accountPassword, accountName, intent);
             }
@@ -575,6 +582,7 @@ public class SignInActivity extends Activity {
             @SuppressLint("StaticFieldLeak")
             @Override
             protected Intent doInBackground(String... params) {
+                trustAllCertificates();
                 ALoginRequest aLoginRequest = new ALoginRequest(userName, photoUrl);
                 return loginProcess(aLoginRequest, accountPassword, accountName, intent);
             }
@@ -607,6 +615,7 @@ public class SignInActivity extends Activity {
         new AsyncTask<String, Void, Intent>() {
             @Override
             protected Intent doInBackground(String... params) {
+                trustAllCertificates();
                 ALoginRequest aLoginRequest = new ALoginRequest(userName,accountPassword, util.GetAndroidId(getApplicationContext()));
                 return loginProcess(aLoginRequest, accountPassword, accountName, intent);
             }
@@ -754,6 +763,7 @@ public class SignInActivity extends Activity {
         new AsyncTask<String, Void, Intent>() {
             @Override
             protected Intent doInBackground(String... params) {
+                trustAllCertificates();
                 ALoginRequest aLoginRequest = new ALoginRequest(userName,pin);
                 return loginProcess(aLoginRequest, accountPassword, accountName, intent);
             }
@@ -781,6 +791,7 @@ public class SignInActivity extends Activity {
         new AsyncTask<String, Void, Intent>() {
             @Override
             protected Intent doInBackground(String... params) {
+                trustAllCertificates();
                 ALoginRequest aLoginRequest = new ALoginRequest(0,UserCode);
                 return loginProcess(aLoginRequest, accountPassword, accountName, intent);
             }
@@ -803,6 +814,7 @@ public class SignInActivity extends Activity {
         new AsyncTask<String, Void, Intent>() {
             @Override
             protected Intent doInBackground(String... params) {
+                trustAllCertificates();
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 AConfigResponse aConfig = null;
@@ -841,6 +853,8 @@ public class SignInActivity extends Activity {
         new AsyncTask<String, Void, Intent>() {
             @Override
             protected Intent doInBackground(String... params) {
+                trustAllCertificates();
+
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 ATransactionListResponse transactionListResponse = null;
@@ -870,7 +884,26 @@ public class SignInActivity extends Activity {
                 //retData(intent);
             }
         }.execute();
+    }
 
+
+
+    private void trustAllCertificates() {
+        try {
+            HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, new TrustManager[]{new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) {}
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) {}
+                @Override
+                public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+            }}, new java.security.SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -882,6 +915,7 @@ public class SignInActivity extends Activity {
         new AsyncTask<String, Void, Intent>() {
             @Override
             protected Intent doInBackground(String... params) {
+                trustAllCertificates();
                 ALoginRequest aLoginRequest = new ALoginRequest(0,UserCode);
                 return loginProcess(aLoginRequest, accountPassword, accountName, new Intent());
             }
