@@ -1,4 +1,4 @@
-package ir.sb24.android.sdkpayzarin;
+package ir.sajjadyosefi.android.sdkpayzarin;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("ir.sb24.android.sdkpayzarin.test", appContext.getPackageName());
+        assertEquals("ir.sajjadyosefi.android.sdkpayzarin.test", appContext.getPackageName());
     }
 }

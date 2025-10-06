@@ -1,4 +1,4 @@
-package ir.sb24.android.sdkpayzarin;
+package ir.sajjadyosefi.android.sdkpayzarin.network;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

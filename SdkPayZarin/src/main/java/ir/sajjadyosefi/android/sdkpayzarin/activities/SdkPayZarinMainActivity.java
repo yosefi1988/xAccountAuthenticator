@@ -1,34 +1,14 @@
-package ir.sb24.android.sdkpayzarin;
-
-
+package ir.sajjadyosefi.android.sdkpayzarin.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import ir.sajjadyosefi.android.sdkpayzarin.R;
+
 public class SdkPayZarinMainActivity extends AppCompatActivity {
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-////        if (requestCode == 1) {
-////            if (resultCode == Activity.RESULT_OK) {
-////                Intent returnIntent = getIntent();
-////                Bundle bundle = new Bundle();
-////                returnIntent.putExtras(bundle);
-////                setResult(Activity.RESULT_OK, getIntent());
-////                finish();
-////            }else {
-////                setResult(Activity.RESULT_CANCELED);
-////                finish();
-////            }
-////        }
-//    }
-
     private ActivityResultLauncher<Intent> paymentLauncher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +29,9 @@ public class SdkPayZarinMainActivity extends AppCompatActivity {
         );
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey("direct")) {
-            boolean isDirect = extras.getBoolean("direct");
+            boolean isDirectPaymentWithoutSdkUI = extras.getBoolean("direct");
 
-            if (isDirect) {
+            if (isDirectPaymentWithoutSdkUI) {
                 startZarinPaymentActivity(extras);
             } else {
                 setContentView(R.layout.activity_main);
@@ -84,8 +64,6 @@ public class SdkPayZarinMainActivity extends AppCompatActivity {
         if (extras.containsKey("email")) {
             intent.putExtra("email", extras.getString("email"));
         }
-
         paymentLauncher.launch(intent);
     }
-
 }

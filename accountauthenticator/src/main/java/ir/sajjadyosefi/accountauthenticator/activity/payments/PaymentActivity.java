@@ -31,7 +31,7 @@ import ir.sajjadyosefi.accountauthenticator.R;
 import ir.sajjadyosefi.accountauthenticator.classes.exception.TubelessException;
 import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionRequest;
 import ir.sajjadyosefi.accountauthenticator.model.response.AWalletChargeResponse;
-import ir.sb24.android.sdkpayzarin.SdkPayZarinMainActivity;
+import ir.sajjadyosefi.android.sdkpayzarin.activities.SdkPayZarinMainActivity;
 
 import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral.sServerAuthenticate;
 
@@ -101,6 +101,7 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         context = this;
         Uri data2 = getIntent().getData();
         launcher = registerForActivityResult(
@@ -382,8 +383,9 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     private void zarrinPayment(long amountZarrinToman,long amountTubelessToman, Context context) {
+
         Intent intent = new Intent(this, SdkPayZarinMainActivity.class);
-        intent.putExtra("direct",true);
+        intent.putExtra("direct",true);         //is Direct Payment Without Sdk UI
         intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
         intent.putExtra("description",(discription.length() == 0 ? "" : discription));
         //intent.putExtra("callbackurl",String.format("%s://%s", "https", "zarinpalpayment2"));

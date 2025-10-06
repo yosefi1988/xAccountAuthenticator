@@ -17,7 +17,6 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,9 +35,7 @@ import ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActiv
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.ChangePasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.ResetPasswordActivity;
 import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignInActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.payments.PaymentActivity;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
-import ir.sajjadyosefi.android.xTubeless.BuildConfig;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.Adapter.FirstFragmentsAdapter;
@@ -48,10 +45,9 @@ import ir.sajjadyosefi.android.xTubeless.activity.common.WebViewActivity;
 import ir.sajjadyosefi.android.xTubeless.classes.Validator;
 
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
-//import ir.sb24.android.samanbanksdkmodule.activities.AboutActivity;
-//import ir.sb24.android.samanbanksdkmodule.activities.banner.WelcomeActivity_1;
-//import ir.sb24.android.samanbanksdkmodule.model.user.UserBasicInfo;
-import ir.sb24.android.sdkpayzarin.SdkPayZarinMainActivity;
+//import ir.sajjadyosefi.android.samanbanksdkmodule.activities.AboutActivity;
+//import ir.sajjadyosefi.android.samanbanksdkmodule.activities.banner.WelcomeActivity_1;
+//import ir.sajjadyosefi.android.samanbanksdkmodule.model.user.UserBasicInfo;
 import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 import it.sephiroth.android.library.bottomnavigation.MiscUtils;
@@ -162,7 +158,7 @@ public class MainActivity extends TubelessActivity implements BottomNavigation.O
         initializeBottomNavigation(savedInstanceState);
         initializeUI(savedInstanceState);
 
-        //callSdk();
+        callSdk();
         //callAboute();
 
         callSdkZ();

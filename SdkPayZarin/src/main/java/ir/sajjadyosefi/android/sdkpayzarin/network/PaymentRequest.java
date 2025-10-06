@@ -1,11 +1,25 @@
-package ir.sb24.android.sdkpayzarin;
+package ir.sajjadyosefi.android.sdkpayzarin.network;
+
+import com.google.gson.annotations.SerializedName;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaymentRequest {
-    public String merchant_id;
-    public String amount;
-    public String callback_url;
+    @SerializedName("metadata")
     public String[] metadata;
+
+    @SerializedName("merchant_id")
+    public String merchant_id;
+
+    @SerializedName("amount")
+    public String amount;
+
+    @SerializedName("callback_url")
+    public String callback_url;
+
+    @SerializedName("description")
     public String description;
+
 
     public PaymentRequest(String merchant_id, String amount, String description, String callback_url,String mobile,String email ) {
         this.merchant_id = merchant_id;

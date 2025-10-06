@@ -22,3 +22,28 @@
 
 -keep class com.squareup.okio.** { *; }
 
+
+
+
+# برای نگه داشتن Retrofit
+-keep class retrofit2.** { *; }
+-dontwarn retrofit2.**
+
+# برای نگه داشتن OkHttp
+-keep class okhttp3.** { *; }
+-dontwarn okhttp3.**
+
+# برای نگه داشتن Gson Converter
+-keep class com.google.gson.** { *; }
+-dontwarn com.google.gson.**
+
+# نگه داشتن مدل‌های شما (پکیج دیتا)
+-keep class ir.sajjadyosefi.android.sdkpayzarin.** { *; }
+-keepclassmembers class * {
+    @retrofit2.http.* <methods>;
+}
+
+# جلوگیری از حذف annotation ها
+-keepattributes Signature
+-keepattributes *Annotation*
+

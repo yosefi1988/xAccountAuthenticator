@@ -1,5 +1,5 @@
-package ir.sb24.android.sdkpayzarin;
-
+package ir.sajjadyosefi.android.sdkpayzarin.activities;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,17 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
-import java.io.IOException;
-
+import ir.sajjadyosefi.android.sdkpayzarin.network.PaymentRequest;
+import ir.sajjadyosefi.android.sdkpayzarin.network.PaymentResponse;
+import ir.sajjadyosefi.android.sdkpayzarin.R;
+import ir.sajjadyosefi.android.sdkpayzarin.network.RetrofitClient;
+import ir.sajjadyosefi.android.sdkpayzarin.network.Tls12Helper;
+import ir.sajjadyosefi.android.sdkpayzarin.network.ZarinPalService;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import okio.Buffer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class SdkPayZarinPaymentActivity extends AppCompatActivity {
-
     private String merchant = "e8a913e8-f089-11e6-8dec-005056a205be";
     private String description = "خرید تستی ";
     private String callbackurl = "http://localhost:2812/Home/VerifyByHttpClient";
@@ -37,6 +38,7 @@ public class SdkPayZarinPaymentActivity extends AppCompatActivity {
     private String authority;
     private WebView paymentWebView;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +66,18 @@ public class SdkPayZarinPaymentActivity extends AppCompatActivity {
             }
         }
         paymentWebView = findViewById(R.id.paymentWebView);
+        Tls12Helper.enableTls12(this);
         paymentWebView.getSettings().setJavaScriptEnabled(true);
         paymentWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                Log.d("WEBVIEW", "Finished loading: " + url);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                Log.e("WEBVIEW", "Error: " + description);
+            }
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.contains(callbackurl)) {
@@ -86,8 +98,18 @@ public class SdkPayZarinPaymentActivity extends AppCompatActivity {
             }
         });
 
+
         PaymentRequest paymentRequest = new PaymentRequest(merchant, amount, description, callbackurl, mobile, email);
         ZarinPalService zarinPalService = RetrofitClient.getInstance(getApplicationContext()).create(ZarinPalService.class);
+//        Log.i("ZSDK", "PaymentRequest: " + new Gson().toJson(paymentRequest));
+//        Toast.makeText(SdkPayZarinPaymentActivity.this, ": "+paymentRequest.amount +paymentRequest.merchant_id +
+//                paymentRequest.amount +
+//                paymentRequest.description +
+//                paymentRequest.callback_url +
+//                paymentRequest.metadata[0]  +
+//                paymentRequest.metadata[1]+
+//                new Gson().toJson(paymentRequest), Toast.LENGTH_LONG).show();
+
         Call<PaymentResponse> call = zarinPalService.createPayment(paymentRequest);
         call.enqueue(new Callback<PaymentResponse>() {
             @Override
@@ -126,7 +148,8 @@ public class SdkPayZarinPaymentActivity extends AppCompatActivity {
 //                        }
 //                    }else {
                         try {
-                            errorBodyString = errorBody.string();
+                            if (errorBody != null)
+                                errorBodyString = errorBody.string();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -136,13 +159,24 @@ public class SdkPayZarinPaymentActivity extends AppCompatActivity {
                     Log.i( "ZSDK" + "exception",exception.toString());
                 }
 
+                if (!response.isSuccessful()) {
+                    try {
+                        String errorBodyString = response.errorBody().string();
+                        Log.e("ZSDK", "ErrorBody: " + errorBodyString);
+                        Toast.makeText(SdkPayZarinPaymentActivity.this, "Error: " + errorBodyString, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 if (response.isSuccessful() && response.body() != null) {
                     PaymentResponse paymentResponse = response.body();
                     if (paymentResponse.getData().getCode() == 100) {
                         // انتقال به صفحه پرداخت زرین‌پال
                         String authority = paymentResponse.getData().getAuthority();
                         String paymentUrl = gateWayUrl + authority ;
-                        paymentWebView.postUrl(paymentUrl,null);
+                        //paymentWebView.postUrl(paymentUrl,("param1=").getBytes());
+                        paymentWebView.loadUrl(paymentUrl);
                     } else {
                         Toast.makeText(SdkPayZarinPaymentActivity.this, "Payment Failed: " + paymentResponse.getData().getCode(), Toast.LENGTH_SHORT).show();
                     }

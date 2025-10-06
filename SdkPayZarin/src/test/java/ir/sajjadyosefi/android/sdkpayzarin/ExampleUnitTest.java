@@ -1,4 +1,4 @@
-package ir.sb24.android.sdkpayzarin;
+package ir.sajjadyosefi.android.sdkpayzarin;
 
 import org.junit.Test;
 
