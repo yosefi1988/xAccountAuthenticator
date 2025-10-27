@@ -37,325 +37,281 @@ import static ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral
 
 public class PaymentActivity extends AppCompatActivity {
 
+    //static vars
     public static final int GO_TO_LOGIN = 20;
+    private static boolean _isWalletSource = false;
+    private static boolean _ActiveUi = false;
+    private static boolean _isWalletCharge = false;
+    private static Intent _intent;
+    private static Bundle _bundle;
+    private static String _phone, _amountX, _description, _textViewPrice4Shadow;
+    private static int tax , portService;
 
-    private static boolean withoutUi = false;
     private static boolean paySuccess = false;
-    private static boolean _isCharge = false;
-    private static boolean isDirectPayment = false;
-    private static Intent paymentIntent;
-    private static Bundle bundle;
 
-    private ViewGroup rootActivity;
-    public Button btnPay , buttonBack ;
-    EditText editTextPhone, editTextAmount,editTextDiscription;
-    TextView textViewPrice1,textViewPrice2,textViewPrice3,textViewPrice4;
-    Context context;
+    //vars
+        private ViewGroup rootActivity;
+        public Button btnPay , buttonBack ;
+        EditText editTextPhone, editTextAmount,editTextDiscription;
+        TextView textViewPrice1,textViewPrice2,textViewPrice3,textViewPrice4;
+        Context context;
+        ActivityResultLauncher launcher;
 
-    private int tax , portService;
-    private static String phone ,amountX,discription ,textViewPrice4Shadow;
 
-    public synchronized static Intent getIntent(Context context) {
-        return getIntent(context,null);
-    }
-
-    public static boolean isPaymentSuccess() {
-        return paySuccess;
-    }
-
-    public static void PaymentDone() {
+    //static methods
+        public synchronized static Intent getIntent(Context _context) {
+            return getIntent(_context,null);
+        }
+        public synchronized static Intent getIntent(Context _context, Bundle _bundle) {
+            if (_bundle == null)
+                _bundle = new Bundle();
+            _bundle.putString("item1","value1");
+            Intent newIntent = new Intent(_context,PaymentActivity.class);
+            newIntent.putExtras(_bundle);
+            return newIntent;
+        }
+        public static Intent getStaticIntent() {
+            if (paySuccess == false)
+                return null;
+            else {
+                return _intent;
+    //            noUi = false;
+    //            paySuccess = false;
+    //            paymentIntent = null;
+    //            bundle = null;
+            }
+        }
+        public static boolean isPaymentSuccess() {
+            return paySuccess;
+        }
+        public static void PaymentDone() {
         try {
-            withoutUi = false;
+            _ActiveUi = false;
             paySuccess = false;
-            paymentIntent = null;
-            bundle = null;
-            _isCharge = false;
-            isDirectPayment = false;
+            _intent = null;
+            _bundle = null;
+            _isWalletSource = false;
+            _isWalletCharge = false;
         }catch (Exception e){
         }
     }
 
-    public static Intent getPaymentIntent() {
-        if (paySuccess == false)
-            return null;
-        else {
-            return paymentIntent;
-//            noUi = false;
-//            paySuccess = false;
-//            paymentIntent = null;
-//            bundle = null;
-        }
-    }
-
-    public synchronized static Intent getIntent(Context context, Bundle bundle) {
-        if (bundle == null)
-            bundle = new Bundle();
-        bundle.putString("item1","value1");
-        Intent intent = new Intent(context,PaymentActivity.class);
-        intent.putExtras(bundle);
-        return intent;
-    }
-    ActivityResultLauncher launcher;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
         context = this;
-        Uri data2 = getIntent().getData();
+        _intent = getIntent();
+        Uri data2 = _intent.getData();
+        _bundle = _intent.getExtras();
+
+        if (_intent.hasExtra("amount"))
+            _amountX = _intent.getIntExtra("amount", 10000) + "";
+        preparePayAcivityMode();
+
+        if (_isWalletSource) {
+            //تراکنش برداشت از کیف پول
+            try {
+                createTransaction(new ATransactionRequest("110015",_amountX));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }else {
+            preparePayActivityResultActions();
+
+
+            if (_intent.hasExtra("phone"))
+                _phone = _intent.getStringExtra("phone");
+            if (_intent.hasExtra("tax"))
+                tax = Integer.parseInt(_intent.getStringExtra("tax"));
+            if (_intent.hasExtra("portService"))
+                portService = Integer.parseInt(_intent.getStringExtra("portService"));
+
+            if (_ActiveUi) {
+                setContentView(R.layout.activity_payment);
+                rootActivity = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+                btnPay = findViewById(R.id.btnPay);
+                buttonBack = findViewById(R.id.buttonBack);
+                editTextPhone = findViewById(R.id.editTextPhone);
+                editTextAmount = findViewById(R.id.editTextAmount);
+                editTextDiscription = findViewById(R.id.editTextDiscription);
+
+                textViewPrice1 = findViewById(R.id.textViewPrice1);
+                textViewPrice2 = findViewById(R.id.textViewPrice2);
+                textViewPrice3 = findViewById(R.id.textViewPrice3);
+                textViewPrice4 = findViewById(R.id.textViewPrice4);
+
+                editTextAmount.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (s.toString().length() > 1) {
+                            _amountX = s.toString();
+                            calcBill();
+                        }
+                    }
+                });
+                editTextAmount.setText(_amountX);
+                editTextPhone.setText(_phone);
+                btnPay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        _phone = editTextPhone.getText().toString();
+                        _amountX = editTextAmount.getText().toString();
+                        prepareDescription();
+                        zarrinPayment(Integer.parseInt(_textViewPrice4Shadow) / 10, Long.parseLong(_amountX) / 10, context);
+                    }
+                });
+            } else {
+                prepareDescription();
+                zarrinPayment(calcBillHide() / 10, Long.parseLong(_amountX) / 10, this);
+            }
+        }
+    }
+    private void prepareDescription() {
+        StringBuilder stringBuilderMetaData = new StringBuilder();
+
+        stringBuilderMetaData.append("موبایل پرداخت کننده:");
+        stringBuilderMetaData.append(_phone);
+        stringBuilderMetaData.append("\n");
+
+        stringBuilderMetaData.append("مبلغ کاربر:");
+        stringBuilderMetaData.append(_amountX);
+        stringBuilderMetaData.append("ريال");
+        stringBuilderMetaData.append("\n");
+
+        stringBuilderMetaData.append("مبلغ درگاه:");
+
+        if (_ActiveUi)
+            stringBuilderMetaData.append(Integer.parseInt(_textViewPrice4Shadow));
+        else
+            stringBuilderMetaData.append(calcBillHide());
+
+        stringBuilderMetaData.append("ريال");
+        stringBuilderMetaData.append("\n");
+
+
+        stringBuilderMetaData.append("توضیحات ");
+        if (_ActiveUi)
+            stringBuilderMetaData.append(editTextDiscription.getText().toString());
+        else
+            stringBuilderMetaData.append(_intent.getStringExtra("metaData"));
+        stringBuilderMetaData.append("\n");
+
+
+        stringBuilderMetaData.append("نوع رابط کاربری :");
+        if (_ActiveUi)
+            stringBuilderMetaData.append("با صفحه پرداخت ");
+        else
+            stringBuilderMetaData.append("بدون صفحه واسط پرداخت ");
+        stringBuilderMetaData.append("\n");
+
+        stringBuilderMetaData.append("برداشت از ");
+        if (_isWalletSource) {
+            stringBuilderMetaData.append("کیف پول ");
+        } else {
+            stringBuilderMetaData.append("کارت بانکی ");
+        }
+        stringBuilderMetaData.append("\n");
+
+        stringBuilderMetaData.append("نوع پرداخت : ");
+        if (_isWalletCharge)
+            stringBuilderMetaData.append("شارژ کیف پول");
+        else
+            stringBuilderMetaData.append("خرید/پرداخت وجه");
+
+        stringBuilderMetaData.append("\n");
+
+        _description = stringBuilderMetaData.toString();
+    }
+
+    private static void preparePayAcivityMode() {
+        //////////////////////    source    /////////////////
+        Source source = (Source) _bundle.getSerializable("Source");
+        if (source == null) {
+            source = Source.Card;
+        }
+        if (source == Source.Wallet)
+            _isWalletSource = true;
+
+        //////////////////////  autenticatiorPaymentUi   /////////////////
+        AutenticatiorPaymentUi autenticatiorPaymentUi = (AutenticatiorPaymentUi) _bundle.getSerializable("AutenticatiorPaymentUi");
+        if (autenticatiorPaymentUi == null) {
+            autenticatiorPaymentUi = AutenticatiorPaymentUi.AppValue;
+        }
+        if (autenticatiorPaymentUi == AutenticatiorPaymentUi.UserValue)
+            _ActiveUi = true;
+
+        //////////////////////    payMode    /////////////////
+        PayMode payMode = (PayMode) _bundle.getSerializable("PayMode");
+        if (payMode == null) {
+            payMode = PayMode.DirectPay;
+        }
+        if (payMode == PayMode.WalletCharge)
+            _isWalletCharge = true;
+    }
+
+    private void preparePayActivityResultActions() {
         launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         paySuccess = true;
-                        Intent x = PaymentActivity.getPaymentIntent();
-                        ATransactionRequest aTransactionRequest = null; // تبدیل به ریال
-                        try {
-                            aTransactionRequest = new ATransactionRequest(calcBillHide() + "");
-                        } catch (Exception exception) {
-
-                            //todo remove
-                            aTransactionRequest = new ATransactionRequest("110015", calcBillHide() + "");
-                            exception.printStackTrace();
-                        }
-                        aTransactionRequest.setMetaData(discription + "\nTransactionID:" + "authority");
-
-                        if (_isCharge) {
-                            aTransactionRequest.setDirectPay(false);
-                        }else {
-                            if (isDirectPayment) {
-                                aTransactionRequest.setDirectPay(true);
-                            } else {
-                                aTransactionRequest.setDirectPay(false);
+                        Intent x = PaymentActivity.getStaticIntent();
+                        if (_isWalletCharge) {
+                            try {
+                                createTransaction(new ATransactionRequest("110015",_amountX));
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
                             }
                         }
-
-                        if (_isCharge)
-                            createTransaction(aTransactionRequest);
                         else {
-                            if (withoutUi) {
-                                Bundle bundle = new Bundle();
-                                Gson gson = new Gson();
-                                bundle.putString("ReturnData","direct Payment");
-                                paymentIntent.putExtras(bundle);
-                                ((Activity)context).setResult(Activity.RESULT_OK, paymentIntent);
-                                ((Activity)context).finish();
-                            } else {
+                            if (_ActiveUi) {
                                 final BottomSheetDialog dialog = new BottomSheetDialog(context);
                                 TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-
                                         Gson gson = new Gson();
-                                        bundle.putString("ReturnData","direct Payment");
-                                        paymentIntent.putExtras(bundle);
-                                        setResult(Activity.RESULT_OK, paymentIntent);
+                                        _bundle.putString("ReturnData", "direct Payment");
+                                        _intent.putExtras(_bundle);
+                                        setResult(Activity.RESULT_OK, _intent);
                                         finish();
                                     }
                                 });
+                            } else {
+                                Bundle bundle = new Bundle();
+                                Gson gson = new Gson();
+                                bundle.putString("ReturnData", "direct Payment");
+                                _intent.putExtras(bundle);
+                                ((Activity) context).setResult(Activity.RESULT_OK, _intent);
+                                ((Activity) context).finish();
                             }
                         }
-                    }else {
-                        //                    Toast.makeText(getBaseContext(),"pay not success" , Toast.LENGTH_LONG).show();
-//                    show message refID
-//                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
+                    } else {
+                        //Toast.makeText(getBaseContext(),"pay not success" , Toast.LENGTH_LONG).show();
+                        //show message refID
+                        //Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
                         paySuccess = false;
-
-                        if (paymentIntent.hasExtra("type")){
-//                        if (paymentIntent.getIntExtra("type",1) == 2){
-                            setResult(Activity.RESULT_CANCELED);
-                            finish();
-//                        }
-                        }
+                        setResult(Activity.RESULT_CANCELED);
+                        finish();
                     }
-                    //finish();
                 });
-
-        if (paymentIntent != null) {
-            if (paymentIntent.hasExtra("type")) {
-                if (paymentIntent.getIntExtra("type", 1) == 2) {
-//                    withoutUi = true;
-//                    AWalletChargeRequest request = new AWalletChargeRequest("10000");
-//                    request.setMetaData(discription);
-//                    amount = request.getAmount();
-//                    payment(Integer.parseInt(amount), this);
-                } else {
-                    setContentView(R.layout.activity_payment);
-                }
-                paymentIntent = getIntent();
-                bundle = paymentIntent.getExtras();
-            } else {
-                setContentView(R.layout.activity_payment);
-            }
-        }else {
-            //first loading +   intent == nul
-            if (getIntent().hasExtra("type")) {
-                paymentIntent = getIntent();
-                bundle = paymentIntent.getExtras();
-                if (paymentIntent.getIntExtra("type", 1) == 2) {
-                    withoutUi = true;
-                    amountX = paymentIntent.getIntExtra("amount", 10000) + "";
-                    phone = paymentIntent.getStringExtra("phone");
-                    tax = Integer.parseInt(paymentIntent.getStringExtra("tax"));
-                    _isCharge = paymentIntent.getBooleanExtra("isCharge",false);
-                    isDirectPayment = paymentIntent.getBooleanExtra("isDirectPayment",false);
-                    portService = Integer.parseInt(paymentIntent.getStringExtra("portService"));
-
-                    StringBuilder stringBuilderMetaData = new StringBuilder();
-                    stringBuilderMetaData.append("مبلغ کاربر:");
-                    stringBuilderMetaData.append(amountX);
-                    stringBuilderMetaData.append("ريال");
-                    stringBuilderMetaData.append("\n");
-                    stringBuilderMetaData.append("مبلغ درگاه:");
-                    stringBuilderMetaData.append(calcBillHide());
-                    stringBuilderMetaData.append("ريال");
-                    stringBuilderMetaData.append("\n");
-                    stringBuilderMetaData.append("توضیحات ");
-                    stringBuilderMetaData.append(paymentIntent.getStringExtra("metaData"));
-                    stringBuilderMetaData.append("\n");
-
-                    if (paymentIntent.hasExtra("type")) {
-                        stringBuilderMetaData.append("نوع رابط کاربری :");
-                        if (paymentIntent.getIntExtra("type", 1) == 1) {
-                            stringBuilderMetaData.append("با صفحه پرداخت ");
-                        }else {
-                            stringBuilderMetaData.append("بدون صفحه پرداخت ");
-                        }
-                        stringBuilderMetaData.append("\n");
-                    }
-                    if (paymentIntent.hasExtra("isCharge")) {
-                        stringBuilderMetaData.append("نوع واریز ");
-                        if (paymentIntent.getBooleanExtra("isCharge",false) == true) {
-                            stringBuilderMetaData.append("شارژ کیف پول ");
-                        }else {
-                            stringBuilderMetaData.append("خرید/واریز ");
-                        }
-                        stringBuilderMetaData.append("\n");
-                    }
-                    if (paymentIntent.hasExtra("isDirectPayment")) {
-                        stringBuilderMetaData.append("نوع پرداخت ");
-                        if (paymentIntent.getBooleanExtra("isDirectPayment",false) == true) {
-                            stringBuilderMetaData.append("پرداخت مستقیم ");
-                        }else {
-                            stringBuilderMetaData.append("کیف پول ");
-                        }
-                        stringBuilderMetaData.append("\n");
-                    }
-                    discription = stringBuilderMetaData.toString();
-
-                    zarrinPayment(calcBillHide() / 10, Long.parseLong(amountX) / 10, this);
-                }else {
-                    setContentView(R.layout.activity_payment);
-                }
-            }else {
-                setContentView(R.layout.activity_payment);
-            }
-        }
-
-        rootActivity = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-        btnPay = findViewById(R.id.btnPay);
-        buttonBack = findViewById(R.id.buttonBack);
-        editTextPhone = findViewById(R.id.editTextPhone);
-        editTextAmount = findViewById(R.id.editTextAmount);
-        editTextDiscription = findViewById(R.id.editTextDiscription);
-
-        textViewPrice1 = findViewById(R.id.textViewPrice1);
-        textViewPrice2 = findViewById(R.id.textViewPrice2);
-        textViewPrice3 = findViewById(R.id.textViewPrice3);
-        textViewPrice4 = findViewById(R.id.textViewPrice4);
-
-        if (paymentIntent.hasExtra("tax"))
-            tax = Integer.parseInt(paymentIntent.getStringExtra("tax"));
-        if (paymentIntent.hasExtra("portService"))
-            portService = Integer.parseInt(paymentIntent.getStringExtra("portService"));
-        if (paymentIntent.hasExtra("isCharge"))
-            _isCharge = paymentIntent.getBooleanExtra("isCharge",false);
-        if (paymentIntent.hasExtra("isDirectPayment"))
-            isDirectPayment = paymentIntent.getBooleanExtra("isDirectPayment",false);
-
-        if (btnPay != null) {
-            editTextAmount.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (s.toString().length() > 1) {
-                        amountX = s.toString();
-                        calcBill();
-                    }
-                }
-            });
-            btnPay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    phone = editTextPhone.getText().toString();
-                    amountX = editTextAmount.getText().toString();
-                    StringBuilder stringBuilderMetaData = new StringBuilder();
-                    stringBuilderMetaData.append("موبایل پرداخت کننده:");
-                    stringBuilderMetaData.append(phone);
-                    stringBuilderMetaData.append("\n");
-                    stringBuilderMetaData.append("مبلغ کاربر:");
-                    stringBuilderMetaData.append(amountX);
-                    stringBuilderMetaData.append("ريال");
-                    stringBuilderMetaData.append("\n");
-                    stringBuilderMetaData.append("مبلغ درگاه:");
-                    stringBuilderMetaData.append(Integer.parseInt(textViewPrice4Shadow));
-                    stringBuilderMetaData.append("ريال");
-                    stringBuilderMetaData.append("\n");
-                    stringBuilderMetaData.append("توضیحات ");
-                    stringBuilderMetaData.append(editTextDiscription.getText().toString());
-                    stringBuilderMetaData.append("\n");
-
-                    if (paymentIntent.hasExtra("type")) {
-                        stringBuilderMetaData.append("نوع رابط کاربری :");
-                        if (paymentIntent.getIntExtra("type", 1) == 1) {
-                            stringBuilderMetaData.append("با صفحه پرداخت ");
-                        }else {
-                            stringBuilderMetaData.append("بدون صفحه پرداخت ");
-                        }
-                        stringBuilderMetaData.append("\n");
-                    }
-                    if (paymentIntent.hasExtra("isCharge")) {
-                        stringBuilderMetaData.append("نوع واریز ");
-                        if (paymentIntent.getBooleanExtra("isCharge",false) == true) {
-                            stringBuilderMetaData.append("شارژ کیف پول ");
-                        }else {
-                            stringBuilderMetaData.append("خرید/واریز ");
-                        }
-                        stringBuilderMetaData.append("\n");
-                    }
-
-                    if (paymentIntent.hasExtra("isDirectPayment")) {
-                        stringBuilderMetaData.append("نوع پرداخت ");
-                        if (paymentIntent.getBooleanExtra("isDirectPayment",false) == true) {
-                            stringBuilderMetaData.append("پرداخت مستقیم ");
-                        }else {
-                            stringBuilderMetaData.append("کیف پول ");
-                        }
-                        stringBuilderMetaData.append("\n");
-                    }
-
-                    discription = stringBuilderMetaData.toString();
-                    zarrinPayment(Integer.parseInt(textViewPrice4Shadow) / 10, Long.parseLong(amountX) / 10, context);
-                }
-            });
-        }
     }
 
     @SuppressLint("SetTextI18n")
     private void calcBill() {
-        textViewPrice1.setText(amountX + "");
-        textViewPrice2.setText((((Integer.parseInt(amountX) * tax) / 100)) + "");
-        textViewPrice3.setText((((Integer.parseInt(amountX) * portService) / 100)) + "");
+        textViewPrice1.setText(_amountX + "");
+        textViewPrice2.setText((((Integer.parseInt(_amountX) * tax) / 100)) + "");
+        textViewPrice3.setText((((Integer.parseInt(_amountX) * portService) / 100)) + "");
 
         StringBuilder stringBuilderSum = new StringBuilder();
         String sumRial = (Integer.parseInt(textViewPrice1.getText().toString())) +
@@ -363,7 +319,7 @@ public class PaymentActivity extends AppCompatActivity {
                 (Integer.parseInt(textViewPrice3.getText().toString())) +
                 "";
         stringBuilderSum.append(sumRial);
-        textViewPrice4Shadow = sumRial;
+        _textViewPrice4Shadow = sumRial;
         stringBuilderSum.append("\n");
         stringBuilderSum.append("(");
         stringBuilderSum.append("معادل:");
@@ -376,131 +332,37 @@ public class PaymentActivity extends AppCompatActivity {
     }
     private long calcBillHide() {
         long sumVal = 0;
-        int a = (((Integer.parseInt(amountX) * tax) / 100));
-        int b = (((Integer.parseInt(amountX) * portService) / 100));
-        sumVal = a + b + Integer.parseInt(amountX);
+        int a = (((Integer.parseInt(_amountX) * tax) / 100));
+        int b = (((Integer.parseInt(_amountX) * portService) / 100));
+        sumVal = a + b + Integer.parseInt(_amountX);
         return sumVal;
     }
 
     private void zarrinPayment(long amountZarrinToman,long amountTubelessToman, Context context) {
 
-        Intent intent = new Intent(this, SdkPayZarinMainActivity.class);
-        intent.putExtra("direct",true);         //is Direct Payment Without Sdk UI
-        intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
-        intent.putExtra("description",(discription.length() == 0 ? "" : discription));
-        //intent.putExtra("callbackurl",String.format("%s://%s", "https", "zarinpalpayment2"));
-        intent.putExtra("callbackurl","https://sajjadyosefi.ir");
-        intent.putExtra("amount", Long.toString(amountZarrinToman * 10));
-        intent.putExtra("mobile", phone);
-        intent.putExtra("email", "yosefi1988@gmail.com");
+//        Intent intent = new Intent(this, SdkPayZarinMainActivity.class);
+//        //intent.putExtra("direct",false);         //is Direct Payment Without Sdk UI
+//        intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
+//        intent.putExtra("description",(discription.length() == 0 ? "" : discription));
+//        //intent.putExtra("callbackurl",String.format("%s://%s", "https", "zarinpalpayment2"));
+//        intent.putExtra("callbackurl","https://sajjadyosefi.ir");
+//        intent.putExtra("amount", Long.toString(amountZarrinToman * 10));
+//        intent.putExtra("mobile", phone);
+//        intent.putExtra("email", "yosefi1988@gmail.com");
 
+        Intent intent = new Intent(this, SdkPayZarinMainActivity.class);
+        //intent.putExtra("direct", true);         //is Direct Payment Without Sdk UI
+        intent.putExtra("merchant", "e8a913e8-f089-11e6-8dec-005056a205be");
+        intent.putExtra("description", (_description.length() == 0 ? "" : _description));
+        //intent.putExtra("callbackurl",String.format("%s://%s", "https", "zarinpalpayment2"));
+        intent.putExtra("callbackurl", "https://sajjadyosefi.ir");
+        intent.putExtra("amount", Long.toString(amountZarrinToman * 100));
+        intent.putExtra("mobile", "09999816652");
+        intent.putExtra("email", "yosefi1988@gmail.com");
 
         launcher.launch(intent);
 
     }
-//    private void zarrinPayment0(long amountZarrinToman,long amountTubelessToman, Context context) {
-//        //new
-//        BillingClientStateListener stateListener = new BillingClientStateListener() {
-//            @Override
-//            public void onClientSetupFinished(ClientState clientState) {
-//
-//                int a = 5;
-//                a++;
-//            }
-//            @Override
-//            public void onClientServiceDisconnected() {
-//
-//                int b = 6;
-//                b++;
-//            }
-//        };
-//        ZarinPalBillingClient client = ZarinPalBillingClient.newBuilder(this)
-//                .enableShowInvoice()
-//                .setListener(stateListener)
-//                .build();
-//
-//        Purchase purchase = Purchase.newBuilder()
-//                .asPaymentRequest(
-//                        "e8a913e8-f089-11e6-8dec-005056a205be",
-//                        amountZarrinToman,
-//                        String.format("%s://%s", "https", "zarinpalpayment2"),
-////                        String.format("%s://%s", AccountGeneral.getSchemezarinpalpayment(), AccountGeneral.getZarinpalpayment()),
-//                        (discription.length() == 0 ? "" : discription),
-//                        phone,
-//                        "yosefi1988@gmail.com"
-//                ).build();
-//
-//
-//        FutureCompletionListener<Receipt> receiptFutureCompletionListener = task -> {
-//            //sdk
-//            if (task.isSuccess()) {
-//                boolean receipt = task.isSuccess();
-//                paySuccess = true;
-//                Intent x = PaymentActivity.getPaymentIntent();
-//                ATransactionRequest aTransactionRequest = null; // تبدیل به ریال
-//                try {
-//                    aTransactionRequest = new ATransactionRequest(amountTubelessToman + "");
-//                } catch (Exception exception) {
-//
-//                    //todo remove
-//                    aTransactionRequest = new ATransactionRequest("110015", amountTubelessToman + "");
-//                    exception.printStackTrace();
-//                }
-//
-//                aTransactionRequest.setMetaData(discription + "\nTransactionID:" + task.getSuccess().getTransactionID());
-//
-//                if (_isCharge) {
-//                    aTransactionRequest.setDirectPay(false);
-//                }else {
-//                    if (isDirectPayment) {
-//                        aTransactionRequest.setDirectPay(true);
-//                    } else {
-//                        aTransactionRequest.setDirectPay(false);
-//                    }
-//                }
-//
-//                if (_isCharge)
-//                    chargeAccount(aTransactionRequest);
-//                else {
-//                    if (withoutUi) {
-//                        Bundle bundle = new Bundle();
-//                        Gson gson = new Gson();
-//                        bundle.putString("ReturnData","direct Payment");
-//                        paymentIntent.putExtras(bundle);
-//                        ((Activity)context).setResult(Activity.RESULT_OK, paymentIntent);
-//                        ((Activity)context).finish();
-//                    } else {
-//                        final BottomSheetDialog dialog = new BottomSheetDialog(context);
-//                        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//
-//                                Gson gson = new Gson();
-//                                bundle.putString("ReturnData","direct Payment");
-//                                paymentIntent.putExtras(bundle);
-//                                setResult(Activity.RESULT_OK, paymentIntent);
-//                                finish();
-//                            }
-//                        });
-//
-//                    }
-//                }
-//            } else {
-////                    Toast.makeText(getBaseContext(),"pay not success" , Toast.LENGTH_LONG).show();
-////                    show message refID
-////                    Toast.makeText(context,"not ok " , Toast.LENGTH_LONG).show();
-//                paySuccess = false;
-//
-//                if (paymentIntent.hasExtra("type")){
-////                        if (paymentIntent.getIntExtra("type",1) == 2){
-//                    setResult(Activity.RESULT_CANCELED);
-//                    finish();
-////                        }
-//                }
-//            }
-//        };
-//        client.launchBillingFlow(purchase,receiptFutureCompletionListener);
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -513,15 +375,40 @@ public class PaymentActivity extends AppCompatActivity {
             }
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        _intent = null;
+        paySuccess = false;
+    }
     @SuppressLint("StaticFieldLeak")
-    private void createTransaction(final ATransactionRequest chargeRequest) {
+    private void createTransaction( ATransactionRequest chargeRequest) {
+        try {
+            chargeRequest = new ATransactionRequest(Long.toString(calcBillHide()));
+        } catch (Exception exception) {
+            //todo remove
+            chargeRequest = new ATransactionRequest("110015", calcBillHide() + "");
+            exception.printStackTrace();
+        }
+        chargeRequest.setMetaData(_description + "\nTransactionID:" + "authority");
+
+        if (_isWalletSource){
+            chargeRequest.setPayMode(PayMode.WalletPay.name());
+        }else {
+            if (_isWalletCharge) {
+                chargeRequest.setPayMode(PayMode.WalletCharge.name());
+            } else {
+                chargeRequest.setPayMode(PayMode.DirectPay.name());
+            }
+        }
+
+        ATransactionRequest finalChargeRequest = chargeRequest;
         new AsyncTask<String, Void, AWalletChargeResponse>() {
             @Override
             protected AWalletChargeResponse doInBackground(String... params) {
                 AWalletChargeResponse response = null;
                 try {
-                    response = sServerAuthenticate.createWalletTransaction(chargeRequest);
+                    response = sServerAuthenticate.createWalletTransaction(finalChargeRequest);
                 } catch (Exception e) {  }
                 return response;
             }
@@ -529,34 +416,16 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(final AWalletChargeResponse aWalletChargeResponse) {
                 final BottomSheetDialog dialog = new BottomSheetDialog(context);
-                if (withoutUi) {
-                    if (aWalletChargeResponse == null){
-                        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.tray_again), context.getString(R.string.tray_again), new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                dialog.dismiss();
-                            }
-                        });
-                        return;
-                    }
-                    if (aWalletChargeResponse.getTubelessException().getCode() == 200) {
-                        Bundle bundle = new Bundle();
-                        Gson gson = new Gson();
-                        bundle.putString("ReturnData",gson.toJson(aWalletChargeResponse));
-                        paymentIntent.putExtras(bundle);
-                        ((Activity)context).setResult(Activity.RESULT_OK, paymentIntent);
-                        ((Activity)context).finish();
-                    }
-                } else {
+                if (_ActiveUi) {
                     if (aWalletChargeResponse != null && aWalletChargeResponse.getTubelessException().getCode() == 200) {
                         TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.new_yafte_new_yafte_inserted), "ok", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
 
                                 Gson gson = new Gson();
-                                bundle.putString("ReturnData",gson.toJson(aWalletChargeResponse));
-                                paymentIntent.putExtras(bundle);
-                                setResult(Activity.RESULT_OK, paymentIntent);
+                                _bundle.putString("ReturnData",gson.toJson(aWalletChargeResponse));
+                                _intent.putExtras(_bundle);
+                                setResult(Activity.RESULT_OK, _intent);
                                 finish();
                             }
                         });
@@ -568,15 +437,30 @@ public class PaymentActivity extends AppCompatActivity {
                             }
                         });
                     }
+                } else {
+                    if (aWalletChargeResponse == null){
+                        TubelessException.ShowSheetDialogMessage(context, dialog, context.getString(R.string.tray_again), context.getString(R.string.tray_again), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        return;
+                    }
+                    if (aWalletChargeResponse.getTubelessException().getCode() == 200 && _isWalletSource) {
+                        paySuccess = true;
+                    }
+
+                    if (aWalletChargeResponse.getTubelessException().getCode() == 200) {
+                        Bundle bundle = new Bundle();
+                        Gson gson = new Gson();
+                        bundle.putString("ReturnData",gson.toJson(aWalletChargeResponse));
+                        _intent.putExtras(bundle);
+                        ((Activity)context).setResult(Activity.RESULT_OK, _intent);
+                        ((Activity)context).finish();
+                    }
                 }
             }
         }.execute();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        paymentIntent = null;
-        paySuccess = false;
     }
 }

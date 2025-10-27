@@ -25,12 +25,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 public class SdkPayZarinPaymentActivity extends AppCompatActivity {
-    private String merchant = "e8a913e8-f089-11e6-8dec-005056a205be";
-    private String description = "خرید تستی ";
-    private String callbackurl = "http://localhost:2812/Home/VerifyByHttpClient";
-    private String amount = "100000"; // مبلغ به ریال
-    private String mobile = "09123678522";
-    private String email = "yosefi1988@gmail.com";
+    private String merchant;
+    private String description;
+    private String callbackurl;
+    private String amount; // مبلغ به ریال
+    private String mobile;
+    private String email;
 
     private String gateWayUrl = "https://www.zarinpal.com/pg/StartPay/";
     //private String verifyUrl = "https://api.zarinpal.com/pg/v4/payment/verify.json";

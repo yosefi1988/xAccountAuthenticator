@@ -2,13 +2,11 @@ package ir.sajjadyosefi.android.xTubeless.activity.common.splashScreen;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,21 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import ir.sajjadyosefi.accountauthenticator.activity.payments.AutenticatiorPaymentUi;
+import ir.sajjadyosefi.accountauthenticator.activity.payments.PayMode;
 import ir.sajjadyosefi.accountauthenticator.activity.payments.PaymentActivity;
-import ir.sajjadyosefi.accountauthenticator.activity.accounts.SignInActivity;
+import ir.sajjadyosefi.accountauthenticator.activity.payments.Source;
 import ir.sajjadyosefi.accountauthenticator.authentication.AccountGeneral;
-import ir.sajjadyosefi.accountauthenticator.classes.IDeviceRegisterRequest;
-import ir.sajjadyosefi.accountauthenticator.model.request.ADeviceRegisterRequest;
-import ir.sajjadyosefi.accountauthenticator.model.request.ATransactionListRequest;
-import ir.sajjadyosefi.accountauthenticator.model.response.AConfigResponse;
 import ir.sajjadyosefi.android.xTubeless.Global;
 import ir.sajjadyosefi.android.xTubeless.R;
 import ir.sajjadyosefi.accountauthenticator.classes.SAccounts;
-import ir.sajjadyosefi.android.xTubeless.activity.MainActivity;
 import ir.sajjadyosefi.android.xTubeless.classes.model.user.User;
-
-import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.KEY_ERROR_MESSAGE;
-import static ir.sajjadyosefi.accountauthenticator.activity.accounts.AuthenticatorActivity.PARAM_CONFIG;
 
 //mvp
 public class SplashScreen extends AppCompatActivity  {
@@ -44,15 +36,122 @@ public class SplashScreen extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.activity_splash_screen);
-    }
+        findViewById(R.id.payMod1)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //دریافت وجه اجباری از کارت مشتری
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Source", Source.Card);
+                        bundle.putSerializable("AutenticatiorPaymentUi", AutenticatiorPaymentUi.AppValue);
+                        bundle.putSerializable("PayMode", PayMode.DirectPay);
 
+                        bundle.putInt("amount", 1000);
+                        bundle.putString("metaData", "sajjad mod 1");
+                        bundle.putString("phone","00");
+                        bundle.putString("tax", "5");
+                        bundle.putString("portService", "5");
+                        Intent intent = PaymentActivity.getIntent(getApplicationContext(), bundle);
+                        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+                    }
+                });
+        findViewById(R.id.payMod2)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //دریافت وجه دلخواه از کارت مشتری
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Source", Source.Card);
+                        bundle.putSerializable("AutenticatiorPaymentUi", AutenticatiorPaymentUi.UserValue);
+                        bundle.putSerializable("PayMode", PayMode.DirectPay);
+
+                        bundle.putInt("amount", 1000);
+                        bundle.putString("metaData", "sajjad mod 3");
+                        bundle.putString("phone","00");
+                        bundle.putString("tax", "5");
+                        bundle.putString("portService", "5");
+
+                        Intent intent = PaymentActivity.getIntent(getApplicationContext(), bundle);
+                        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+                    }
+                });
+        findViewById(R.id.payMod3)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //mod 3
+                        //شارژ کیف مستقیم
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Source", Source.Card);
+                        bundle.putSerializable("AutenticatiorPaymentUi", AutenticatiorPaymentUi.AppValue);
+                        bundle.putSerializable("PayMode", PayMode.WalletCharge);
+
+                        bundle.putInt("amount", 1300);
+                        bundle.putString("metaData", "sajjad mod 3");
+                        bundle.putString("phone","00");
+                        bundle.putString("tax", "5");
+                        bundle.putString("portService", "5");
+
+                        Intent intent = PaymentActivity.getIntent(getApplicationContext(), bundle);
+                        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+                    }
+                });
+        findViewById(R.id.payMod4)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //mod 4
+                        //شارژ کیف پول با یو آی
+                        //دلخواه
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Source", Source.Card);
+                        bundle.putSerializable("AutenticatiorPaymentUi", AutenticatiorPaymentUi.UserValue);
+                        bundle.putSerializable("PayMode", PayMode.WalletCharge);
+
+                        bundle.putInt("amount", 1000);
+                        bundle.putString("metaData", "sajjad mod 3");
+                        bundle.putString("phone","00");
+                        bundle.putString("tax", "5");
+                        bundle.putString("portService", "5");
+
+                        Intent intent = PaymentActivity.getIntent(getApplicationContext(), bundle);
+                        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+                    }
+                });
+
+        findViewById(R.id.payMod5)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //mod 5
+                        // دریافت وجه از کیف مشتری
+                        Bundle bundle = new Bundle();
+                          bundle.putString("Source", "Wallet");
+                        bundle.putSerializable("Source", Source.Wallet);
+
+                        bundle.putInt("amount", 1000);
+                        bundle.putString("metaData", "sajjad mod 3");
+                        bundle.putString("phone","00");
+                        bundle.putString("tax", "5");
+                        bundle.putString("portService", "5");
+
+                        Intent intent = PaymentActivity.getIntent(getApplicationContext(), bundle);
+                        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+                        startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
+                    }
+                });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Intent x;
         if (requestCode == 661) {
             if (PaymentActivity.isPaymentSuccess()) {
-                x = PaymentActivity.getPaymentIntent();
+                x = PaymentActivity.getStaticIntent();
 
                 Toast.makeText(context,"pay success" ,Toast.LENGTH_LONG).show();
 
@@ -63,8 +162,6 @@ public class SplashScreen extends AppCompatActivity  {
             PaymentActivity.PaymentDone();
         }
     }
-
-    //PAY SDK TEST DEVELOPER
     @Override
     protected void onStart() {
         super.onStart();
@@ -196,35 +293,11 @@ public class SplashScreen extends AppCompatActivity  {
 
 
 
-    //payment = Charge Activity
-            Bundle bundle = new Bundle();
-            bundle.putInt("type" , 1);
-            Intent intent = PaymentActivity.getIntent(context,bundle);
-            //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
-            //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-            //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
-
-
-        //payment = charge by method
-        //done
-//            Bundle bundle = new Bundle();
-//            bundle.putInt("type", 2);
-//            bundle.putInt("amount", 1000);
-//            bundle.putString("metaData", "sajjad 1000");
-//            Intent intent = PaymentActivity.getIntent(this, bundle);
-//            //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-//            //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-//            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-//            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-//            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
 
 
         //SignInActivity
 //        Bundle bundle = new Bundle();
-//        bundle.putInt("type" , 1);
+//        bundle.putInt("AutenticatiorPaymentUi" , 1);
 //        Intent intent = SignInActivity.getIntent(context,bundle);
 ////        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);     //todo not need
 ////                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS); //todo check and fix
@@ -233,7 +306,6 @@ public class SplashScreen extends AppCompatActivity  {
 //        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 //        startActivityForResult(intent, 1000);
     }
-
 
 //    @Override
 //    protected void onStart() {
@@ -365,35 +437,11 @@ public class SplashScreen extends AppCompatActivity  {
 //
 //
 //
-////    //payment = Charge Activity
-////            Bundle bundle = new Bundle();
-////            bundle.putInt("type" , 1);
-////            Intent intent = PaymentActivity.getIntent(context,bundle);
-////            //intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);
-////            //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-////            //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-////            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-////            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-////            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
-//
-//
-//        //payment = charge by method
-//        //done
-////            Bundle bundle = new Bundle();
-////            bundle.putInt("type", 2);
-////            bundle.putInt("amount", 1000);
-////            bundle.putString("metaData", "sajjad 1000");
-////            Intent intent = PaymentActivity.getIntent(this, bundle);
-////            //intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_ADMIN_USER);
-////            //intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-////            //intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-////            bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-////            startActivityForResult(intent, WALLETCHARGE_REQUEST_CODE);
-//
+
 //
 //        //SignInActivity
 ////        Bundle bundle = new Bundle();
-////        bundle.putInt("type" , 1);
+////        bundle.putInt("AutenticatiorPaymentUi" , 1);
 ////        Intent intent = SignInActivity.getIntent(context,bundle);
 //////        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, AccountGeneral.ACCOUNT_TYPE);     //todo not need
 //////                    intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS); //todo check and fix
@@ -402,5 +450,4 @@ public class SplashScreen extends AppCompatActivity  {
 ////        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 ////        startActivityForResult(intent, 1000);
 //    }
-
 }

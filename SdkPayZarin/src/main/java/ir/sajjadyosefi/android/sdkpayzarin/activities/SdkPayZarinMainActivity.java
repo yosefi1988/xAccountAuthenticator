@@ -28,20 +28,18 @@ public class SdkPayZarinMainActivity extends AppCompatActivity {
                 }
         );
         Bundle extras = getIntent().getExtras();
-        if (extras != null && extras.containsKey("direct")) {
-            boolean isDirectPaymentWithoutSdkUI = extras.getBoolean("direct");
+        //if (extras != null && extras.containsKey("direct")) {
+        //    boolean isDirectPaymentWithoutSdkUI = extras.getBoolean("direct");
 
-            if (isDirectPaymentWithoutSdkUI) {
+        //    if (isDirectPaymentWithoutSdkUI) {
+        //        startZarinPaymentActivity(extras);
+        //    } else {
+        //        setContentView(R.layout.activity_main);
                 startZarinPaymentActivity(extras);
-            } else {
-                setContentView(R.layout.activity_main);
-                startZarinPaymentActivity(extras);
-            }
-        } else {
-            finish();
-        }
-
-
+        //    }
+        //} else {
+         //   finish();
+        //}
     }
     private void startZarinPaymentActivity(Bundle extras) {
         Intent intent = new Intent(SdkPayZarinMainActivity.this, SdkPayZarinPaymentActivity.class);
@@ -66,4 +64,7 @@ public class SdkPayZarinMainActivity extends AppCompatActivity {
         }
         paymentLauncher.launch(intent);
     }
+
+
+
 }

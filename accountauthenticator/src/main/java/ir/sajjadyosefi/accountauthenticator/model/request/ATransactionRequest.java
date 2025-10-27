@@ -12,15 +12,15 @@ public class ATransactionRequest {
 
     private String UserCode = null;
     private String Amount;
-    private boolean DirectPay;
+    private String payMode;
     private String metaData;
 
-    public void setDirectPay(boolean directPay) {
-        DirectPay = directPay;
+    public String getPayMode() {
+        return payMode;
     }
 
-    public boolean isDirectPay() {
-        return DirectPay;
+    public void setPayMode(String payMode) {
+        this.payMode = payMode;
     }
 
     public String getMetaData() {
