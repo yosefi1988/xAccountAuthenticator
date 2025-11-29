@@ -12,7 +12,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.1'
+        classpath 'com.android.tools.build:gradle:8.7.3'
+        //classpath 'com.android.tools.build:gradle:8.5.2'
 
         //classpath "com.android.tools.build:gradle:8.6.1"
         //classpath "com.android.tools.build:gradle:8.5.2"
@@ -29,14 +30,14 @@ buildscript {
 
 allprojects {
     repositories {
-        google() // مخزن اصلی برای وابستگی‌های اندروید و Google
-        mavenCentral() // مخزن اصلی Maven برای کتابخانه‌های عمومی
+        //google() // مخزن اصلی برای وابستگی‌های اندروید و Google
+        //mavenCentral() // مخزن اصلی Maven برای کتابخانه‌های عمومی
 
         // مخزن Gradle Plugin برای افزونه‌های خاص
-        maven { url = uri("https://plugins.gradle.org/m2/") }
+        //maven { url = uri("https://plugins.gradle.org/m2/") }
 
         // مخزن JitPack برای کتابخانه‌های متن‌باز در GitHub
-        maven { url = uri("https://jitpack.io") }
+        //maven { url = uri("https://jitpack.io") }
     }
 
     tasks.withType(JavaCompile) {
