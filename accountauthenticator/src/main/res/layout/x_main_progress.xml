@@ -19,5 +19,5 @@
             android:gravity="center"
             android:foregroundGravity="center"
             android:layout_centerInParent="true"
-            app:mk_color="@color/black"  />
+            app:mk_color="@color/colorBlack"  />
 </RelativeLayout>

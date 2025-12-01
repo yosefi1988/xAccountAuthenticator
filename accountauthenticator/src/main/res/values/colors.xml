@@ -22,4 +22,7 @@
     <color name="button_border">#1D8DBF</color>
     <color name="button_pressed">#104D68</color>
     <color name="button_pressed_border">#135573</color>
+
+    <color name="colorBlack">#000000</color>
+
 </resources>
